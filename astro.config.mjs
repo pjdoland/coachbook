@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   // GitHub Pages project-page hosting: https://pjdoland.github.io/coachbook/
   site: 'https://pjdoland.github.io',
-  base: '/coachbook',
+  base: '/coachbook/',
   output: 'static',
   trailingSlash: 'ignore',
   build: {

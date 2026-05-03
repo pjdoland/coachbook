@@ -10,6 +10,9 @@ const [models, designers, authentication, colors, catalogs, history] = await Pro
   getCollection('catalogs'),
   getCollection('history'),
 ]);
+
+const base = import.meta.env.BASE_URL;
+const repo = 'https://github.com/pjdoland/coachbook/blob/main';
 ---
 
 <BaseLayout
@@ -20,36 +23,36 @@ const [models, designers, authentication, colors, catalogs, history] = await Pro
   <p>
     A reference archive of vintage Coach Leatherware (1941–2002), built
     from free public sources with citation discipline. See
-    <a href="/PLAN">PLAN</a> for scope and
-    <a href="/STYLE">STYLE</a> for editorial conventions.
+    <a href={`${repo}/PLAN.md`}>PLAN</a> for scope and
+    <a href={`${repo}/STYLE.md`}>STYLE</a> for editorial conventions.
   </p>
 
   <section>
     <h2>Start here</h2>
     <ul>
-      <li><a href="/authentication/decision-tree/">Authentication decision tree</a> — "is this real?" in seven steps</li>
-      <li><a href="/authentication/">Authentication topics</a> ({authentication.length})</li>
-      <li><a href="/history">Company timeline</a> 1941–2002</li>
-      <li><a href="/designers/">Designers and people</a> ({designers.length})</li>
+      <li><a href={`${base}authentication/decision-tree/`}>Authentication decision tree</a> — "is this real?" in seven steps</li>
+      <li><a href={`${base}authentication/`}>Authentication topics</a> ({authentication.length})</li>
+      <li><a href={`${base}history/`}>Company timeline</a> 1941–2002</li>
+      <li><a href={`${base}designers/`}>Designers and people</a> ({designers.length})</li>
     </ul>
   </section>
 
   <section>
     <h2>Browse</h2>
     <ul>
-      <li><a href="/models/">Models</a> ({models.length}) — every documented vintage Coach silhouette</li>
-      <li><a href="/colors/">Colors</a> ({colors.length}) — the Coach palette, era-by-era</li>
-      <li><a href="/catalogs/">Catalogs</a> ({catalogs.length}) — primary-source catalog records</li>
+      <li><a href={`${base}models/`}>Models</a> ({models.length}) — every documented vintage Coach silhouette</li>
+      <li><a href={`${base}colors/`}>Colors</a> ({colors.length}) — the Coach palette, era-by-era</li>
+      <li><a href={`${base}catalogs/`}>Catalogs</a> ({catalogs.length}) — primary-source catalog records</li>
     </ul>
   </section>
 
   <section>
     <h2>Reference</h2>
     <ul>
-      <li><a href="/bibliography">Bibliography</a></li>
-      <li><a href="/market">Market and pricing</a></li>
-      <li><a href="/care/">Care and restoration</a></li>
-      <li><a href="/errata">Errata</a> — corrections log</li>
+      <li><a href={`${repo}/bibliography.md`}>Bibliography</a></li>
+      <li><a href={`${repo}/market.md`}>Market and pricing</a></li>
+      <li><a href={`${repo}/care/`}>Care and restoration</a></li>
+      <li><a href={`${repo}/errata.md`}>Errata</a> — corrections log</li>
     </ul>
   </section>
 
@@ -64,8 +67,8 @@ const [models, designers, authentication, colors, catalogs, history] = await Pro
     </p>
     <p>
       Many entries are currently <code>tentative</code> — Phase 3 retrieval
-      operations (see <a href="/RETRIEVAL">RETRIEVAL</a>) will upgrade
-      them as primary sources are pulled.
+      operations (see <a href={`${repo}/RETRIEVAL.md`}>RETRIEVAL</a>) will
+      upgrade them as primary sources are pulled.
     </p>
   </section>
 </BaseLayout>
