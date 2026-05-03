@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const entries = await getCollection('designers');
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Designers and people">
@@ -15,7 +16,7 @@ const entries = await getCollection('designers');
   <ul>
     {entries.map((entry) => (
       <li>
-        <a href={`/designers/${entry.id}/`}>
+        <a href={`${base}designers/${entry.id}/`}>
           {entry.data.name ?? entry.id}
         </a>
         {entry.data.tenure_start && entry.data.tenure_end && (

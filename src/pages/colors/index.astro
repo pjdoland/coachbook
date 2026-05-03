@@ -8,6 +8,7 @@ const sorted = entries.sort((a, b) => {
   const bl = (b.data.name ?? b.data.title ?? b.id).toString();
   return al.localeCompare(bl);
 });
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Colors">
@@ -20,7 +21,7 @@ const sorted = entries.sort((a, b) => {
   <ul>
     {sorted.map((entry) => (
       <li>
-        <a href={`/colors/${entry.id}/`}>
+        <a href={`${base}colors/${entry.id}/`}>
           {entry.data.name ?? entry.data.title ?? entry.id}
         </a>
         {entry.data.confidence && <em> ({entry.data.confidence})</em>}
