@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const entries = await getCollection('authentication');
+const sorted = entries.sort((a, b) => {
+  const al = (a.data.title ?? a.data.name ?? a.id).toString();
+  const bl = (b.data.title ?? b.data.name ?? b.id).toString();
+  return al.localeCompare(bl);
+});
+---
+
+<BaseLayout title="Authentication">
+  <h1>Authentication</h1>
+  <p>
+    Topic-by-topic authentication reference. Combine multiple checks
+    — no single signal proves authentic or fake.
+  </p>
+  <ul>
+    {sorted.map((entry) => (
+      <li>
+        <a href={`/authentication/${entry.id}/`}>
+          {entry.data.title ?? entry.data.name ?? entry.id}
+        </a>
+        {entry.data.confidence && <em> ({entry.data.confidence})</em>}
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

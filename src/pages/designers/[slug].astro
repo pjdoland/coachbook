@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const designers = await getCollection('designers');
+  return designers.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const label = entry.data.name ?? entry.data.title ?? entry.id;
+
+const tenureStart =
+  entry.data.tenure_start ?? entry.data.coach_tenure_start;
+const tenureEnd = entry.data.tenure_end ?? entry.data.coach_tenure_end;
+---
+
+<BaseLayout title={label}>
+  <article>
+    <h1>{label}</h1>
+    <dl>
+      {entry.data.born && (<><dt>Born</dt><dd>{String(entry.data.born)}</dd></>)}
+      {entry.data.died && (<><dt>Died</dt><dd>{String(entry.data.died)}</dd></>)}
+      {(tenureStart || tenureEnd) && (
+        <>
+          <dt>Coach tenure</dt>
+          <dd>{tenureStart ?? '?'}–{tenureEnd ?? '?'}</dd>
+        </>
+      )}
+      {entry.data.employment_status && (
+        <><dt>Employment status</dt><dd>{entry.data.employment_status}</dd></>
+      )}
+      {entry.data.confidence && (
+        <><dt>Confidence</dt><dd>{entry.data.confidence}</dd></>
+      )}
+    </dl>
+    <Content />
+    {
+      entry.data.sources && entry.data.sources.length > 0 && (
+        <section>
+          <h2>Sources</h2>
+          <ul>
+            {entry.data.sources.map((id) => (
+              <li><code>{id}</code></li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</BaseLayout>

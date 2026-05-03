@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const entries = await getCollection('catalogs');
+const sorted = entries.sort((a, b) => {
+  const ay = a.data.year ?? 0;
+  const by = b.data.year ?? 0;
+  if (ay !== by) return ay - by;
+  return (a.data.season ?? '').localeCompare(b.data.season ?? '');
+});
+---
+
+<BaseLayout title="Catalogs">
+  <h1>Catalogs</h1>
+  <p>
+    Coach catalogs are the most valuable primary source for dating
+    models. The free-online catalog landscape is fragmented; this
+    directory tracks what's known, with stubs for catalog years not
+    yet retrieved.
+  </p>
+  <ul>
+    {sorted.map((entry) => (
+      <li>
+        <a href={`/catalogs/${entry.id}/`}>
+          {entry.data.title ?? entry.id}
+        </a>
+        {entry.data.status === 'stub' && <em> (stub — no scan yet)</em>}
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

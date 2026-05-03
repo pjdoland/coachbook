@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const entries = await getCollection('colors');
+const sorted = entries.sort((a, b) => {
+  const al = (a.data.name ?? a.data.title ?? a.id).toString();
+  const bl = (b.data.name ?? b.data.title ?? b.id).toString();
+  return al.localeCompare(bl);
+});
+---
+
+<BaseLayout title="Colors">
+  <h1>Colors</h1>
+  <p>
+    Coach color names, with model coverage and authentication notes.
+    Color is rarely an era anchor — combine with creed, serial,
+    hardware, and country-of-origin.
+  </p>
+  <ul>
+    {sorted.map((entry) => (
+      <li>
+        <a href={`/colors/${entry.id}/`}>
+          {entry.data.name ?? entry.data.title ?? entry.id}
+        </a>
+        {entry.data.confidence && <em> ({entry.data.confidence})</em>}
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

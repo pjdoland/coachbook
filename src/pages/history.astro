@@ -1,0 +1,16 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const entries = await getCollection('history');
+const timeline = entries.find((e) => e.id === 'timeline') ?? entries[0];
+const { Content } = timeline ? await render(timeline) : { Content: () => null };
+const label = timeline?.data.title ?? 'Coach company timeline';
+---
+
+<BaseLayout title={label}>
+  <article>
+    <h1>{label}</h1>
+    {timeline && <Content />}
+  </article>
+</BaseLayout>
