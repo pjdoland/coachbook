@@ -3,8 +3,9 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  // site URL TBD — set before public launch (PLAN.md "private now, public later").
-  // site: 'https://example.com',
+  // GitHub Pages project-page hosting: https://pjdoland.github.io/coachbook/
+  site: 'https://pjdoland.github.io',
+  base: '/coachbook',
   output: 'static',
   trailingSlash: 'ignore',
   build: {
