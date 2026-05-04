@@ -215,8 +215,12 @@ const siteJsonLd = {
         text-decoration-color: currentColor;
       }
 
-      /* Inline code + frontmatter style numbers — slightly recessed. */
-      code {
+      /* Inline code + frontmatter style numbers — slightly recessed.
+       * Scoped to NOT match <code> inside a <pre>, where shiki applies
+       * its own dark-theme background and per-token colors. Without
+       * the :not(pre) > guard the paper-soft background drowns
+       * shiki's syntax highlighting. */
+      :not(pre) > code {
         font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo,
           Consolas, monospace;
         font-size: 0.9em;
@@ -226,11 +230,19 @@ const siteJsonLd = {
       }
 
       pre {
-        background: var(--paper-soft);
         padding: 1rem;
         border-radius: 4px;
         overflow-x: auto;
         font-size: 0.875rem;
+      }
+      /* shiki applies inline background-color on .astro-code; ensure the
+       * inner <code> stays transparent so the per-token colors read. */
+      pre code {
+        background: transparent;
+        padding: 0;
+        font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo,
+          Consolas, monospace;
+        font-size: inherit;
       }
 
       blockquote {
