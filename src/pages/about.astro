@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
+const repo = 'https://github.com/pjdoland/coachbook/blob/main';
+---
+
+<BaseLayout
+  title="About this archive"
+  description="Editorial standards, scope, sourcing, and how to flag a correction."
+>
+  <p class="standfirst">Colophon</p>
+  <h1>About this archive</h1>
+  <p class="lede">
+    coachbook is an independent reference archive of vintage Coach
+    Leatherware, 1941–2002. Built from free public sources with
+    citation discipline. Not affiliated with Coach, Inc.
+  </p>
+
+  <h2>Scope</h2>
+  <p>
+    Vintage Coach starts in 1941, when Gail Leather Products opens in a
+    Manhattan loft. It runs through the Bonnie Cashin years
+    (1962–1974), the Cahn-family ownership (1961–1985), the Sara Lee
+    era (1985–2001), and the Reed Krakoff transition (1996 onward). It
+    ends, for our purposes, around 2002 — the season the original
+    heritage silhouettes (Willis, Court, Companion Flap, Daypack) drop
+    out of the catalog and Legacy West replaces them.
+  </p>
+  <p>
+    The Krakoff transition is treated as <em>contrast only</em>: in
+    scope where it bounds the NYC era, not as the archive's main
+    subject. See <a href={`${repo}/PLAN.md`}>PLAN.md</a> for the
+    full scope rules.
+  </p>
+
+  <h2>Editorial standards</h2>
+  <p>Every claim in this archive carries two things:</p>
+  <dl>
+    <dt>A confidence tag</dt>
+    <dd>
+      <span class="chip" data-confidence="confirmed">confirmed</span> ·
+      <span class="chip" data-confidence="likely">likely</span> ·
+      <span class="chip" data-confidence="tentative">tentative</span> ·
+      <span class="chip" data-confidence="disputed">disputed</span>
+    </dd>
+    <dt>A source citation</dt>
+    <dd>
+      A short, stable source ID (e.g. <code>coach-catalogs-1960-1989</code>)
+      that resolves in the registry to a tiered, dated, archive-snapshotted
+      reference.
+    </dd>
+  </dl>
+  <p>
+    Tier 1 is primary documents — Coach catalogs, SEC filings, USPTO
+    records. Tier 2 is reputable secondary sources — encyclopedia
+    entries, trade press, museum archives. Tier 3 is community
+    references — collector blogs, PurseForum threads. Tier 4 is
+    listing evidence — eBay, Etsy, individual auction lots. Tier 1
+    overrides Tier 2; Tier 2 overrides Tier 3 unless triangulated.
+    Full rules: <a href={`${repo}/STYLE.md`}>STYLE.md</a>.
+  </p>
+
+  <h2>Why 2002?</h2>
+  <p>
+    The 2002 Autumn catalog is the last in-scope catalog. By that
+    point Willis 9927, Court 9870, Companion Flap 9076, and the
+    original Daypack 9791 have all been retired and the Krakoff-era
+    Legacy West sub-collection has replaced them with re-numbered,
+    re-named silhouettes. After 2002 the archive's subject — vintage
+    NYC-era Coach — no longer exists as a current-season concept.
+  </p>
+
+  <h2>Corrections</h2>
+  <p>
+    Trust comes from documenting being wrong. Every correction is
+    dated and logged in <a href={`${base}errata/`}>errata</a>, with a
+    before/after and the source that surfaced the error. Nothing is
+    silently overwritten.
+  </p>
+  <p>
+    To flag a correction:
+    <a href="https://github.com/pjdoland/coachbook/issues/new?title=Correction%3A%20"
+       rel="noopener">open a GitHub issue</a>
+    with the page, the claim, and the source you'd cite against it.
+  </p>
+
+  <h2>Method</h2>
+  <p>
+    The catalog corpus (107 Coach catalogs, 1960–2020) was deep-read
+    season-by-season across research streams M, N, O, P, Q (one stream
+    per period). Each stream produced a primary-source-cited research
+    file in <code>research/</code>; corrections to model and
+    authentication entries flow from there.
+  </p>
+  <p>
+    Code, data, and the full editorial method are public at
+    <a href="https://github.com/pjdoland/coachbook">github.com/pjdoland/coachbook</a>.
+  </p>
+
+  <h2>The work</h2>
+  <p>
+    Built and edited by PJ Doland. Not a commercial project; not for
+    sale. If the archive helps you authenticate, date, or research a
+    specific bag, that's the entire point.
+  </p>
+</BaseLayout>
+
+<style>
+  .standfirst {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-quiet);
+    margin: 0 0 0.5rem;
+    font-weight: 500;
+  }
+  .lede {
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin-bottom: 2rem;
+  }
+</style>
