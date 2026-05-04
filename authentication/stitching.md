@@ -13,12 +13,20 @@ sources:
 
 ## Lead
 
-Coach stitching is most folklore-prone where the community insists vintage
-bags were "saddle-stitched." NYC-era and later US-made bags actually use
-machine lock-stitch on most seams, with hand finishing reserved for specific
-accents [coachbagrehab-dating, vintagecoachie]. The reliable diagnostic is
-not stitch type but the combination of consistent stitches per inch (SPI),
-heavy bonded thread, and clean lock-off endings.
+**Vintage Coach is not saddle-stitched.** NYC-era and later US-made
+bags use **machine lock-stitch** on virtually every seam, hand-finished
+only on specific accents like turnlock backplates and strap junctions
+[coachbagrehab-dating, vintagecoachie, thriftyrunner-authenticating].
+The "saddle-stitched" line is the single most common piece of folklore
+in this category and gets repeated by reputable resale dealers. It's
+wrong.
+
+The reliable diagnostic is not stitch type but **the combination of
+consistent stitches per inch (SPI), heavy bonded thread, and clean
+lock-off endings**. The 1985 catalog publishes the brand spec
+explicitly: **12 stitches per inch** [coach-catalogs-1960-1989] —
+the strongest primary SPI anchor in the archive. A bag claiming 1980s
+manufacture should hit ~12 SPI; meaningful deviation is a flag.
 
 ## Saddle-stitch vs lock-stitch myth
 
