@@ -521,9 +521,13 @@ const base = import.meta.env.BASE_URL;
 
   /* ---------- state ---------- */
   const wiz = document.getElementById('wizard');
+  // Single source of truth for the entry step. Used by both the
+  // initial state and restartWizard so the two cannot drift apart
+  // when the step ordering changes.
+  const START_STEP = 'hardware';
   const state = {
     history: [], // [{stepId, optionIndex, label, era, flags}]
-    current: 'hardware',
+    current: START_STEP,
   };
 
   /* ---------- era-consistency check ---------- */
@@ -701,7 +705,7 @@ const base = import.meta.env.BASE_URL;
 
   function restartWizard() {
     state.history = [];
-    state.current = 'creed';
+    state.current = START_STEP;
     render();
   }
 
