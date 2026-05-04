@@ -143,12 +143,14 @@ const base = import.meta.env.BASE_URL;
         text-decoration: underline;
         text-decoration-thickness: 1px;
         text-underline-offset: 0.18em;
-        text-decoration-color: var(--brass-soft);
+        /* Underline = currentColor so the only non-color affordance for
+         * a link clears WCAG SC 1.4.11 (3:1 non-text contrast).
+         * Previous --brass-soft was ~2.4:1 against paper. */
+        text-decoration-color: currentColor;
         transition: color 120ms ease, text-decoration-color 120ms ease;
       }
       a:hover, a:focus-visible {
         color: var(--brass-deep);
-        text-decoration-color: var(--brass-deep);
       }
 
       /* Inline code + frontmatter style numbers — slightly recessed. */
