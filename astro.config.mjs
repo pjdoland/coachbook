@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSourceCitations from './scripts/rehype-source-citations.mjs';
 
 const BASE = '/coachbook/';
@@ -18,26 +17,11 @@ export default defineConfig({
   },
   markdown: {
     rehypePlugins: [
-      // Slug → autolink ordering matters: slug must run first so the
-      // autolink plugin has stable `id` attributes to point at.
+      // Stable IDs on every heading. Source citations and TOC anchors
+      // depend on these. The auto-link-headings plugin used to follow
+      // here but added a hover ¶ to every heading; ripped out for
+      // editorial calm.
       rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: 'append',
-          properties: {
-            className: ['heading-anchor'],
-            ariaLabel: 'Permalink to this entry',
-          },
-          // The pilcrow is announced as "paragraph mark" by VoiceOver;
-          // the aria-label above replaces the announcement with the
-          // intent. Sighted users see ¶ as a small affordance.
-          content: { type: 'text', value: '¶' },
-        },
-      ],
-      // Linkify [source-id] tokens whose IDs resolve in sources/registry.md.
-      // Runs after slug/autolink so heading nodes are already finalized
-      // and skipped via the SKIP_TAGS set.
       [rehypeSourceCitations, { base: BASE }],
     ],
   },
