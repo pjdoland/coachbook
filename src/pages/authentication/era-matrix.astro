@@ -1,0 +1,271 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const base = import.meta.env.BASE_URL;
+
+// Era columns. Match the codes used in /history/ and the timeline.
+const ERAS = [
+  { code: 'E1', label: 'Pre-Cashin', range: '1941–1961' },
+  { code: 'E2', label: 'Cashin', range: '1962–1974' },
+  { code: 'E3', label: 'Early NYC', range: '1975–1984' },
+  { code: 'E4', label: 'Late NYC', range: '1985–1994' },
+  { code: 'E5', label: 'Krakoff transition', range: '1995–2002' },
+];
+
+// Each row is a feature; each cell is the era-specific signal
+// (kept short — the detail lives in the linked authentication entry).
+//
+// Cells with a single hyphen "—" mean the feature does not apply or
+// is not yet documented for that era.
+const ROWS = [
+  {
+    feature: 'Creed',
+    href: 'creed-formats',
+    cells: [
+      'No creed. Bag has only "COACH" wordmark or none at all.',
+      'Earliest creeds appear ~late 1960s. Wording: "Coach Leatherwares®" with NEW YORK CITY line. Cashin-era bags often have no creed at all (see Pre-Creed Era).',
+      '"Coach Leatherwares®" with NEW YORK CITY. Late E3 transitions toward LEATHERWARE.',
+      '"Coach LEATHERWARE" wordmark from First Use 1973-09 (USPTO 73345984). Through 1994 the country line says NEW YORK CITY.',
+      'Country line drops to "Made in [country]" for offshore production. Multiple manufacturing geographies appear in parallel (China, Costa Rica, Italy, India).',
+    ],
+  },
+  {
+    feature: 'Hardware',
+    href: 'hardware',
+    cells: [
+      'Pre-1964: no brass turnlock — hardware varies (clasps, snaps, buckles).',
+      'Brass turnlock from 1964 (US Patent 3,201,162, Fulford Mfg.). Solid brass throughout. Magnet test should fail.',
+      'Solid brass continues. Dogleash clip standard. Patina develops; should be honey-amber, not green.',
+      'Solid brass continues. Sara Lee era — no significant hardware change.',
+      'Krakoff era: hardware diversifies into nickel/silver-tone for some lines. Vintage palette persists in heritage models.',
+    ],
+  },
+  {
+    feature: 'Country of origin',
+    href: 'country-of-origin',
+    cells: [
+      'Made in U.S.A. (Manhattan loft, then Carlstadt NJ).',
+      'Made in U.S.A. (Carlstadt NJ; later 516 W 34th St NYC).',
+      'Made in U.S.A. NEW YORK CITY line cited on creed.',
+      'Made in U.S.A. through 1994. Sara Lee corporate ownership from July 1985 but US production continues.',
+      'Offshore production from 1995 onward: Costa Rica, Mexico, China, India, Italy, Spain, Hungary, Turkey. Lares PR closed April 2002.',
+    ],
+  },
+  {
+    feature: 'Serial number',
+    href: 'serial-numbers',
+    cells: [
+      'Pre-1961 catalog format: 22-25XXX-NNN. No creed-side serial.',
+      'No serial number on creed (creeds rare). Catalog style numbers exist but are not on the bag.',
+      'Numeric-only serial. No leading letter. Format roughly NNN-NNNN.',
+      'Through ~1993: digit-letter-NNN format. Single-digit-year ambiguity (e.g. "9" could be 1979, 1989, or 1999).',
+      'Letter-digit-letter format from ~1994 (e.g. F4D-9876). The leading letter encodes manufacturing facility/quarter.',
+    ],
+  },
+  {
+    feature: 'Hangtag',
+    href: 'hangtags',
+    cells: [
+      'No leather "beanbag" hangtag documented; presentation varies.',
+      '—',
+      'Beanbag hangtag established. Brass clip attachment. Squarer silhouette early in era.',
+      'Beanbag hangtag continues. Attachment shifts include leather strap and plastic-coated wire. Silhouette rounds out.',
+      'Beanbag hangtag continues into the offshore era. Replacement hangtags from Coach Repair (Jacksonville FL from July 1999) common on serviced bags.',
+    ],
+  },
+  {
+    feature: 'Stitching',
+    href: 'stitching',
+    cells: [
+      '—',
+      '—',
+      'Machine lock-stitch on body and gusset. Hand-finishing on turnlock backplates and strap junctions.',
+      '12 SPI primary anchor (1985 catalog, brand-published). Heavy bonded color-matched thread. Glove-tanned seam binding folded around every edge (1989 catalog brand voice).',
+      'Lock-stitch continues. Sub-collections (Sheridan, some Madison) introduce contrast stitching as designed accent.',
+    ],
+  },
+  {
+    feature: 'Leather',
+    href: 'leather',
+    cells: [
+      'Glove-tanned cowhide established as company signature.',
+      'Glove-tanned cowhide. Bridle leather variants for accessories.',
+      'Glove-tanned cowhide. Edges raw or burnished, never painted glossy.',
+      'Glove-tanned cowhide. Lightweight Collection (Spring 1989) introduces softer hides; Soho/Sheridan/Berkeley sub-collections expand the palette.',
+      'Glove-tanned cowhide continues in heritage line. Krakoff-era diversification: Signature C jacquard, Hamptons line, lighter weights for fashion silhouettes.',
+    ],
+  },
+  {
+    feature: 'Lining',
+    href: 'lining',
+    cells: [
+      'Unlined or self-lined (cowhide-on-cowhide).',
+      'Unlined or self-lined Cashin convention. Suede-lined Cashin-Carry in select years.',
+      'Unlined classic NYC bags; self-lined or suede on select models.',
+      'Unlined remains the heritage convention. Sub-collections introduce lined models (Sheridan with cotton twill, Madison with grosgrain).',
+      'Lined models become the norm by late 1990s for Krakoff-era silhouettes; heritage line retains unlined construction.',
+    ],
+  },
+  {
+    feature: 'Zipper',
+    href: 'zippers',
+    cells: [
+      '—',
+      '—',
+      'Talon zippers dominate. YKK begins to appear late E3.',
+      'YKK takes over. Talon largely gone by mid-E4.',
+      'YKK throughout. Replacement zippers from Coach Repair common.',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Era × feature authentication matrix"
+  description="Era-by-era signals across creed, hardware, country, serial, hangtag, stitching, leather, lining, and zipper — the cross-cut authentication reference."
+>
+  <article>
+    <Breadcrumbs trail={[
+      { label: 'Authentication', href: `${base}authentication/` },
+      { label: 'Era × feature matrix' },
+    ]} />
+    <p class="standfirst">Reference</p>
+    <h1>Era × feature matrix</h1>
+    <p class="lede">
+      Each row is an authentication feature; each column is an era
+      window. Cells summarize what the feature should look like for
+      that era. Mismatches across cells in the same column are how
+      counterfeits give themselves away — see the
+      <a href={`${base}authentication/coach-repair/`}>Coach Repair caveat</a>
+      for legitimate exceptions.
+    </p>
+
+    <div class="matrix-wrap" role="region" aria-label="Era × feature matrix" tabindex="0">
+      <table class="era-matrix">
+        <thead>
+          <tr>
+            <th scope="col">Feature</th>
+            {ERAS.map((e) => (
+              <th scope="col">
+                <span class="th-code">{e.code}</span>
+                <span class="th-label">{e.label}</span>
+                <span class="th-range">{e.range}</span>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {ROWS.map((row) => (
+            <tr>
+              <th scope="row">
+                <a href={`${base}authentication/${row.href}/`}>{row.feature}</a>
+              </th>
+              {row.cells.map((cell) => (
+                <td>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <p class="footnote">
+      Cells are summaries; click any feature name in the leftmost
+      column for the full entry. The matrix is hand-curated from the
+      authentication entries — corrections welcome via the
+      <a href="https://github.com/pjdoland/coachbook/issues/new?title=Correction%3A%20era-matrix">issues tracker</a>.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .standfirst {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-quiet);
+    margin: 0 0 0.5rem;
+    font-weight: 500;
+  }
+  .lede { font-size: 1.05rem; color: var(--ink-soft); max-width: 65ch; margin-bottom: 1.5rem; }
+  .matrix-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 1rem -0.5rem 1.5rem;
+    border: 1px solid var(--surface-line);
+    border-radius: 4px;
+    background: var(--surface);
+  }
+  .matrix-wrap:focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 2px;
+  }
+  .era-matrix {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 920px;
+  }
+  .era-matrix th,
+  .era-matrix td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.7rem 0.85rem;
+    border-bottom: 1px solid var(--surface-line);
+    border-right: 1px solid var(--surface-line);
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+  .era-matrix tbody tr:last-child td,
+  .era-matrix tbody tr:last-child th { border-bottom: 0; }
+  .era-matrix th[scope="col"] {
+    background: var(--paper-soft);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    line-height: 1.2;
+    min-width: 9.5rem;
+  }
+  .era-matrix th[scope="col"] .th-code {
+    display: inline-block;
+    background: var(--bridle);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.05em 0.35em;
+    border-radius: 3px;
+    margin-right: 0.4rem;
+    vertical-align: 0.15em;
+  }
+  .era-matrix th[scope="col"] .th-label {
+    display: inline;
+  }
+  .era-matrix th[scope="col"] .th-range {
+    display: block;
+    margin-top: 0.15rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink-quiet);
+    font-variant-numeric: tabular-nums;
+  }
+  .era-matrix th[scope="row"] {
+    background: var(--paper-soft);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 1rem;
+    width: 8rem;
+  }
+  .era-matrix th[scope="row"] a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--brass-soft);
+  }
+  .era-matrix th[scope="row"] a:hover { color: var(--brass-deep); }
+  .footnote {
+    color: var(--ink-quiet);
+    font-size: 0.88rem;
+    margin-top: 1.5rem;
+  }
+</style>
