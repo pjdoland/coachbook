@@ -23,23 +23,40 @@ sources:
 
 # Bleecker Satchel
 
-**Dispute flagged 2026-05-02.** Primary catalog evidence contradicts the
-brand-published 2000 introduction date and surfaces multiple "Bleeker"
-SKUs across the 1995-1997 window:
+**Three distinct production eras** — primary catalog evidence shows
+the "Bleeker/Bleecker" name has been used by Coach for at least three
+different product runs, contradicting the simple "first introduced
+2000" claim on Coach.com:
 
-- **1995-1996 Source Book** (Soho Collection): **"Bleeker 4154"** at
-  $220 [coach-catalogs-1960-1989]
-- **1997 Spring Preview catalog** (Soho Collection): "**Bleeker Bag**"
-  Style **4153** at $220 [coach-catalogs-1960-1989]
-- **2000 Coach.com brand page**: states the Bleecker Satchel was
-  "first introduced in 2000" [coach-vintage-bleecker]
+1. **1995-1997: Bleeker Bag in Soho Series (lightweight leather)**
+   - 1995-1996 Source Book: "Bleeker 4154" at $220 [coach-catalogs-1960-1989]
+   - 1997 Spring Preview: "Bleeker Bag" Style 4153 at $220 [coach-catalogs-1960-1989]
+   - Spelled "Bleeker" (single 'c'); lightweight leather Soho-Series
+     style
 
-Both 1995-96 (4154) and 1997 (4153) appear in the Soho Collection at
-$220 — possibly the same silhouette with a renumbered SKU between
-years, or two related Bleeker variants. Catalog spelling is "**Bleeker**"
-(single 'c') across the 1990s — a documented Coach name variant, not
-a misspelling. The 2000 "Bleecker Satchel" with double-c spelling is
-the form Coach uses on the modern Vintage Bleecker re-release.
+2. **Fall 1999: Bleecker Tweed sub-line debuts**
+   - **1999-fall back cover**: "Bleecker Tweed Satchel 6126 at $198"
+     with body copy "**Preview our new Mercer, Hippies, Bleecker
+     Tweed, and Home collections**" [coach-catalogs-1960-1989, per Q2
+     research stream]
+   - Spelled "Bleecker" (double 'c'); tweed material; Krakoff-era
+
+3. **Holiday 2001: Bleecker glove-tanned leather expansion**
+   - 2001 Holiday Preview Bleecker section (TOC p 28): glove-tanned
+     leather handbags 9303 Satchel / 9305 Bucket / 9306 Tote / 9308
+     Demi Satchel / 9309 Zip / 9311 Demi Zip / 9314 Book Tote
+     [coach-catalogs-1960-1989]
+   - Tweed editions 6112 / 6126 / 6127 / 6128 continue
+   - 5898 Bleecker Combination Wallet Checkbook
+   - Brand voice: "the making of a new classic"
+
+**Coach.com's "first introduced 2000" Vintage Bleecker Satchel
+CK664 product page conflates these three eras.** The CK664 appears
+to be a re-release of either the 1999 Fall tweed line or the 2001
+Holiday glove-tanned-leather expansion, not a 2000-original
+silhouette per se. The 2000-spring and 2000-fall catalogs (not in
+archive corpus) would settle whether "2000" refers to a specific
+intermediate launch or is a marketing rounding.
 
 Two plausible reconciliations: (1) **Same name, different silhouette** —
 the 1997 "Bleeker Bag" (Soho Collection) and the 2000 "Bleecker Satchel"

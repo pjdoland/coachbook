@@ -915,16 +915,150 @@ in the 2003 10-K — open research item.
 - confidence: confirmed
 - sources: [coach-10k-fiscal-2003]
 
+### Holiday 2000 — Wool C Small Tote 8131: Signature C precursor in market
+**Primary catalog correction (per Q2 deep-read).** Earlier framing
+(per FundingUniverse and encyclopedia.com) placed Signature C launch
+in 2001. Primary catalog evidence shows the **Wool C Small Tote
+(Style 8131)** already shipping in the **2000 Holiday catalog**
+[coach-catalogs-1960-1989] in the Wool C signature jacquard (twin-C
+surface, wool ground). The "Signature C launches 2001" framing is
+**off by one season** at the catalog level — the precursor Wool C
+product ships Holiday 2000, before the formal six-page Coach
+Signature editorial block in 2001 Fall.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
+### Fall 1999 — Bleecker Tweed sub-line launches
+Per Q2 partial 1999 reading: 1999-fall catalog back cover lists
+**Bleecker Tweed Satchel 6126 at $198** with body copy "**Preview
+our new Mercer, Hippies, Bleecker Tweed, and Home collections**"
+[coach-catalogs-1960-1989]. This is the **second of three Bleecker
+production eras** documented in the archive:
+- 1995-1997: Bleeker Bag (single 'c') in Soho Series, lightweight
+  leather, Style 4153/4154
+- **Fall 1999: Bleecker Tweed (double 'c') sub-line, tweed material**
+- 2001 Holiday Preview: Bleecker glove-tanned leather expansion
+  (9303-9314 + tweed continuation 6112-6128)
+The Coach.com Vintage Bleecker Satchel CK664 "first introduced 2000"
+claim conflates these eras.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
 ### 2001 — Signature collection (double-C logo) introduced
 Marks the visual brand pivot away from solid-leather identity toward logo
-monogram. End-of-vintage marker for this archive.
+monogram. End-of-vintage marker for this archive. **Refined per Q2 deep-
+read**: Signature C was already in market via Wool C Small Tote 8131 in
+Holiday 2000; the formal six-page Coach Signature editorial block in
+2001 Fall (anchored by Coach Signature Multi-Function Tote 4263 at
+$368) represents the full collection-level launch, not the silhouette
+debut. Secondary sources collapse the two events into "2001."
 - confidence: confirmed
-- sources: [fundinguniverse-coach][wwd-coach-early-years]
+- sources: [fundinguniverse-coach][wwd-coach-early-years][coach-catalogs-1960-1989]
+
+### Fall 2001 — Coach Consumer Service Carlstadt NJ → Jacksonville FL
+Per Q2 deep-read of 2001 catalogs: Coach Consumer Service address
+updates from "**410 Commerce Boulevard / Carlstadt, NJ 07072-3099**"
+(per P3 1994 corpus) to "**Coach Consumer Service / One Coach Way /
+Jacksonville, Florida 32218**" with (904) 741-3090 area-code-aligned
+line [coach-catalogs-1960-1989]. The catalog signage finally catches
+up with the **July 1999** infrastructure consolidation (worldwide
+warehousing/distribution/repair into Jacksonville FL per existing
+timeline anchor) — a 2.25-year lag between operational move and
+catalog-text update.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
+### Between Fall 2001 and Holiday 2001 — Hamptons Collection sunset
+Per Q2 deep-read: **Hamptons Collection persists through 2001 Fall
+catalog** as two parallel sub-lines (Coach Hamptons Carryalls TOC
+pp 3-5; Coach Hamptons Leather TOC pp 10-11 with Hamptons Leather
+Demi Pouch 7785) but is **absent from the Holiday 2001 Preview
+TOC**, replaced by Coach Monterey, Mercer, Gramercy, Bleecker, Coach
+Bridle, Coach Neo [coach-catalogs-1960-1989]. The Krakoff-era
+collection-rotation cadence is faster than the late-NYC-era
+collections (Sheridan ran 1992-1995, ~3 years; Hamptons rotates
+across a single season transition).
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
+### Holiday 2001 — Heritage Coach Classics survives into post-IPO Coach Inc.
+Per Q2 deep-read: 2001 Holiday Preview includes a **"Coach Classics"
+sub-collection** (TOC p 18) with **Court 9870, Companion Flap 9076,
+Large Daypack 9791, Willis 9927** all alive in original
+Black/British Tan/Mahogany/Navy/Bone palette with brass hardware
+[coach-catalogs-1960-1989]. These late-NYC-era silhouettes survive
+**at least 7 years past the 1994 late-NYC peak** and into the
+post-Sara-Lee, post-IPO standalone-Coach-Inc. era. The "MADE BY
+COACH" mark on the 2001 Holiday Preview cover is a deliberate
+mid-century brand-voice anchor that pairs with this Coach Classics
+editorial block. Adjacent surviving silhouettes per same catalog:
+**Hippie Flap 9134/9135** with copy "vintage form streamlined for
+now" — Krakoff-era 1970s-silhouette revival.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
 
 ### November 2001 — First jewelry collection
 Joint venture with Carolee Designs, Inc.
 - confidence: likely
 - sources: [fundinguniverse-coach]
+
+### Autumn 2002 — Heritage Coach Classics retired; Legacy West replaces
+Per Q2 follow-up deep-read (`research/Q2-catalogs-2000-2002.md`):
+**all late-NYC-era heritage silhouettes are retired by Autumn 2002**.
+The 2001 Holiday Preview "Coach Classics" sub-collection (Willis 9927,
+Court 9870, Companion Flap 9076, Large Daypack 9791) is gone in 2002
+Autumn. **Legacy West Small Backpack 9858 ($238) and Legacy West
+Suede Small Backpack 9878 ($238) launch as Krakoff-era replacements**
+— "*A classic Coach style updated in rich suede and Fall's new
+neutrals*" with "Coach logo lining" [coach-catalogs-1960-1989]. This
+is **the formal end of vintage-era Coach as a current-season
+concept** — the natural archive cutoff.
+
+Concurrent Autumn 2002 retirements: Bleecker GONE (closes 3-era
+Bleecker timeline); Mercer GONE as handbag (survives only as
+Sunglasses S311); Madison GONE as handbag (survives only as
+Sunglasses S412); Gramercy GONE; Coach Bridle handbag GONE (only
+Coach Bridle Classic Watch survives); Coach Neo GONE; Hippie Flap
+9134/9135 single-season revival did NOT extend.
+
+NEW Autumn 2002 launches: **Legacy West** (heritage replacement),
+**Coach Soft Signature** (jacquard), **Coach Textured Leather /
+Milbrook**, **Milbrook Tattersall** (plaid), **Signature Chic**.
+Hamptons returns as flagship after single-season Holiday 2001
+sunset.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
+### Autumn 2002 — Signature C proliferates to embossed calfskin
+Per Q2 follow-up: by Autumn 2002 the Signature C pattern appears
+not just on jacquard but on **EMBOSSED CALFSKIN**: Signature
+Embossed Leather Medium Zip-Top Cosmetic 8991, Signature Embossed
+Slim Envelope Wallet 6873, Signature Skinny Wristlet 8365,
+Signature Carryall 6086, Signature Travel Tote
+[coach-catalogs-1960-1989]. The C-monogram completes its transition
+from jacquard motif (Wool C 8131 Holiday 2000) to brand-wide
+debossed-leather signature within ~2 years.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
+### Autumn 2002 — "COACH LEATHERWARE EST. 1941" embossed-leather patch debuts
+Per Q2 follow-up: multiple Autumn 2002 Signature pieces (Signature
+Carryall 6086, Signature Travel Tote, Signature Skinny Wristlet
+8365) carry an embossed leather patch reading "**COACH LEATHERWARE
+EST. 1941**" [coach-catalogs-1960-1989]. This is the closest the
+catalog comes to a 61st-anniversary acknowledgment — a **silent
+heritage signal**, not a celebration. Continues the documented
+pattern: round-number anniversaries 40 (1981), 60 (2001), 61 (2002)
+are silent in catalog editorial copy; only 45 (1986 Frankfort
+letter) and 50 (1990 "fifty years ago / six craftspeople") get
+explicit framing.
+
+Authentication implication: a "COACH LEATHERWARE EST. 1941"
+embossed leather patch claiming pre-2002 manufacture is wrong on
+its face — this patch is an Autumn 2002 introduction tied to the
+Signature embossed-calfskin debut.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
 
 ## Disputes
 

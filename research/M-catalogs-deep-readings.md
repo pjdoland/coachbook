@@ -32,6 +32,22 @@ disputes and integrate per-catalog data.
   retail network built 1982-1984 under Cahn, 10-color palette
   stable 3.5+ years
 
+## Index of Q-stream files (1999-2002 end-of-vintage era)
+
+- **Q1** — `Q1-catalogs-1999.md` — PENDING (1999 deep-read agent hit
+  quota limit; retry after reset). Critical: 1999-fall back cover
+  surfaces Bleecker Tweed Satchel 6126 at $198 with "Preview our new
+  Mercer, Hippies, Bleecker Tweed, and Home collections."
+- **Q2** — `Q2-catalogs-2000-2002.md` — PARTIAL. 2000-holiday +
+  2001-fall fully read, 2001-holiday-preview pp 1-38 read; 2002-autumn
+  unread. Major findings: **Wool C Small Tote 8131 in 2000-holiday
+  (Signature C precursor)**; Bleecker has 3 distinct eras (1995-1997
+  Soho/lightweight, 1999 Tweed, 2001 glove-tanned expansion); Hamptons
+  sunset between Fall 2001 and Holiday 2001 Preview; Carlstadt NJ →
+  Jacksonville FL Coach Consumer Service relocation by Fall 2001;
+  Coach Classics + Hippie Flap revival in 2001 Holiday Preview;
+  Krakoff NOT named in any 2000-2001 catalog body copy.
+
 ## Index of P-stream files (1992-1994 sub-collection peak era)
 
 - **P1** — `P1-catalogs-1992.md` — Sub-collection-launch peak;
