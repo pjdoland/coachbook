@@ -13,10 +13,11 @@ const base = import.meta.env.BASE_URL;
 <BaseLayout title="Models" description="All vintage Coach models in the archive.">
   <h1>Models</h1>
   <p class="lede">
-    {models.length} silhouettes documented from the Cashin era through the
-    Krakoff transition. Each entry carries primary-catalog citations
-    where available, and Tier 3 community sources where not.
+    {models.length} silhouettes from the Cashin era through the Krakoff
+    transition. Each entry carries catalog citations where available;
+    community sources are flagged where they aren't.
   </p>
+  <p class="standfirst">Sorted A–Z. Confidence chip on each card; click for full entry.</p>
   <ul class="card-grid">
     {
       models.map((entry) => {
@@ -45,6 +46,12 @@ const base = import.meta.env.BASE_URL;
 </BaseLayout>
 
 <style>
-  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1.5rem; max-width: 60ch; }
+  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 0.75rem; max-width: 60ch; }
+  .standfirst {
+    font-size: 0.85rem;
+    color: var(--ink-quiet);
+    margin: 0 0 1.5rem;
+    font-style: italic;
+  }
   .card-grid .chip { margin-top: 0.4rem; }
 </style>
