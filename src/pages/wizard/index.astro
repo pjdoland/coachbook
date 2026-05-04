@@ -317,6 +317,85 @@ const base = import.meta.env.BASE_URL;
   .wiz-verdict .next-reads a:hover { border-color: var(--brass); }
   .wiz-verdict .next-reads a strong { display: block; }
   .wiz-verdict .next-reads a .sub { font-size: 0.85rem; color: var(--ink-quiet); }
+
+  /* Verdict reasoning trace — per-step explanation of how the verdict
+   * was reached. Defaults open so the trace is visible immediately;
+   * collapsible for users who want to focus on the verdict text. */
+  .verdict-reasoning {
+    margin: 1.5rem 0 1.25rem;
+    padding: 0.95rem 1rem 1rem;
+    background: var(--paper-soft);
+    border: 1px solid var(--surface-line);
+    border-radius: 3px;
+  }
+  .verdict-reasoning summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--ink);
+    list-style: none;
+    padding-right: 1.5rem;
+    position: relative;
+  }
+  .verdict-reasoning summary::-webkit-details-marker { display: none; }
+  .verdict-reasoning summary::after {
+    content: '▸';
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: var(--ink-quiet);
+    transition: transform 120ms ease;
+  }
+  .verdict-reasoning[open] summary::after { transform: rotate(90deg); }
+  .verdict-reasoning summary:focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 2px;
+  }
+  .reasoning-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.85rem 0 0.5rem;
+    counter-reset: rrow;
+  }
+  .reasoning-row {
+    display: grid;
+    grid-template-columns: 1.6rem 1fr;
+    gap: 0.55rem;
+    padding: 0.55rem 0.6rem;
+    border-bottom: 1px solid var(--surface-line);
+  }
+  .reasoning-row:last-child { border-bottom: 0; }
+  .reasoning-row.is-flag {
+    background: rgba(177, 90, 60, 0.08);
+    border-left: 3px solid #b15a3c;
+    padding-left: 0.45rem;
+  }
+  .reasoning-num {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--brass-deep);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.4;
+  }
+  .reasoning-body p { margin: 0.05rem 0; line-height: 1.4; }
+  .reasoning-step {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-quiet);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+  .reasoning-answer { color: var(--ink); }
+  .reasoning-signal { font-size: 0.85rem; color: var(--ink-soft); }
+  .reasoning-row.is-flag .reasoning-signal { color: #8a3e22; }
+  .reasoning-footer {
+    margin: 0.75rem 0 0;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--surface-line);
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
 </style>
 
 <script is:inline define:vars={{ wizardBase: import.meta.env.BASE_URL }}>
@@ -597,8 +676,10 @@ const base = import.meta.env.BASE_URL;
     const opt = step.options[i];
     state.history.push({
       stepId: state.current,
+      stepTitle: step.title,
       optionIndex: i,
       label: opt.label,
+      sub: opt.sub || '',
       era: opt.era || [],
       flags: opt.flags ?? 0,
     });
@@ -694,6 +775,7 @@ const base = import.meta.env.BASE_URL;
       <h2 class="verdict-heading" tabindex="-1" id="wiz-verdict-heading">${verdictLabel}</h2>
       <span class="verdict-tag" data-verdict="${verdict}" aria-hidden="true">${verdictLabel}</span>
       <p>${summary}</p>
+      ${verdictReasoning(verdict, noCreed, flags, inconsistent)}
       <h3>What this means</h3>
       <ul>${body.map(b => `<li>${b}</li>`).join('')}</ul>
       <h3>Read next</h3>
@@ -712,6 +794,69 @@ const base = import.meta.env.BASE_URL;
      * answer, not at the bottom of the wizard's previous question. */
     const heading = v.querySelector('.verdict-heading');
     if (heading) heading.focus();
+  }
+
+  /* Build the per-step reasoning panel: which answers stacked into
+   * which signal. Surfacing the trace turns the verdict from a black
+   * box into a defensible argument the user can audit answer by answer. */
+  function verdictReasoning(verdict, noCreed, flags, inconsistent) {
+    if (state.history.length === 0) return '';
+
+    const ERA_LABEL = {
+      e2a: 'pre-creed Cashin',
+      e2b: 'late-Cashin (creed introduced)',
+      e3: '1970s NEW YORK CITY',
+      e4: '1980s–1994 NEW YORK CITY (LEATHERWARE)',
+      e5: '1994+ offshore / serial-A',
+      'line-specific': 'line-specific',
+      'post-vintage': 'post-vintage',
+    };
+
+    const rows = state.history.map((h, i) => {
+      const num = i + 1;
+      const flagged = (h.flags || 0) > 0;
+      const era = (h.era || []).map(e => ERA_LABEL[e] || e).filter(Boolean).join(' · ');
+      let signal = '';
+      if (flagged && h.sub) signal = h.sub;
+      else if (flagged) signal = `Red flag · counts ${h.flags}`;
+      else if (era) signal = `Era window: ${era}`;
+      else signal = 'No signal — neutral answer';
+      return `
+        <li class="reasoning-row${flagged ? ' is-flag' : ''}">
+          <span class="reasoning-num">${num}</span>
+          <div class="reasoning-body">
+            <p class="reasoning-step">${h.stepTitle}</p>
+            <p class="reasoning-answer">${h.label}</p>
+            <p class="reasoning-signal">${signal}</p>
+          </div>
+        </li>
+      `;
+    }).join('');
+
+    let footer = '';
+    if (inconsistent) {
+      const eras = [...new Set(
+        state.history
+          .flatMap(h => h.era || [])
+          .map(e => ERA_LABEL[e] || e)
+          .filter(e => e && e !== 'line-specific' && e !== 'post-vintage'),
+      )];
+      footer = `<p class="reasoning-footer"><strong>Era conflict:</strong> ${eras.join(' + ')} — these windows do not coexist on a single authentic bag.</p>`;
+    } else if (flags === 0 && !noCreed) {
+      footer = `<p class="reasoning-footer"><strong>Era-consistent across ${state.history.length} dimensions.</strong> Each answer landed inside a single coherent era window with no red flags.</p>`;
+    } else if (flags === 1) {
+      footer = `<p class="reasoning-footer"><strong>One flag, ${state.history.length - 1} clean answers.</strong> Coach Repair is a plausible explanation for an isolated mismatch; a second flag would close that off.</p>`;
+    } else if (flags >= 2) {
+      footer = `<p class="reasoning-footer"><strong>${flags} flags across ${state.history.length} dimensions.</strong> Multiple independent flags don't share a single replacement-component explanation.</p>`;
+    }
+
+    return `
+      <details class="verdict-reasoning" open>
+        <summary>Why this verdict — ${state.history.length} ${state.history.length === 1 ? 'answer' : 'answers'} traced</summary>
+        <ol class="reasoning-list">${rows}</ol>
+        ${footer}
+      </details>
+    `;
   }
 
   function nextReads(verdict, noCreed) {
