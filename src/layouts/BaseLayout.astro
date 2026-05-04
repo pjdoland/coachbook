@@ -220,6 +220,13 @@ const base = import.meta.env.BASE_URL;
       }
       dd {
         margin: 0;
+        font-variant-numeric: tabular-nums;
+      }
+      /* Year-heavy contexts get column-true digits for less jitter
+       * across the 99-event timeline and the year-led card metas. */
+      .card-meta,
+      .history-body h3 {
+        font-variant-numeric: tabular-nums;
       }
 
       /* Lists — generous tap targets, no excessive bullet drift. */
