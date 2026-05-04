@@ -240,7 +240,7 @@ const eraGroups = ERAS.map((era) => ({
     margin: 3rem 0 1rem;
     padding-bottom: 0.3rem;
     border-bottom: 1px solid var(--surface-line);
-    scroll-margin-top: 1rem;
+    scroll-margin-top: clamp(1rem, 8vh, 4rem);
   }
 
   .history-body h3 {
@@ -249,7 +249,7 @@ const eraGroups = ERAS.map((era) => ({
     padding-left: 0.85rem;
     border-left: 3px solid var(--brass);
     line-height: 1.3;
-    scroll-margin-top: 1rem;
+    scroll-margin-top: clamp(1rem, 8vh, 4rem);
   }
 
   /* Indent the immediate paragraph + bullet list under each h3 so the
