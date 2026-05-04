@@ -175,43 +175,6 @@ Schema for each entry:
 
 ---
 
-## Tier 2 — Reputable secondary
-
-### fundinguniverse-coach
-- url: https://www.fundinguniverse.com/company-histories/coach-inc-history/
-- snapshot: TODO
-- type: company-history-reference
-- tier: 2
-- title: History of Coach, Inc.
-- author/operator: International Directory of Company Histories (republished by FundingUniverse)
-- accessed: 2026-05-01
-- notes: Most thorough free public corporate history before paywalled WWD / NYTimes archives.
-
-### encyclopedia-com-coach-inc
-- url: https://www.encyclopedia.com/economics/economics-magazines/coach-inc
-- type: encyclopedia
-- tier: 2
-- accessed: 2026-05-01
-
-### encyclopedia-com-coach-leatherware
-- url: https://www.encyclopedia.com/books/politics-and-business-magazines/coach-leatherware
-- type: encyclopedia
-- tier: 2
-- accessed: 2026-05-01
-
-### encyclopedia-com-cashin
-- url: https://www.encyclopedia.com/people/literature-and-arts/fashion-biographies/bonnie-cashin
-- type: encyclopedia
-- tier: 2
-- accessed: 2026-05-01
-
-### wwd-coach-early-years
-- url: https://wwd.com/fashion-news/designer-luxury/coach-the-early-years-5220127/
-- type: trade-press-article
-- tier: 2
-- title: Coach: The Early Years
-- accessed: 2026-05-01
-
 ### coach-catalogs-1960-1989
 - url: https://drive.google.com/drive/folders/1wcK21b2R_plh3PyLXrTvWENYsOd6wMcu (user-supplied folder)
 - local: /Users/pjdoland/Repos/coachbook/sources/primary/catalogs/Archived Vintage Coach Catalogues/
@@ -258,15 +221,6 @@ Schema for each entry:
 - rights: public-domain
 - notes: **Second Tier 1 primary source in this archive, after the 2003 10-K.** User-supplied local copy. Highest-value document for the IPO-era operational picture. Primary citation for: Frankfort Coach President July 1985 – September 1991 (with 1991-1995 gap during Sara Lee corporate roles); Frankfort Chairman/CEO from November 1995; "Coach Leatherware Company" as the named predecessor entity Sara Lee acquired in 1985; Medley FL 107,000 sq ft manufacturing facility (the long-rumored 1988 "Miami-area" plant — not in 2003 10-K); Lares PR 66,000 sq ft manufacturing; Florence Italy 16,000 sq ft product development; June 2000 properties total six facilities; 1985 acquisition-year sales $19.0M; FY1997 peak sales $540.4M; first sales declines 1998-1999; first direct mail catalog by 1980s; Coach Inc. incorporated June 1, 2000 (Maryland). 1941 founders still unnamed in this primary; Cashin not mentioned by name (Item 1 is product-and-strategy focused, not historical-narrative focused).
 
-### wwd-lillian-cahn-obituary
-- url: https://wwd.com/accessories-news/leather-goods/lillian-cahn-cofounder-of-coach-dies-at-89-6838763/
-- snapshot: TODO
-- type: trade-press-obituary
-- tier: 2
-- title: "Lillian Cahn, Cofounder of Coach, Dies at 89" (WWD)
-- accessed: 2026-05-02
-- notes: Tier 2 trade-press obituary published March 2013. Confirms: Lillian Cahn (1923–2013), born Sátoraljaújhely, Hungary; Cahns joined Gail Leather Products **as contractors** in 1946 (NOT as employees as some prior sources framed); Cahns purchased factory 1961 in leveraged buyout; sold Coach to Sara Lee July 1985 ~$30M; Lillian helped hire Cashin "in 1961" — supporting the Maharam 1961 framing as the contract date with first collection shipping Fall 1962. Direct quote from Lillian (2000): "I was always dreaming after Bonnie's clothes in the Town & Country shop at Lord & Taylor. I couldn't afford them, but I loved them." Cahn children: Susan, Julie, David. Coach Farm Gallatinville NY founded 1983, sold ~2008 (five years before Lillian's 2013 death).
-
 ### coach-fb-1962-cashin
 - url: https://www.facebook.com/coach/posts/-1962-enter-bonnie-cashin-our-first-lead-designer-and-a-very-quotable-one-at-tha/10158069868246693/
 - snapshot: TODO
@@ -285,6 +239,55 @@ Schema for each entry:
 - title: Bonnie Cashin, "Cashin Carry for Coach" (1962) — RISD Museum collection record (via Artsy)
 - accessed: 2026-05-02
 - notes: RISD Museum holds a Cashin Carry tote dated 1962. Tier 1 institutional dating confirms the Cashin Carry's 1962 introduction year. Adds RISD to the list of museums with Cashin Coach material (alongside UCLA Library Special Collections, FIT, Met Costume Institute, ASU FIDM, Henry Ford).
+
+
+## Tier 2 — Reputable secondary
+
+### fundinguniverse-coach
+- url: https://www.fundinguniverse.com/company-histories/coach-inc-history/
+- snapshot: TODO
+- type: company-history-reference
+- tier: 2
+- title: History of Coach, Inc.
+- author/operator: International Directory of Company Histories (republished by FundingUniverse)
+- accessed: 2026-05-01
+- notes: Most thorough free public corporate history before paywalled WWD / NYTimes archives.
+
+### encyclopedia-com-coach-inc
+- url: https://www.encyclopedia.com/economics/economics-magazines/coach-inc
+- type: encyclopedia
+- tier: 2
+- accessed: 2026-05-01
+
+### encyclopedia-com-coach-leatherware
+- url: https://www.encyclopedia.com/books/politics-and-business-magazines/coach-leatherware
+- type: encyclopedia
+- tier: 2
+- accessed: 2026-05-01
+
+### encyclopedia-com-cashin
+- url: https://www.encyclopedia.com/people/literature-and-arts/fashion-biographies/bonnie-cashin
+- type: encyclopedia
+- tier: 2
+- accessed: 2026-05-01
+
+### wwd-coach-early-years
+- url: https://wwd.com/fashion-news/designer-luxury/coach-the-early-years-5220127/
+- type: trade-press-article
+- tier: 2
+- title: Coach: The Early Years
+- accessed: 2026-05-01
+
+
+### wwd-lillian-cahn-obituary
+- url: https://wwd.com/accessories-news/leather-goods/lillian-cahn-cofounder-of-coach-dies-at-89-6838763/
+- snapshot: TODO
+- type: trade-press-obituary
+- tier: 2
+- title: "Lillian Cahn, Cofounder of Coach, Dies at 89" (WWD)
+- accessed: 2026-05-02
+- notes: Tier 2 trade-press obituary published March 2013. Confirms: Lillian Cahn (1923–2013), born Sátoraljaújhely, Hungary; Cahns joined Gail Leather Products **as contractors** in 1946 (NOT as employees as some prior sources framed); Cahns purchased factory 1961 in leveraged buyout; sold Coach to Sara Lee July 1985 ~$30M; Lillian helped hire Cashin "in 1961" — supporting the Maharam 1961 framing as the contract date with first collection shipping Fall 1962. Direct quote from Lillian (2000): "I was always dreaming after Bonnie's clothes in the Town & Country shop at Lord & Taylor. I couldn't afford them, but I loved them." Cahn children: Susan, Julie, David. Coach Farm Gallatinville NY founded 1983, sold ~2008 (five years before Lillian's 2013 death).
+
 
 ### maharam-cashin
 - url: https://www.maharam.com/stories/ping_bonnie-cashin
