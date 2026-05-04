@@ -201,6 +201,20 @@ const siteJsonLd = {
         text-decoration-color: currentColor;
       }
 
+      /* Inline model name links (auto-linked from narrative body text).
+       * Read in line with the body — same color, lighter underline so a
+       * paragraph thick with model mentions doesn't read as a forest of
+       * brass. */
+      a.model-link {
+        color: var(--ink);
+        text-decoration-color: var(--brass-soft);
+        text-decoration-thickness: 1px;
+      }
+      a.model-link:hover, a.model-link:focus-visible {
+        color: var(--brass-deep);
+        text-decoration-color: currentColor;
+      }
+
       /* Inline code + frontmatter style numbers — slightly recessed. */
       code {
         font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo,
