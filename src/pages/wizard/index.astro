@@ -70,19 +70,22 @@ const base = import.meta.env.BASE_URL;
     font-size: 0.85rem;
     color: var(--ink-soft);
   }
-  .wiz-progress .pip {
+  /* Stepped indicator — discrete pips give spatial memory of where the
+   * user is in the flow. Completed = brass, current = bridle, remaining
+   * = surface-line. */
+  .wiz-progress .pip-row {
     flex: 1;
-    height: 3px;
+    display: flex;
+    gap: 0.25rem;
+  }
+  .wiz-progress .pip-step {
+    flex: 1;
+    height: 4px;
     background: var(--surface-line);
-    border-radius: 3px;
-    overflow: hidden;
+    border-radius: 2px;
   }
-  .wiz-progress .pip span {
-    display: block;
-    height: 100%;
-    background: var(--brass);
-    transition: width 200ms ease;
-  }
+  .wiz-progress .pip-step.is-done { background: var(--brass); }
+  .wiz-progress .pip-step.is-current { background: var(--bridle); }
 
   .wiz-step {
     padding: 1.5rem 1.25rem 1.75rem;
@@ -438,12 +441,22 @@ const base = import.meta.env.BASE_URL;
 
     wiz.innerHTML = '';
 
-    // progress
+    // progress — stepped indicator with one pip per step
     const prog = document.createElement('div');
     prog.className = 'wiz-progress';
+    const pips = Array.from({ length: step.of }, (_, i) => {
+      const n = i + 1;
+      const cls = n < step.n ? 'pip-step is-done'
+                : n === step.n ? 'pip-step is-current'
+                : 'pip-step';
+      return `<span class="${cls}" aria-hidden="true"></span>`;
+    }).join('');
     prog.innerHTML = `
       <span>Step ${step.n} of ${step.of}</span>
-      <span class="pip"><span style="width:${(step.n / step.of) * 100}%"></span></span>
+      <span class="pip-row" role="progressbar"
+            aria-valuemin="1" aria-valuemax="${step.of}" aria-valuenow="${step.n}">
+        ${pips}
+      </span>
     `;
     wiz.appendChild(prog);
 
