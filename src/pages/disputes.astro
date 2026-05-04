@@ -1,0 +1,127 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+
+// Pull every entry across all collections that's tagged confidence: disputed
+// or confidence: mixed. Mixed = aggregate page where individual claims carry
+// their own tags; disputed = the entry itself is in conflict.
+const collections = await Promise.all([
+  getCollection('models'),
+  getCollection('authentication'),
+  getCollection('colors'),
+  getCollection('history'),
+  getCollection('designers'),
+  getCollection('catalogs'),
+  getCollection('creed-formats'),
+]);
+
+const labels = ['models', 'authentication', 'colors', 'history', 'designers', 'catalogs', 'creed-formats'];
+const slugBase = ['models', 'authentication', 'colors', 'history', 'designers', 'catalogs', 'creed-formats'];
+
+// Buckets keyed by collection. Filter and lift each entry into a uniform shape.
+const buckets = collections.map((entries, i) => {
+  const items = entries
+    .filter((e) => e.data.confidence === 'disputed' || e.data.confidence === 'mixed')
+    .map((e) => ({
+      slug: e.data.slug ?? e.id,
+      label: e.data.name ?? e.data.title ?? e.id,
+      confidence: e.data.confidence,
+      summary: e.data.canonical_name
+        ? `Community uses "${e.data.name ?? e.id}"; primary catalogs say "${e.data.canonical_name}".`
+        : (e.data.introduced_evidence ?? e.data.notes ?? ''),
+      href: `${base}${slugBase[i]}/${e.data.slug ?? e.id}/`,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+  return { collection: labels[i], items };
+});
+
+const totalCount = buckets.reduce((n, b) => n + b.items.length, 0);
+---
+
+<BaseLayout
+  title="Disputes"
+  description="Entries where sources disagree, and how the archive resolves (or refuses to resolve) the conflict."
+>
+  <p class="standfirst">Editorial</p>
+  <h1>Disputes</h1>
+  <p class="lede">
+    Entries where the sources don't agree. Each one carries the
+    conflict in plain view: what each source says, which the archive
+    treats as canonical, and why.
+  </p>
+
+  <p>
+    <span class="chip" data-confidence="disputed">disputed</span>
+    means the entry's central claim has at least two sources giving
+    different answers, with no obvious tiebreaker.
+    <span class="chip" data-confidence="mixed">mixed</span>
+    means the entry aggregates many claims and individual ones carry
+    their own tags.
+  </p>
+
+  {totalCount === 0 ? (
+    <p><em>No disputed or mixed entries currently flagged.</em></p>
+  ) : (
+    buckets.map((b) =>
+      b.items.length === 0 ? null : (
+        <section>
+          <h2>{b.collection}</h2>
+          <ul class="card-grid">
+            {b.items.map((it) => (
+              <li>
+                <a href={it.href}>
+                  <strong>{it.label}</strong>
+                  <span class="card-meta">
+                    <span class="chip" data-confidence={it.confidence}>{it.confidence}</span>
+                  </span>
+                  {it.summary && <span class="dispute-summary">{it.summary}</span>}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    )
+  )}
+
+  <section>
+    <h2>Resolved disputes</h2>
+    <p>
+      Disputes that have been settled — usually by primary-source
+      evidence — get logged in <a href={`${base}errata/`}>errata</a>
+      with the resolution and the source that surfaced it. The
+      original disputed reading is preserved there for the record.
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .standfirst {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-quiet);
+    margin: 0 0 0.5rem;
+    font-weight: 500;
+  }
+  .lede {
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    margin-bottom: 1.5rem;
+  }
+  .dispute-summary {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  h2 {
+    text-transform: capitalize;
+    margin-top: 2.5rem;
+  }
+</style>
