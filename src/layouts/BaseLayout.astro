@@ -153,6 +153,20 @@ const base = import.meta.env.BASE_URL;
         color: var(--brass-deep);
       }
 
+      /* Source citation links: small, monospace, recessed but still
+       * underlined for SC 1.4.1. The `[id]` brackets stay visible so
+       * the citation reads the same as the source files do. */
+      a.source-cite {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.85em;
+        color: var(--ink-soft);
+        text-decoration-color: var(--ink-quiet);
+      }
+      a.source-cite:hover, a.source-cite:focus-visible {
+        color: var(--brass-deep);
+        text-decoration-color: currentColor;
+      }
+
       /* Inline code + frontmatter style numbers — slightly recessed. */
       code {
         font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo,

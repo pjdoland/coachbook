@@ -2,12 +2,15 @@
 import { defineConfig } from 'astro/config';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeSourceCitations from './scripts/rehype-source-citations.mjs';
+
+const BASE = '/coachbook/';
 
 // https://astro.build/config
 export default defineConfig({
   // GitHub Pages project-page hosting: https://pjdoland.github.io/coachbook/
   site: 'https://pjdoland.github.io',
-  base: '/coachbook/',
+  base: BASE,
   output: 'static',
   trailingSlash: 'ignore',
   build: {
@@ -32,6 +35,10 @@ export default defineConfig({
           content: { type: 'text', value: '¶' },
         },
       ],
+      // Linkify [source-id] tokens whose IDs resolve in sources/registry.md.
+      // Runs after slug/autolink so heading nodes are already finalized
+      // and skipped via the SKIP_TAGS set.
+      [rehypeSourceCitations, { base: BASE }],
     ],
   },
 });
