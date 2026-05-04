@@ -270,6 +270,8 @@ const colors = defineCollection({
   schema: z
     .object({
       ...baseFields,
+      era: era.optional(),
+      era_code: eraCode.optional(),
       era_introduced: era.optional(),
       swatch_image: z.string().optional(),
       seen_on: z.array(z.string()).optional(),

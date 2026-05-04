@@ -3,42 +3,145 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const entries = await getCollection('catalogs');
+const base = import.meta.env.BASE_URL;
+
+// Era windows mirror the rest of the site (history, models, era-matrix).
+const ERAS = [
+  { code: 'E1', label: 'Pre-Cashin', range: '1941–1961', max: 1961 },
+  { code: 'E2', label: 'Cashin', range: '1962–1974', max: 1974 },
+  { code: 'E3', label: 'Early NYC', range: '1975–1984', max: 1984 },
+  { code: 'E4', label: 'Late NYC', range: '1985–1994', max: 1994 },
+  { code: 'E5', label: 'Krakoff transition', range: '1995–2002', max: 2002 },
+];
+
+function eraFor(year) {
+  if (!year) return null;
+  for (const era of ERAS) if (year <= era.max) return era;
+  return ERAS[ERAS.length - 1];
+}
+
 const sorted = entries.sort((a, b) => {
   const ay = a.data.year ?? 0;
   const by = b.data.year ?? 0;
   if (ay !== by) return ay - by;
   return (a.data.season ?? '').localeCompare(b.data.season ?? '');
 });
-const base = import.meta.env.BASE_URL;
+
+const buckets = new Map();
+for (const era of ERAS) buckets.set(era.code, []);
+const undated = [];
+for (const entry of sorted) {
+  const era = eraFor(entry.data.year);
+  if (era) buckets.get(era.code).push(entry);
+  else undated.push(entry);
+}
 ---
 
 <BaseLayout title="Catalogs">
   <h1>Catalogs</h1>
   <p class="lede">
     Coach catalogs are the most valuable primary source for dating
-    models. This directory tracks the catalogs we have located, with
-    stubs for the years still open.
+    models. Grouped by era window; each entry's year and season are
+    on the card. Stubs flag catalogs we know about but don't yet have.
   </p>
-  <ul class="card-grid">
-    {sorted.map((entry) => {
-      const meta = [
-        entry.data.year ? String(entry.data.year) : null,
-        entry.data.season ?? null,
-      ].filter(Boolean).join(' · ');
-      return (
-        <li>
-          <a href={`${base}catalogs/${entry.id}/`}>
-            <strong>{entry.data.title ?? entry.id}</strong>
-            {meta && <span class="card-meta">{meta}</span>}
-            {entry.data.status === 'stub' && <span class="chip">not yet retrieved</span>}
-          </a>
-        </li>
-      );
-    })}
-  </ul>
+
+  {ERAS.map((era) => {
+    const items = buckets.get(era.code);
+    if (!items || items.length === 0) return null;
+    return (
+      <section class="era-section">
+        <header class="era-heading">
+          <h2>
+            <span class="era-code">{era.code}</span>
+            {era.label}
+          </h2>
+          <span class="era-range">{era.range}</span>
+          <span class="era-count">{items.length} {items.length === 1 ? 'catalog' : 'catalogs'}</span>
+        </header>
+        <ul class="card-grid">
+          {items.map((entry) => {
+            const meta = [
+              entry.data.year ? String(entry.data.year) : null,
+              entry.data.season ?? null,
+            ].filter(Boolean).join(' · ');
+            return (
+              <li>
+                <a href={`${base}catalogs/${entry.id}/`}>
+                  <strong>{entry.data.title ?? entry.id}</strong>
+                  {meta && <span class="card-meta">{meta}</span>}
+                  {entry.data.status === 'stub' && <span class="chip">not yet retrieved</span>}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    );
+  })}
+
+  {undated.length > 0 && (
+    <section class="era-section">
+      <header class="era-heading">
+        <h2>Undated</h2>
+        <span class="era-count">{undated.length}</span>
+      </header>
+      <ul class="card-grid">
+        {undated.map((entry) => (
+          <li>
+            <a href={`${base}catalogs/${entry.id}/`}>
+              <strong>{entry.data.title ?? entry.id}</strong>
+              {entry.data.status === 'stub' && <span class="chip">not yet retrieved</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 </BaseLayout>
 
 <style>
   .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1.5rem; max-width: 60ch; }
   .card-grid .chip { margin-top: 0.4rem; }
+  .era-section { margin-top: 2.25rem; }
+  .era-section:first-of-type { margin-top: 1rem; }
+  .era-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.85rem;
+    margin: 0 0 0.85rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--surface-line);
+  }
+  .era-heading h2 {
+    margin: 0;
+    font-size: 1.45rem;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.55rem;
+  }
+  .era-heading .era-code {
+    display: inline-block;
+    min-width: 1.6rem;
+    padding: 0.05em 0.4em;
+    background: var(--bridle);
+    color: var(--paper);
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: 0.2em;
+  }
+  .era-heading .era-range {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .era-heading .era-count {
+    font-size: 0.82rem;
+    color: var(--ink-quiet);
+    font-variant-numeric: tabular-nums;
+    margin-left: auto;
+  }
 </style>
