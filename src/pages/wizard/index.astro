@@ -175,7 +175,15 @@ const base = import.meta.env.BASE_URL;
     border-color: var(--brass);
     background: var(--paper);
   }
-  .wiz-controls button[disabled] { opacity: 0.4; cursor: not-allowed; }
+  .wiz-controls button[disabled] {
+    /* Keep the disabled state perceivable: explicit color (instead of
+     * opacity) preserves text contrast for low-vision users; aria-disabled
+     * + native disabled both convey state to AT. */
+    color: var(--ink-quiet);
+    background: var(--paper-soft);
+    border-style: dashed;
+    cursor: not-allowed;
+  }
 
   /* Trail / running summary ------------------------------------------- */
   .wiz-trail {
