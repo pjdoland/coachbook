@@ -68,13 +68,34 @@ const related = relatedSlugs
       </section>
     )}
 
+    <section class="authenticate-this">
+      <h2>Authenticate a {label}</h2>
+      <p>
+        Don't authenticate on a single feature — combine the era-keyed
+        signals across creed, hardware, hangtag, stitching, and country
+        of origin. Start at the wizard or jump to the topic.
+      </p>
+      <ul class="card-grid">
+        <li><a href={`${base}wizard/`}><strong>Wizard</strong><span class="card-meta">Step-through · 6 questions</span></a></li>
+        <li><a href={`${base}authentication/decision-tree/`}><strong>Decision tree</strong><span class="card-meta">One-page reference</span></a></li>
+        <li><a href={`${base}creed-formats/`}><strong>Creed formats</strong><span class="card-meta">By era</span></a></li>
+        <li><a href={`${base}authentication/hardware/`}><strong>Hardware</strong><span class="card-meta">Turnlocks, dogleash, tells</span></a></li>
+        <li><a href={`${base}authentication/hangtags/`}><strong>Hangtags</strong><span class="card-meta">Beanbag silhouette + stamps</span></a></li>
+        <li><a href={`${base}authentication/country-of-origin/`}><strong>Country of origin</strong><span class="card-meta">"Made in" line by era</span></a></li>
+        <li><a href={`${base}authentication/stitching/`}><strong>Stitching</strong><span class="card-meta">12 SPI · not saddle-stitched</span></a></li>
+        <li><a href={`${base}authentication/coach-repair/`}><strong>Coach Repair caveat</strong><span class="card-meta">Wrong-era part ≠ fake</span></a></li>
+      </ul>
+    </section>
+
     {
       entry.data.sources && entry.data.sources.length > 0 && (
         <section>
           <h2>Sources</h2>
-          <ul>
+          <ul class="source-list">
             {entry.data.sources.map((id) => (
-              <li><code>{id}</code></li>
+              <li>
+                <a href={`${base}sources/#${id}`} class="source-cite">[{id}]</a>
+              </li>
             ))}
           </ul>
         </section>
@@ -82,3 +103,27 @@ const related = relatedSlugs
     }
   </article>
 </BaseLayout>
+
+<style>
+  .authenticate-this {
+    margin-top: 2.5rem;
+    padding: 1.25rem 1.25rem 0.5rem;
+    background: var(--paper-soft);
+    border-left: 3px solid var(--brass);
+  }
+  .authenticate-this h2 {
+    margin-top: 0;
+    font-size: 1.3rem;
+  }
+  .authenticate-this p {
+    color: var(--ink-soft);
+    max-width: 60ch;
+  }
+  .source-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  .source-list li {
+    margin: 0.2rem 0;
+  }
+</style>
