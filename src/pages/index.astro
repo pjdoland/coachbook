@@ -89,17 +89,17 @@ const repo = 'https://github.com/pjdoland/coachbook/blob/main';
 
   <section>
     <h2>Confidence</h2>
-    <p>
-      Every claim carries a confidence tag and a source citation:
-      <span class="chip" data-confidence="confirmed">confirmed</span>
-      = primary source or two independent reputable sources;
-      <span class="chip" data-confidence="likely">likely</span>
-      = single primary or multiple agreeing secondary;
-      <span class="chip">tentative</span>
-      = community sources only;
-      <span class="chip" data-confidence="disputed">disputed</span>
-      = sources disagree, both shown.
-    </p>
+    <p>Every claim carries a confidence tag and a source citation.</p>
+    <dl class="confidence-legend">
+      <dt><span class="chip" data-confidence="confirmed">confirmed</span></dt>
+      <dd>Primary source, or two independent reputable sources</dd>
+      <dt><span class="chip" data-confidence="likely">likely</span></dt>
+      <dd>Single primary, or multiple agreeing secondary sources</dd>
+      <dt><span class="chip" data-confidence="tentative">tentative</span></dt>
+      <dd>Community sources only, awaiting primary corroboration</dd>
+      <dt><span class="chip" data-confidence="disputed">disputed</span></dt>
+      <dd>Sources disagree; both readings shown side-by-side</dd>
+    </dl>
   </section>
 
   <section>
@@ -130,5 +130,17 @@ const repo = 'https://github.com/pjdoland/coachbook/blob/main';
     color: var(--ink-soft);
     max-width: 56ch;
     margin-bottom: 2rem;
+  }
+  .confidence-legend {
+    grid-template-columns: max-content 1fr;
+    align-items: baseline;
+  }
+  .confidence-legend dt {
+    font-weight: normal;
+    color: var(--ink);
+  }
+  @media (max-width: 540px) {
+    .confidence-legend dt { margin-top: 0.6rem; }
+    .confidence-legend dt:first-child { margin-top: 0; }
   }
 </style>
