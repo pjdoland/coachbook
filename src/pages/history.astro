@@ -70,6 +70,20 @@ const eraGroups = ERAS.map((era) => ({
       era.
     </p>
 
+    <nav class="era-strip" aria-label="Era jump">
+      <ul>
+        {eraGroups.map((era) => (
+          <li>
+            <a href={era.events[0]?.slug ? `#${era.events[0].slug}` : '#top'}>
+              <span class="strip-code">{era.code}</span>
+              <span class="strip-label">{era.label}</span>
+              <span class="strip-range">{era.range}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
     <nav class="history-toc" aria-label="Timeline navigation">
       <h2>Eras</h2>
       <ul class="era-grid">
@@ -109,6 +123,81 @@ const eraGroups = ERAS.map((era) => ({
 <style is:global>
   /* Styled is:global because some children render through Astro's
    * markdown renderer and don't carry the page's scoped class hash. */
+
+  /* Slim sticky era strip — visible as the reader scrolls deep into the
+   * timeline. The full era cards below remain the primary entry point;
+   * this strip is the always-on jump bar once you've scrolled past them. */
+  .era-strip {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    margin: 0 -1rem 1.25rem;
+    padding: 0.4rem 1rem;
+    background: var(--paper);
+    border-bottom: 1px solid var(--surface-line);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    backdrop-filter: saturate(140%) blur(8px);
+  }
+  .era-strip ul {
+    display: flex;
+    gap: 0.35rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+  .era-strip li { flex: 0 0 auto; }
+  .era-strip a {
+    display: flex;
+    flex-direction: column;
+    padding: 0.35rem 0.7rem;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 0.78rem;
+    line-height: 1.15;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    min-width: 5.5rem;
+    min-height: 44px;
+    justify-content: center;
+  }
+  .era-strip a:hover, .era-strip a:focus-visible {
+    border-color: var(--brass);
+    background: var(--paper-soft);
+    color: var(--ink);
+  }
+  .era-strip .strip-code {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    color: var(--brass-deep);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+  .era-strip .strip-label {
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 0.84rem;
+  }
+  .era-strip .strip-range {
+    color: var(--ink-quiet);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.72rem;
+  }
+  /* On very narrow screens, drop the range to keep the strip thin. */
+  @media (max-width: 540px) {
+    .era-strip .strip-range { display: none; }
+    .era-strip a { min-width: 4.5rem; padding: 0.3rem 0.55rem; }
+  }
+  /* If the user has reduced motion preferred, drop the backdrop blur
+   * which can be expensive on lower-end devices. */
+  @media (prefers-reduced-motion: reduce) {
+    .era-strip {
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
 
   .history-toc {
     margin: 1.5rem 0 2.5rem;
