@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('colors');
@@ -13,15 +14,20 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const label = entry.data.name ?? entry.data.title ?? entry.id;
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={label}>
   <article>
+    <Breadcrumbs trail={[
+      { label: 'Colors', href: `${base}colors/` },
+      { label },
+    ]} />
     <h1>{label}</h1>
     <dl>
       {entry.data.era && (<><dt>Era</dt><dd>{entry.data.era}</dd></>)}
       {entry.data.era_code && (<><dt>Era code</dt><dd>{entry.data.era_code}</dd></>)}
-      {entry.data.confidence && (<><dt>Confidence</dt><dd>{entry.data.confidence}</dd></>)}
+      {entry.data.confidence && (<><dt>Confidence</dt><dd><span class="chip" data-confidence={entry.data.confidence}>{entry.data.confidence}</span></dd></>)}
       {entry.data.status && (<><dt>Status</dt><dd>{entry.data.status}</dd></>)}
     </dl>
     <Content />
@@ -29,9 +35,11 @@ const label = entry.data.name ?? entry.data.title ?? entry.id;
       entry.data.sources && entry.data.sources.length > 0 && (
         <section>
           <h2>Sources</h2>
-          <ul>
+          <ul class="source-list">
             {entry.data.sources.map((id) => (
-              <li><code>{id}</code></li>
+              <li>
+                <a href={`${base}sources/#${id}`} class="source-cite">[{id}]</a>
+              </li>
             ))}
           </ul>
         </section>
@@ -39,3 +47,8 @@ const label = entry.data.name ?? entry.data.title ?? entry.id;
     }
   </article>
 </BaseLayout>
+
+<style>
+  .source-list { list-style: none; padding-left: 0; }
+  .source-list li { margin: 0.2rem 0; }
+</style>

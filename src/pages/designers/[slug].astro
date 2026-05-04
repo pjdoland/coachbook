@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 export async function getStaticPaths() {
   const designers = await getCollection('designers');
@@ -13,6 +14,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const label = entry.data.name ?? entry.data.title ?? entry.id;
+const base = import.meta.env.BASE_URL;
 
 const tenureStart =
   entry.data.tenure_start ?? entry.data.coach_tenure_start;
@@ -21,6 +23,10 @@ const tenureEnd = entry.data.tenure_end ?? entry.data.coach_tenure_end;
 
 <BaseLayout title={label}>
   <article>
+    <Breadcrumbs trail={[
+      { label: 'Designers and people', href: `${base}designers/` },
+      { label },
+    ]} />
     <h1>{label}</h1>
     <dl>
       {entry.data.born && (<><dt>Born</dt><dd>{String(entry.data.born)}</dd></>)}
@@ -35,7 +41,7 @@ const tenureEnd = entry.data.tenure_end ?? entry.data.coach_tenure_end;
         <><dt>Employment status</dt><dd>{entry.data.employment_status}</dd></>
       )}
       {entry.data.confidence && (
-        <><dt>Confidence</dt><dd>{entry.data.confidence}</dd></>
+        <><dt>Confidence</dt><dd><span class="chip" data-confidence={entry.data.confidence}>{entry.data.confidence}</span></dd></>
       )}
     </dl>
     <Content />
@@ -43,9 +49,11 @@ const tenureEnd = entry.data.tenure_end ?? entry.data.coach_tenure_end;
       entry.data.sources && entry.data.sources.length > 0 && (
         <section>
           <h2>Sources</h2>
-          <ul>
+          <ul class="source-list">
             {entry.data.sources.map((id) => (
-              <li><code>{id}</code></li>
+              <li>
+                <a href={`${base}sources/#${id}`} class="source-cite">[{id}]</a>
+              </li>
             ))}
           </ul>
         </section>
@@ -53,3 +61,8 @@ const tenureEnd = entry.data.tenure_end ?? entry.data.coach_tenure_end;
     }
   </article>
 </BaseLayout>
+
+<style>
+  .source-list { list-style: none; padding-left: 0; }
+  .source-list li { margin: 0.2rem 0; }
+</style>

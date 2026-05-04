@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('catalogs');
@@ -13,16 +14,21 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const label = entry.data.title ?? entry.data.name ?? entry.id;
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={label}>
   <article>
+    <Breadcrumbs trail={[
+      { label: 'Catalogs', href: `${base}catalogs/` },
+      { label },
+    ]} />
     <h1>{label}</h1>
     <dl>
       {entry.data.year && (<><dt>Year</dt><dd>{entry.data.year}</dd></>)}
       {entry.data.season && (<><dt>Season</dt><dd>{entry.data.season}</dd></>)}
       {entry.data.edition && (<><dt>Edition</dt><dd>{entry.data.edition}</dd></>)}
-      {entry.data.confidence && (<><dt>Confidence</dt><dd>{entry.data.confidence}</dd></>)}
+      {entry.data.confidence && (<><dt>Confidence</dt><dd><span class="chip" data-confidence={entry.data.confidence}>{entry.data.confidence}</span></dd></>)}
       {entry.data.status && (<><dt>Status</dt><dd>{entry.data.status}</dd></>)}
     </dl>
     <Content />
@@ -30,9 +36,11 @@ const label = entry.data.title ?? entry.data.name ?? entry.id;
       entry.data.sources && entry.data.sources.length > 0 && (
         <section>
           <h2>Sources</h2>
-          <ul>
+          <ul class="source-list">
             {entry.data.sources.map((id) => (
-              <li><code>{id}</code></li>
+              <li>
+                <a href={`${base}sources/#${id}`} class="source-cite">[{id}]</a>
+              </li>
             ))}
           </ul>
         </section>
@@ -40,3 +48,8 @@ const label = entry.data.title ?? entry.data.name ?? entry.id;
     }
   </article>
 </BaseLayout>
+
+<style>
+  .source-list { list-style: none; padding-left: 0; }
+  .source-list li { margin: 0.2rem 0; }
+</style>

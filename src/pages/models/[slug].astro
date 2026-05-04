@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 export async function getStaticPaths() {
   const models = await getCollection('models');
@@ -25,6 +26,10 @@ const related = relatedSlugs
 
 <BaseLayout title={label}>
   <article>
+    <Breadcrumbs trail={[
+      { label: 'Models', href: `${base}models/` },
+      { label },
+    ]} />
     <h1>{label}</h1>
     <dl>
       {
