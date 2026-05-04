@@ -3,85 +3,167 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const entries = await getCollection('authentication');
-const sorted = entries.sort((a, b) => {
-  const al = (a.data.title ?? a.data.name ?? a.id).toString();
-  const bl = (b.data.title ?? b.data.name ?? b.id).toString();
-  return al.localeCompare(bl);
-});
 const base = import.meta.env.BASE_URL;
+
+// Hand-curated groupings — alphabetical was a flat list with no
+// signal about what each topic actually tells you. Each group leads
+// with the question it answers.
+const GROUPS = [
+  {
+    label: 'Era windows',
+    blurb: 'Pin the bag to a date range. Each of these surfaces a different decade.',
+    slugs: ['creed-formats', 'serial-numbers', 'pre-creed-era', 'country-of-origin'],
+  },
+  {
+    label: 'Material and construction',
+    blurb: 'What the bag is made of, and how it was put together.',
+    slugs: ['leather', 'stitching', 'hardware', 'lining', 'zippers'],
+  },
+  {
+    label: 'Provenance details',
+    blurb: 'Smaller signals that confirm or contradict the era windows above.',
+    slugs: ['hangtags'],
+  },
+  {
+    label: 'Reading the signals',
+    blurb: 'How to combine the per-feature checks into a verdict.',
+    slugs: ['decision-tree', 'toolkit', 'coach-repair'],
+  },
+];
+
+// Keep a flat lookup by slug so we can pull the live entry data.
+const bySlug = new Map(entries.map((e) => [e.id, e]));
+
+// Track which slugs are surfaced in groups vs. left over (so nothing
+// gets silently dropped if someone adds an entry without updating the
+// curation list).
+const grouped = new Set(GROUPS.flatMap((g) => g.slugs));
+const ungrouped = entries.filter((e) => !grouped.has(e.id));
+
+const counterfeits = (await getCollection('authentication')).filter((e) =>
+  e.id.startsWith('counterfeits/'),
+);
 ---
 
-<BaseLayout title="Authentication">
+<BaseLayout
+  title="Authentication"
+  description="Authenticate vintage Coach by combining era-windowed signals across creed, hardware, country of origin, leather, and construction. No single check is sufficient."
+>
   <h1>Authentication</h1>
   <p class="lede">
-    No single check proves a bag authentic or fake. Combine multiple
-    checks for any verdict.
+    Coach used the same brass turnlock for 60 years and the same
+    glove-tanned cowhide for 40. Authenticating a vintage bag isn't
+    about spotting a single fake-tell — it's about checking that the
+    creed wording, country of origin, serial format, hardware, and
+    construction all sit inside the same era window. Mismatches across
+    those windows are how counterfeits give themselves away.
   </p>
 
-  <p class="paths">
-    <strong>If you have a bag in hand</strong>, start the wizard.
-    <strong>For a printable reference</strong>, use the decision tree.
-    <strong>To browse by topic</strong>, see the index below.
+  <p>
+    <strong>The principle:</strong> no single signal is sufficient.
+    A wrong-era turnlock could be a Coach Repair replacement on an
+    otherwise authentic bag. A wrong-era creed alone could be the same.
+    Two or more independent mismatches cannot share a single
+    explanation, and that's when fakes show.
   </p>
 
-  <p class="cta-row">
-    <a class="cta primary" href={`${base}wizard/`}>Start the wizard →</a>
-    <a class="cta" href={`${base}authentication/decision-tree/`}>Printable decision tree</a>
-  </p>
-
-  <h2>Browse topics</h2>
-  <ul class="card-grid">
-    {sorted.map((entry) => (
-      <li>
-        <a href={`${base}authentication/${entry.id}/`}>
-          <strong>{entry.data.title ?? entry.data.name ?? entry.id}</strong>
-          {entry.data.confidence && (
-            <span class="chip" data-confidence={entry.data.confidence}>
-              {entry.data.confidence}
-            </span>
-          )}
-        </a>
-      </li>
-    ))}
+  <h2>Three ways into the work</h2>
+  <ul class="card-grid path-grid">
+    <li>
+      <a href={`${base}wizard/`}>
+        <strong>Wizard</strong>
+        <span class="card-meta">Step-through · 6 questions · cross-checked</span>
+      </a>
+    </li>
+    <li>
+      <a href={`${base}authentication/decision-tree/`}>
+        <strong>Printable decision tree</strong>
+        <span class="card-meta">One-page reference for offline use</span>
+      </a>
+    </li>
+    <li>
+      <a href={`${base}authentication/toolkit/`}>
+        <strong>Inspection toolkit</strong>
+        <span class="card-meta">Tools, lighting, and the canonical photo set</span>
+      </a>
+    </li>
   </ul>
+
+  {GROUPS.map((g) => {
+    const items = g.slugs.map((s) => bySlug.get(s)).filter(Boolean);
+    if (items.length === 0) return null;
+    return (
+      <section class="topic-group">
+        <h2>{g.label}</h2>
+        <p class="group-blurb">{g.blurb}</p>
+        <ul class="card-grid">
+          {items.map((entry) => (
+            <li>
+              <a href={`${base}authentication/${entry.id}/`}>
+                <strong>{entry.data.title ?? entry.data.name ?? entry.id}</strong>
+                {entry.data.confidence && (
+                  <span class="chip" data-confidence={entry.data.confidence}>
+                    {entry.data.confidence}
+                  </span>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  })}
+
+  {counterfeits.length > 0 && (
+    <section class="topic-group">
+      <h2>Documented fake families</h2>
+      <p class="group-blurb">
+        Specific reproduction lineages with characteristic tells —
+        useful when comparing a suspect bag to known-fake patterns.
+      </p>
+      <ul class="card-grid">
+        {counterfeits.map((entry) => (
+          <li>
+            <a href={`${base}authentication/${entry.id}/`}>
+              <strong>{entry.data.title ?? entry.data.name ?? entry.id}</strong>
+              {entry.data.confidence && (
+                <span class="chip" data-confidence={entry.data.confidence}>
+                  {entry.data.confidence}
+                </span>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {ungrouped.length > 0 && (
+    <section class="topic-group">
+      <h2>Other topics</h2>
+      <ul class="card-grid">
+        {ungrouped.map((entry) => (
+          <li>
+            <a href={`${base}authentication/${entry.id}/`}>
+              <strong>{entry.data.title ?? entry.data.name ?? entry.id}</strong>
+              {entry.data.confidence && (
+                <span class="chip" data-confidence={entry.data.confidence}>
+                  {entry.data.confidence}
+                </span>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
 </BaseLayout>
 
 <style>
-  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 0.75rem; max-width: 60ch; }
-  .paths {
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-    margin: 0 0 1.5rem;
-    max-width: 60ch;
-    line-height: 1.6;
-  }
-  .paths strong { color: var(--ink); font-weight: 600; }
+  .lede { font-size: 1.05rem; color: var(--ink-soft); max-width: 62ch; margin-bottom: 1rem; }
+  .topic-group { margin-top: 2.5rem; }
+  .topic-group h2 { margin-bottom: 0.4rem; }
+  .group-blurb { color: var(--ink-soft); max-width: 62ch; margin: 0 0 1rem; }
   .card-grid .chip { margin-top: 0.4rem; }
-  .cta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin: 1.5rem 0 2.5rem;
-  }
-  .cta {
-    display: inline-block;
-    padding: 0.6rem 1rem;
-    border: 1px solid var(--surface-line);
-    border-radius: 3px;
-    text-decoration: none;
-    color: var(--ink);
-    background: var(--surface);
-    font-weight: 500;
-  }
-  .cta:hover { border-color: var(--brass); background: var(--paper-soft); }
-  .cta.primary {
-    background: var(--bridle);
-    color: var(--paper);
-    border-color: var(--bridle);
-  }
-  .cta.primary:hover {
-    background: var(--bridle-soft);
-    border-color: var(--bridle-soft);
-    color: var(--paper);
-  }
+  .path-grid { margin-bottom: 1rem; }
 </style>
