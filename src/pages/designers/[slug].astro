@@ -17,9 +17,8 @@ const { Content } = await render(entry);
 const label = entry.data.name ?? entry.data.title ?? entry.id;
 const base = import.meta.env.BASE_URL;
 
-const tenureStart =
-  entry.data.tenure_start ?? entry.data.coach_tenure_start;
-const tenureEnd = entry.data.tenure_end ?? entry.data.coach_tenure_end;
+const tenureStart = entry.data.tenure_start;
+const tenureEnd = entry.data.tenure_end;
 const evidence = summarize(entry.data.sources);
 
 const jsonLd = {

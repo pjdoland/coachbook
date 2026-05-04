@@ -180,12 +180,11 @@ const designers = defineCollection({
       // Dates in ISO form (YYYY-MM-DD) or year-only string per STYLE.md §5.
       born: z.union([z.coerce.date(), z.string()]).optional(),
       died: z.union([z.coerce.date(), z.string()]).optional(),
-      // Tenure fields: STYLE.md §5 names them tenure_start/tenure_end;
-      // bonnie-cashin.md uses coach_tenure_start/coach_tenure_end. Accept both.
+      // Coach tenure dates. Coach is the only employer this archive
+      // tracks for any designer, so the bare `tenure_*` names suffice
+      // (STYLE.md §5).
       tenure_start: z.union([z.number(), z.string()]).optional(),
       tenure_end: z.union([z.number(), z.string()]).optional(),
-      coach_tenure_start: z.union([z.number(), z.string()]).optional(),
-      coach_tenure_end: z.union([z.number(), z.string()]).optional(),
       employment_status: z.string().optional(),
       role: z.string().optional(),
     })
@@ -215,9 +214,8 @@ const authentication = defineCollection({
           'packaging',
         ])
         .optional(),
-      // Existing entries use `covers_eras` (creed-formats.md). STYLE.md
-      // also documents `era_coverage`. Accept either spelling.
-      covers_eras: z.array(era).optional(),
+      // Eras the topic covers. Canonical name is `era_coverage`; the
+      // older `covers_eras` spelling has been migrated.
       era_coverage: z.array(era).optional(),
     })
     .passthrough()

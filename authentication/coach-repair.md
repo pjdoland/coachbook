@@ -6,7 +6,7 @@ confidence: confirmed
 sources:
   - coach-10k-fiscal-2003
   - coach-s1-2000
-covers_eras: [E1, E2, E3, E4, E5]
+era_coverage: [E1, E2, E3, E4, E5]
 ---
 
 # Coach Repair and Factory Restoration
