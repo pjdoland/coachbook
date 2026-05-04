@@ -311,12 +311,16 @@ const eraGroups = ERAS.map((era) => ({
     font-size: 0.85rem;
   }
   .back-to-top a {
-    color: var(--ink-quiet);
+    color: var(--ink-soft);
     text-decoration: none;
-    padding: 0.3rem 0.6rem;
+    /* 44×44 touch target minimum per WCAG 2.5.8. */
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.5rem 1rem;
     border: 1px solid var(--surface-line);
     border-radius: 2px;
-    display: inline-block;
+    font-size: 0.92rem;
   }
   .back-to-top a:hover {
     color: var(--brass-deep);
