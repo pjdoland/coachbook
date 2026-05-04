@@ -199,12 +199,13 @@ const base = import.meta.env.BASE_URL;
     cursor: not-allowed;
   }
 
-  /* Trail / running summary ------------------------------------------- */
+  /* Trail / running summary — sits above the step body now so users
+   * can see previous answers without scrolling past the question. */
   .wiz-trail {
     padding: 0.85rem 1.25rem 1rem;
-    border-top: 1px solid var(--surface-line);
+    border-bottom: 1px solid var(--surface-line);
     font-size: 0.85rem;
-    color: var(--ink-quiet);
+    color: var(--ink-soft);
     background: var(--paper-soft);
   }
   .wiz-trail .trail-heading {
@@ -215,6 +216,9 @@ const base = import.meta.env.BASE_URL;
     letter-spacing: 0.05em;
     font-size: 0.78rem;
   }
+  details.wiz-trail summary { cursor: pointer; }
+  details.wiz-trail .wiz-trail-list { margin-top: 0.4rem; }
+  details.wiz-trail:not([open]) .wiz-trail-list { display: none; }
   ol.wiz-trail-list {
     list-style: none;
     padding: 0;
@@ -519,10 +523,13 @@ const base = import.meta.env.BASE_URL;
     body.appendChild(h);
     body.appendChild(hint);
     body.appendChild(ul);
-    wiz.appendChild(body);
 
-    renderControls();
+    /* Render order: progress → trail (collapsed) → body → controls.
+     * Trail above body so users see their previous answers without
+     * scrolling past the question on mobile. */
     renderTrail();
+    wiz.appendChild(body);
+    renderControls();
 
     /* Move focus to the new heading after the DOM is in place so AT
      * announces the step change instead of staying on the now-detached
@@ -549,12 +556,24 @@ const base = import.meta.env.BASE_URL;
 
   function renderTrail() {
     if (state.history.length === 0) return;
-    const trail = document.createElement('div');
+    /* After step 2, collapse the trail by default — once the list grows
+     * past two answers, an open list crowds the question above the
+     * fold on mobile. The summary still shows the count so users know
+     * to expand if they want to review. */
+    const useDetails = state.history.length > 2;
+    const trail = document.createElement(useDetails ? 'details' : 'div');
     trail.className = 'wiz-trail';
-    const heading = document.createElement('p');
-    heading.className = 'trail-heading';
-    heading.textContent = 'Your answers so far';
-    trail.appendChild(heading);
+    if (useDetails) {
+      const summary = document.createElement('summary');
+      summary.className = 'trail-heading';
+      summary.textContent = `Your answers so far (${state.history.length})`;
+      trail.appendChild(summary);
+    } else {
+      const heading = document.createElement('p');
+      heading.className = 'trail-heading';
+      heading.textContent = 'Your answers so far';
+      trail.appendChild(heading);
+    }
     const ol = document.createElement('ol');
     ol.className = 'wiz-trail-list';
     state.history.forEach((h, i) => {
