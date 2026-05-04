@@ -366,20 +366,32 @@ const base = import.meta.env.BASE_URL;
         border: 1px solid var(--surface-line);
         vertical-align: 0.1em;
       }
+      /* Border-style per confidence level so the chip taxonomy is
+       * parseable without reading the label and without relying on
+       * color (WCAG 1.4.1). solid = confirmed, dashed = likely,
+       * dotted = tentative, double = disputed. */
       .chip[data-confidence='confirmed'] {
         background: rgba(138, 106, 43, 0.12);
         color: var(--brass-deep);
         border-color: var(--brass-soft);
+        border-style: solid;
       }
       .chip[data-confidence='likely'] {
         background: rgba(138, 106, 43, 0.05);
         color: var(--ink-soft);
         border-color: var(--brass-soft);
+        border-style: dashed;
+      }
+      .chip[data-confidence='tentative'] {
+        border-style: dotted;
       }
       .chip[data-confidence='disputed'] {
         background: rgba(107, 58, 30, 0.08);
         color: var(--bridle);
         border-color: var(--bridle-soft);
+        border-style: double;
+        border-width: 3px;
+        padding: 0 0.45em;
       }
 
       /* Print — strip nav, full-bleed paper. */
