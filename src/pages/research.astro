@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const repo = 'https://github.com/pjdoland/coachbook/blob/main/research';
+
+// Research streams. Each letter is a topic; numbered files within a
+// letter are sub-streams (typically year-by-year catalog deep-reads).
+// Hand-curated because the file titles are inconsistent and the
+// hierarchy (letter -> sub-letter) doesn't appear in the filenames.
+const streams = [
+  {
+    code: 'A',
+    label: 'Free online sources',
+    summary: 'The starter sweep: every reputable online source on vintage Coach, tier-graded.',
+    files: [{ slug: 'A-online-sources', title: 'Free online sources' }],
+  },
+  {
+    code: 'B',
+    label: 'Company history and timeline',
+    summary: 'Coach\'s history from the 1941 Manhattan founding through the 2001 Signature C launch, every event source-tagged.',
+    files: [{ slug: 'B-history', title: 'Coach company history' }],
+  },
+  {
+    code: 'C',
+    label: 'Bonnie Cashin',
+    summary: 'Cashin\'s 1962–1974 contracted tenure: turnlock invention, hardware patents, design canon — and the folklore traps.',
+    files: [
+      { slug: 'C-cashin', title: 'Bonnie Cashin (primary)' },
+      { slug: 'J-cashin-supplemental', title: 'Cashin supplemental findings' },
+    ],
+  },
+  {
+    code: 'D',
+    label: 'Model canon',
+    summary: 'The full-roster cross-check: every silhouette known from catalog evidence, with style numbers and date ranges.',
+    files: [{ slug: 'D-models', title: 'Model canon' }],
+  },
+  {
+    code: 'E',
+    label: 'Authentication primary data',
+    summary: 'Per-feature authentication data: creed evolution, hardware, hangtags, country marking, the 12-SPI primary anchor.',
+    files: [{ slug: 'E-authentication', title: 'Authentication primary data' }],
+  },
+  {
+    code: 'F',
+    label: 'Catalogs and ads online',
+    summary: 'Catalog and print-ad sources before the user-supplied catalog corpus arrived (preempted by the L stream).',
+    files: [{ slug: 'F-catalogs', title: 'Catalogs and ads (online)' }],
+  },
+  {
+    code: 'G',
+    label: 'Coach S-1 / IPO documentation',
+    summary: 'SEC EDGAR investigation of the October 2000 IPO and the Sara Lee divestiture sequence.',
+    files: [
+      { slug: 'G-coach-s1', title: 'Coach S-1 (online)' },
+      { slug: 'K-coach-s1-2000', title: 'Coach 2000 S-1 prospectus (PRIMARY)' },
+    ],
+  },
+  {
+    code: 'H',
+    label: 'USPTO trademark and patent',
+    summary: 'Trademark registrations and Cashin/Coach turnlock patent records — primary IP-document anchoring.',
+    files: [{ slug: 'H-uspto', title: 'USPTO Coach trademark and patent search' }],
+  },
+  {
+    code: 'I',
+    label: 'Coach Inc. fiscal 2003 10-K',
+    summary: 'The first user-supplied Tier-1 primary source. Anchors: 1941 founding, July 1985 Sara Lee acquisition, Oct 2000 IPO, July 1999 Jacksonville consolidation.',
+    files: [{ slug: 'I-coach-10k-2003', title: 'Coach 10-K fiscal 2003 (PRIMARY)' }],
+  },
+  {
+    code: 'L',
+    label: 'Original Coach catalogs, 1960–1989',
+    summary: 'The user-supplied catalog corpus arrives. 1960s–1989 readings, with 1985 and 1989 quarterlies being the most-cited primary anchors in the archive.',
+    files: [{ slug: 'L-catalogs-1960-1989', title: 'Original Coach catalogs 1960–1989 (PRIMARY)' }],
+  },
+  {
+    code: 'M',
+    label: 'Catalog deep-readings (post-1989)',
+    summary: 'Year-by-year deep readings continuing from L. M1–M4 cover the 1985–1998 transition window where the most disputes resolve.',
+    files: [
+      { slug: 'M-catalogs-deep-readings', title: 'M overview' },
+      { slug: 'M1-catalogs-1985', title: 'M1 — 1985' },
+      { slug: 'M2-catalogs-1989', title: 'M2 — 1989' },
+      { slug: 'M3-catalogs-1995-1996', title: 'M3 — 1995–1996' },
+      { slug: 'M4-catalogs-1997-1998', title: 'M4 — 1997–1998' },
+    ],
+  },
+  {
+    code: 'N',
+    label: 'Catalog deep-readings, 1981–1984',
+    summary: 'Pre-Sara Lee Cahn-era catalogs: brand voice, model continuity, the four-year window before the 1985 acquisition.',
+    files: [
+      { slug: 'N1-catalogs-1981-1982', title: 'N1 — 1981–1982' },
+      { slug: 'N2-catalogs-1983', title: 'N2 — 1983' },
+      { slug: 'N3-catalogs-1984', title: 'N3 — 1984' },
+      { slug: 'N4-cross-cut-1981-1984', title: 'N4 — 1981–1984 cross-cut' },
+    ],
+  },
+  {
+    code: 'O',
+    label: 'Catalog deep-readings, 1986–1990',
+    summary: 'Late-NYC peak: 1986–1987 quarterly cadence, 1988–1990 transition. Where the heritage-rhetoric voice solidifies.',
+    files: [
+      { slug: 'O1-catalogs-1986', title: 'O1 — 1986' },
+      { slug: 'O2-catalogs-1987', title: 'O2 — 1987' },
+      { slug: 'O3-catalogs-1988-1990', title: 'O3 — 1988 + 1990' },
+    ],
+  },
+  {
+    code: 'P',
+    label: 'Catalog deep-readings, 1992–1994',
+    summary: 'Sub-collection diversification: Soho, Sheridan, Berkeley, Continental. P3 covers the full 1994 cycle including the Soho rename.',
+    files: [
+      { slug: 'P1-catalogs-1992', title: 'P1 — 1992' },
+      { slug: 'P2-catalogs-1993', title: 'P2 — 1993' },
+      { slug: 'P3-catalogs-1994', title: 'P3 — 1994' },
+    ],
+  },
+  {
+    code: 'Q',
+    label: 'Catalog deep-readings, 1999–2002',
+    summary: 'The Krakoff transition closes out: 1999 quarterly cadence, 2000–2002 cutoff including the 2002 Autumn (the last in-scope catalog).',
+    files: [
+      { slug: 'Q1-catalogs-1999', title: 'Q1 — 1999 overview' },
+      { slug: 'Q1a-1999-fall-preview', title: 'Q1a — 1999 Fall Preview' },
+      { slug: 'Q1b-1999-fall', title: 'Q1b — 1999 Fall' },
+      { slug: 'Q1c-1999-holiday', title: 'Q1c — 1999 Holiday' },
+      { slug: 'Q2-catalogs-2000-2002', title: 'Q2 — 2000–2002' },
+      { slug: 'Q2-catalogs-2002-autumn', title: 'Q2 — 2002 Autumn (final in-scope)' },
+    ],
+  },
+];
+
+const totalFiles = streams.reduce((n, s) => n + s.files.length, 0);
+---
+
+<BaseLayout
+  title="Research method"
+  description="The 16-stream research method behind the coachbook archive. Per-stream summaries, primary-source anchors, file links."
+>
+  <p class="standfirst">Method</p>
+  <h1>Research method</h1>
+  <p class="lede">
+    The archive is built from {streams.length} research streams ({totalFiles} working
+    files), each a primary-source-cited investigation of one slice of
+    vintage Coach. Streams A–K were online-sources sweeps;
+    L–Q are catalog deep-reads against a user-supplied corpus of 107
+    Coach catalogs spanning 1960–2020.
+  </p>
+  <p>
+    Working notes are in the public repo at
+    <a href={repo}><code>research/</code></a>. Each stream's findings
+    flow into the model, designer, authentication, and history entries
+    that cite them.
+  </p>
+
+  {streams.map((s) => (
+    <section class="stream">
+      <h2><span class="stream-code">{s.code}</span> {s.label}</h2>
+      <p class="stream-summary">{s.summary}</p>
+      <ul class="stream-files">
+        {s.files.map((f) => (
+          <li><a href={`${repo}/${f.slug}.md`}>{f.title}</a></li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>
+
+<style>
+  .standfirst {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-quiet);
+    margin: 0 0 0.5rem;
+    font-weight: 500;
+  }
+  .lede { font-size: 1.05rem; color: var(--ink-soft); max-width: 60ch; margin-bottom: 1rem; }
+  .stream { margin: 2rem 0; }
+  .stream h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .stream-code {
+    display: inline-block;
+    min-width: 1.6rem;
+    padding: 0.05em 0.4em;
+    margin-right: 0.45rem;
+    background: var(--bridle);
+    color: var(--paper);
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: 0.12em;
+  }
+  .stream-summary { color: var(--ink-soft); max-width: 65ch; margin: 0.3rem 0 0.6rem; }
+  .stream-files {
+    list-style: none;
+    padding-left: 0.75rem;
+    border-left: 1px solid var(--surface-line);
+  }
+  .stream-files li { margin: 0.25rem 0; font-size: 0.92rem; }
+</style>
