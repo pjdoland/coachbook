@@ -375,6 +375,11 @@ const base = import.meta.env.BASE_URL;
           era: ['e5'],
           next: 'country',
         },
+        {
+          label: "I can't tell — the creed is too worn to read",
+          sub: 'No era hint recorded; verdict relies on the other dimensions.',
+          next: 'country',
+        },
       ],
     },
 
@@ -390,6 +395,7 @@ const base = import.meta.env.BASE_URL;
         { label: '"Made in Puerto Rico, U.S.A."', sub: 'Through April 2002 (Lares facility, last in-house plant)', era: ['e5'], next: 'serial' },
         { label: '"Handcrafted in China"', sub: '2000s onward — post-vintage for this archive', era: ['post-vintage'], next: 'serial' },
         { label: 'No country marking visible', sub: 'Pre-late-1970s common; era-context dependent', flags: 0, next: 'serial' },
+        { label: "I can't tell — the stamp is illegible", sub: 'No era hint recorded.', next: 'serial' },
       ],
     },
 
@@ -402,6 +408,7 @@ const base = import.meta.env.BASE_URL;
         { label: 'Letter-digit-letter, e.g. "B6D-9927"', sub: '1994 onward. Single-digit-year ambiguity (1996 vs 2006) — never publish a year from the code alone.', era: ['e5'], next: 'hardware' },
         { label: 'Two-digit year, e.g. "B16D-9927"', sub: '2004 onward — post-vintage for this archive.', era: ['post-vintage'], next: 'hardware' },
         { label: 'No serial', sub: 'Era-context dependent. Pre-1980 bags and small accessories shipped without serials. Absence is not by itself a fake tell.', flags: 0, next: 'hardware' },
+        { label: "I can't read the serial — it's too worn", sub: 'No era hint recorded; common on heavily-used vintage examples.', next: 'hardware' },
       ],
     },
 
