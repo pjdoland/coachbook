@@ -38,6 +38,48 @@ Good (from `research/B-history.md`):
 Bad:
 > The iconic Coach brand has its storied origins in 1941, when…
 
+### Voice resolution — when sources diverge
+
+The archive's voice is plain and historical. When sources you're
+synthesizing diverge in tone or framing, resolve in this order:
+
+1. **Brand voice ≠ archive voice.** Coach's own catalog copy from
+   1985–1994 is rich source material for *what Coach said about
+   itself*, but the archive does not adopt that register. Quote brand
+   voice in quotation marks, with a citation; paraphrase only into
+   factual claims.
+
+   - From the 1989 catalog: > "We use a special process to make this
+     binding from the very same glove-tanned cowhide as the bag…"
+     [coach-catalogs-1960-1989]
+   - Archive paraphrase: > Coach's 1989 catalog describes the seam
+     binding as "glove-tanned cowhide cut from the same hide as the
+     bag" [coach-catalogs-1960-1989].
+
+2. **Catalog name beats marketing name.** When the same bag has a
+   catalog-listed name and a community / marketing name, use the
+   catalog name as canonical and list the marketing name in
+   `also_known_as`.
+
+3. **Specific framing beats general framing.** "Bonnie Cashin
+   contracted as designer 1962–1974" beats "Bonnie Cashin worked at
+   Coach during the Cashin era" — same fact, but the specific dates
+   are diagnostic and the era label is circular.
+
+4. **Plain language beats jargon.** Where authentication communities
+   have established their own shorthand ("Frankenbag", "creed-side
+   serial"), define the term on first use, then use it; don't import
+   the jargon as decoration.
+
+5. **Past-tense cleans up tense conflict.** When sources mix tenses
+   (a 1989 catalog describing current production; a 2016 article
+   describing the same), the archive collapses to past tense
+   throughout — the subject is vintage Coach, and vintage is
+   historical.
+
+When in doubt, ask: would a librarian writing a finding aid use this
+phrase? If not, rewrite.
+
 ---
 
 ## 2. Citation format
