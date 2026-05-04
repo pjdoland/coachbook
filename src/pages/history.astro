@@ -296,6 +296,27 @@ const eraGroups = ERAS.map((era) => ({
     font-weight: 600;
   }
 
+  /* Heading anchor affordance — pilcrow appears on hover/focus.
+   * Sighted users get a click-to-copy permalink target; keyboard +
+   * AT users get a labeled link they can navigate to directly. */
+  .history-body h3 .heading-anchor,
+  .history-body h2 .heading-anchor {
+    margin-left: 0.4em;
+    color: var(--ink-quiet);
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 120ms ease, color 120ms ease;
+    font-weight: normal;
+  }
+  .history-body h3:hover .heading-anchor,
+  .history-body h3:focus-within .heading-anchor,
+  .history-body h2:hover .heading-anchor,
+  .history-body h2:focus-within .heading-anchor,
+  .history-body .heading-anchor:focus-visible {
+    opacity: 1;
+    color: var(--brass-deep);
+  }
+
   /* Anchor link affordance — when an h3 is the navigation target, hint
    * it visually so the user can confirm they jumped to the right entry. */
   .history-body h3:target {
