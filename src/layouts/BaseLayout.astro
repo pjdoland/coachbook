@@ -57,10 +57,13 @@ const base = import.meta.env.BASE_URL;
 
         /* Brass accent — link color and section rules. Restrained;
          * approximates the warm yellow-brown of solid brass turnlock
-         * hardware in artificial light. Not literal Coach-orange. */
-        --brass: #8a6a2b;
-        --brass-deep: #6b5021;
-        --brass-soft: #b89a5e;
+         * hardware in artificial light. Not literal Coach-orange.
+         * --brass darkened from #8a6a2b (4.4:1, fails AA body text)
+         * to #7a5c22 (~5.4:1) to clear WCAG SC 1.4.3 — links count as
+         * body text, not UI. */
+        --brass: #7a5c22;
+        --brass-deep: #5c4419;
+        --brass-soft: #a88752;
 
         /* Bridle leather accent — used sparingly for state highlighting
          * (active wizard step, primary CTA). */
