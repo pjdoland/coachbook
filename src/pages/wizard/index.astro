@@ -25,11 +25,7 @@ const base = import.meta.env.BASE_URL;
     </div>
   </noscript>
 
-  <div id="wizard" data-base={base}>
-    <div class="wiz-intro">
-      <p>Loading…</p>
-    </div>
-  </div>
+  <div id="wizard" data-base={base} hidden></div>
 
   <p class="footnote">
     Based on
@@ -635,5 +631,9 @@ const base = import.meta.env.BASE_URL;
     return reads;
   }
 
+  /* Reveal the wizard once the script has executed; with JS off the
+   * div stays hidden and the noscript fallback is the only content
+   * the user sees. */
+  wiz.hidden = false;
   render();
 </script>
