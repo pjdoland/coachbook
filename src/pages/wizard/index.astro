@@ -139,9 +139,18 @@ const base = import.meta.env.BASE_URL;
     color: var(--ink);
     transition: border-color 120ms ease, background 120ms ease;
   }
-  ul.wiz-options button:hover, ul.wiz-options button:focus-visible {
+  ul.wiz-options button:hover {
     border-color: var(--brass);
     background: var(--paper-soft);
+  }
+  /* Stronger focus-visible — outline + box-shadow ring so keyboard
+   * users get an unambiguous indicator separate from hover styling. */
+  ul.wiz-options button:focus-visible {
+    border-color: var(--brass);
+    background: var(--paper-soft);
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 1px var(--paper) inset;
   }
   ul.wiz-options button strong {
     display: block;
