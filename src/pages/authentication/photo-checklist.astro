@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+
+const base = import.meta.env.BASE_URL;
+
+// Curated, printable photo set. Each row = one photo to capture, with
+// the per-feature evidence it supports. Designed to fit on one page
+// when printed; the styles below squeeze whitespace under
+// @media print.
+const SHOTS = [
+  {
+    group: 'Identity (every bag)',
+    items: [
+      { name: 'Bag, full front', why: 'Silhouette / proportions for model identification.' },
+      { name: 'Bag, full back', why: 'Confirms construction, back panel, any rear pockets.' },
+      { name: 'Bag, side / gusset', why: 'Reads stitching count per inch; gusset construction.' },
+      { name: 'Bag, top down (open)', why: 'Lining, internal pockets, any internal labels.' },
+      { name: 'Bag, bottom', why: 'Wear pattern, any bottom feet, edge finish.' },
+    ],
+  },
+  {
+    group: 'Creed (every bag with a creed)',
+    items: [
+      { name: 'Creed, full', why: 'Wording, layout, embossing depth, font kerning.' },
+      { name: 'Creed, close-up of "Coach" wordmark', why: 'Wordmark differs by era (LEATHERWARES vs LEATHERWARE).' },
+      { name: 'Creed, close-up of country line', why: '"NEW YORK CITY" → US production through 1994; "Made in <country>" → offshore.' },
+      { name: 'Creed, close-up of serial number', why: 'Decode era window from format (digit-letter vs letter-digit-letter).' },
+      { name: 'Creed, ruler in frame for scale', why: 'Required by community authenticators; dimensional check against known examples.' },
+    ],
+  },
+  {
+    group: 'Hardware',
+    items: [
+      { name: 'Turnlock, both halves face-on', why: 'Brass color, stamp depth, alignment, magnet test result.' },
+      { name: 'Turnlock backplate', why: 'Hand-finishing or replacement evidence.' },
+      { name: 'Strap junctions / D-rings / dogleash clip', why: 'Brass color match, stamping, era-consistency with turnlock.' },
+      { name: 'Hangtag, front + back (if present)', why: 'Silhouette, attachment hardware, any reverse stamping.' },
+      { name: 'Zipper pull (if applicable)', why: 'Maker (Talon vs YKK) → era window.' },
+    ],
+  },
+  {
+    group: 'Stitching',
+    items: [
+      { name: 'Body seam, ruler in frame', why: 'Count SPI; primary anchor 12 SPI per 1985 catalog.' },
+      { name: 'Strap junction stitch', why: 'Hand-finishing on accent points; per-model.' },
+      { name: 'Lock-off endings (inside or underside)', why: 'Clean backstitch vs loose tail / visible knots.' },
+    ],
+  },
+  {
+    group: 'Leather and edges',
+    items: [
+      { name: 'Edge close-up (raw / burnished / painted?)', why: 'Painted glossy edge on pre-1995 bag is a fake signal.' },
+      { name: 'Leather flesh side (interior, where unlined)', why: 'Glove-tanned cowhide presents a specific color and texture.' },
+      { name: 'Color reference shot under daylight bulb', why: 'iPhone photos under incandescent skew warm; daylight bulb is ground truth.' },
+    ],
+  },
+  {
+    group: 'Optional but useful',
+    items: [
+      { name: '365 nm UV flood', why: 'Reveals adhesive repairs, restoration, creed swaps invisible in visible light.' },
+      { name: 'Loupe macro of creed embossing', why: 'Distinguishes deep brand-stamp from shallow reproduction.' },
+      { name: 'Bag in shoulder / hand for proportion', why: 'Sanity-check the model dimensions against a typical body.' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Canonical photo set"
+  description="The reference set of inspection photos to capture for authentication, identification, or community second opinions. Printable."
+>
+  <article>
+    <Breadcrumbs trail={[
+      { label: 'Authentication', href: `${base}authentication/` },
+      { label: 'Canonical photo set' },
+    ]} />
+    <p class="standfirst">Reference checklist</p>
+    <h1>Canonical photo set</h1>
+    <p class="lede">
+      The reference shots to capture before posting a bag to community
+      authenticators, comparing against a known example, or filing
+      provenance for resale. Print one-page; tick as you go.
+    </p>
+
+    <p class="setup-note">
+      Setup: color-corrected daylight bulb (or daylight near a window),
+      a small ruler with cm + in markings, a soft cloth for cleaning,
+      a 12 MP phone camera. Optional but high-value: a 365 nm UV
+      flashlight and a 10× jeweler's loupe. Full toolkit at
+      <a href={`${base}authentication/toolkit/`}>authentication/toolkit</a>.
+    </p>
+
+    <ol class="checklist">
+      {SHOTS.map((group) => (
+        <li class="group">
+          <h2>{group.group}</h2>
+          <ul>
+            {group.items.map((shot) => (
+              <li class="shot">
+                <input type="checkbox" aria-label={`Captured: ${shot.name}`} />
+                <div>
+                  <p class="shot-name">{shot.name}</p>
+                  <p class="shot-why">{shot.why}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+
+    <p class="footnote">
+      The checkboxes are unsubmitted form inputs; print or save the
+      page and tick by hand. Browser checks reset on reload.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .standfirst {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-quiet);
+    margin: 0 0 0.5rem;
+    font-weight: 500;
+  }
+  .lede { font-size: 1.05rem; color: var(--ink-soft); max-width: 60ch; margin-bottom: 1rem; }
+  .setup-note {
+    margin: 1rem 0 1.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--paper-soft);
+    border-left: 3px solid var(--brass);
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+  .checklist { list-style: none; padding-left: 0; margin: 0; }
+  .checklist > li.group { margin: 1.75rem 0; }
+  .checklist h2 {
+    font-size: 1.15rem;
+    margin: 0 0 0.6rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--surface-line);
+  }
+  .checklist ul { list-style: none; padding-left: 0; margin: 0; }
+  .checklist .shot {
+    display: grid;
+    grid-template-columns: 1.6rem 1fr;
+    gap: 0.55rem;
+    align-items: start;
+    padding: 0.55rem 0.5rem;
+    border-bottom: 1px solid var(--surface-line);
+  }
+  .checklist .shot:last-child { border-bottom: 0; }
+  .checklist .shot input[type="checkbox"] {
+    margin-top: 0.25rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--brass);
+  }
+  .shot-name { margin: 0 0 0.15rem; color: var(--ink); font-weight: 600; }
+  .shot-why { margin: 0; color: var(--ink-soft); font-size: 0.9rem; line-height: 1.4; }
+  .footnote { color: var(--ink-quiet); font-size: 0.88rem; margin-top: 1.5rem; }
+
+  @media print {
+    .standfirst, .footnote { display: none; }
+    .lede { font-size: 0.95rem; }
+    .setup-note { font-size: 0.85rem; padding: 0.5rem 0.75rem; }
+    .checklist > li.group { margin: 0.85rem 0; break-inside: avoid; }
+    .checklist h2 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .checklist .shot { padding: 0.3rem 0.3rem; }
+    .shot-name { font-size: 0.92rem; }
+    .shot-why { font-size: 0.82rem; }
+    h1 { margin-bottom: 0.4rem; }
+  }
+</style>
