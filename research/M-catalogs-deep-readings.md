@@ -34,10 +34,31 @@ disputes and integrate per-catalog data.
 
 ## Index of Q-stream files (1999-2002 end-of-vintage era)
 
-- **Q1** — `Q1-catalogs-1999.md` — PENDING (1999 deep-read agent hit
-  quota limit; retry after reset). Critical: 1999-fall back cover
-  surfaces Bleecker Tweed Satchel 6126 at $198 with "Preview our new
-  Mercer, Hippies, Bleecker Tweed, and Home collections."
+- **Q1** — `Q1-catalogs-1999.md` — Synthesizes Q1a/Q1b/Q1c sub-files.
+  Major findings: **Spring 1999 = 4 NEW sub-collections** (Bleecker,
+  Coach Bridle, Coach Hudson, Gramercy) — earlier than Q2 partial
+  framing of Mercer/Hippie/Bleecker Tweed/Home as the only 1999
+  launches. Fall 1999 adds **Mercer (NEW)**, **Hippie Flap 9134/9135
+  (NEW)** — confirms 2001 was a continuation not a revival, **Bleecker
+  Tweed sub-line** (one-season Fall-only). Holiday 1999 adds **Coach
+  Aero (NEW)**. **Krakoff September 1999 promotion silent in all 3
+  catalogs.** **www.coach.com absent** from all 1999 catalogs (debuts
+  catalog-side between Holiday 1999 and Holiday 2000). **Madison
+  Satchel 9725, Duffle Sac 9085, Classic Shoulder Bag 9170 retired
+  before 1999** — earlier than Autumn 2002 heritage sunset.
+- **Q1a** — `Q1a-1999-fall-preview.md` — Spring 1999 Preview (filename
+  mislabeled per cover wordmark "1999 PREVIEW"). 4 NEW sub-collection
+  launches. Hardware fragmentation: Coach Neo+Hudson all-nickel,
+  Gramercy all-brass, Bridle/Legacy/Classics dual-option.
+- **Q1b** — `Q1b-1999-fall.md` — Fall 1999 (keycode SC58, ~26 of ~36
+  pages). 5 sub-collections continue/launch (Mercer NEW, Bleecker
+  Tweed NEW sub-line, Hippie 9134/9135 NEW, Bleecker continues, Coach
+  Bridle continues, Coach Neo continues). "COACH EST 1941" hangtag
+  plaque debut on Coach Neo.
+- **Q1c** — `Q1c-1999-holiday.md` — Holiday 1999 (keycode SC55, 31
+  pages). Coach Aero NEW. Bleecker dominates pp 1-5 with 12 SKUs.
+  Madison Satchel/Duffle Sac/Classic Shoulder Bag NOT visible —
+  retired before 1999.
 - **Q2** — `Q2-catalogs-2000-2002.md` — PARTIAL. 2000-holiday +
   2001-fall fully read, 2001-holiday-preview pp 1-38 read; 2002-autumn
   unread. Major findings: **Wool C Small Tote 8131 in 2000-holiday

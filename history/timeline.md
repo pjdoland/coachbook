@@ -878,6 +878,131 @@ Chelsea**, **Coach Brights**, **Coach Bridle**.
 - confidence: likely
 - sources: [fundinguniverse-coach]
 
+### Spring 1999 — Major Krakoff-era collection restructuring (4 NEW sub-collection launches)
+Per Q1 deep-read of the Spring 1999 Preview catalog (filed as
+`1999-fall-preview.pdf` but the cover wordmark reads "1999 PREVIEW"
+with a Spring positioning), Coach launches **four NEW named
+sub-collections simultaneously** [coach-catalogs-1960-1989]:
+- **Bleecker** (NEW) — classic leather + canvas; spelling
+  normalized to double-c (was "Bleeker" single-c in 1995-1997
+  Soho-era per P2)
+- **Coach Bridle** (NEW) — premium calfskin
+- **Coach Hudson** (NEW) — newly documented; not seen in earlier
+  research streams
+- **Gramercy** (NEW) — saffron-grain calfskin; Powder Blue +
+  Wheat debut palette
+
+Plus carryover: Coach Neo (1998 launch per M4), Legacy. **This is
+the largest single-season sub-collection launch wave in the
+deep-read corpus** — 4 simultaneous brand-name debuts.
+
+Hardware fragmentation accelerates dramatically: Coach Neo and
+Hudson are all-nickel; Gramercy is all-brass; Bridle, Legacy, and
+Classics offer **customer choice between nickel and brass on most
+SKUs**. This is the most explicit dual-hardware-option period
+documented.
+
+Earlier framing (per Q2 partial back-cover preview) of Mercer +
+Hippies + Bleecker Tweed + Home as the only 1999 collection
+launches was wrong — those were Fall 1999 ADDITIONS to the
+Spring 1999 base.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
+### Fall 1999 — Mercer + Bleecker Tweed + Hippie Flap launches
+Per Q1b deep-read of `1999-fall.pdf` (keycode SC58):
+- **Mercer** (NEW) — twill collection; Slim Shoulder Tote 7414 in
+  jet ($198) cover bag; 11 SKUs documented including J676 Mercer
+  Boot
+- **Bleecker Tweed** (NEW sub-line within Bleecker) — Satchel 6126
+  at $198 (one-season Fall-only sub-line; absent from Holiday 1999
+  per Q1c)
+- **Hippie Flap 9134 ($198) and Small Hippie Flap 9135 ($148)
+  launch as NEW** with brand voice: "Vintage forms. Streamlined
+  for now." 1970s revival positioning. **Earlier Q2 framing of
+  Hippie as a "2001 revival" was wrong** — the 2001 Holiday
+  Preview Hippie Flap entry was a CONTINUATION at the same
+  9134/9135 style numbers, not a single-season revival. The Hippie
+  Flap had a 2-year run Fall 1999 → 2001 Holiday Preview before
+  retiring by Autumn 2002.
+- Bleeker → Bleecker spelling shift fully normalized by Fall 1999
+
+The Q2 partial 1999-fall back-cover preview banner ("Preview our
+new Mercer, Hippies, Bleecker Tweed, and Home collections") refers
+to these Fall 1999 ADDITIONS plus a Home Collection that is not
+visible in the scanned Fall 1999 pages and remains an open
+verification item.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
+### Fall 1999 — "COACH EST 1941" hangtag plaque debuts on Coach Neo
+Per Q1b: a "**COACH EST 1941**" hangtag plaque appears on the Coach
+Neo tote in 1999 Fall [coach-catalogs-1960-1989] — predating the
+2002 Autumn embossed-leather "COACH LEATHERWARE EST. 1941" patch
+by 3 years. The hangtag-format precedes the embossed-leather-format
+by ~3 years. Together they form a continuum of silent heritage
+signaling that runs alongside the explicit unmarked-anniversary
+pattern (40, 60, 61 years).
+
+Authentication implication: a "COACH EST 1941" hangtag plaque
+claiming pre-1999 manufacture is wrong on its face. The plaque
+debuts with the Coach Neo Fall 1999 cycle.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
+### Holiday 1999 — Coach Aero NEW; Bleecker dominates pp 1-5
+Per Q1c deep-read of `1999-holiday.pdf` (keycode SC55):
+- **Coach Aero (NEW)** — sleek calfskin with magnetic-snap-style
+  closures: Flap 9054, Small Pocket Zip 9053, Small Zip 9057,
+  Pocket Zip 9052
+- **Bleecker dominates pp 1-5** with 12 SKUs (Sandal J237, Tote
+  9306, Canvas/Classic Zip 6124/9309, Demi Satchel 6126, Satchel
+  6121, Canvas/Classic Bucket 6122/9305, three new wallets
+  5896/5898/5899, Demi Zip 9311). Cover: Canvas Bleecker Bucket
+  6122 + Bleecker Demi Zip 9311.
+- Bleecker Tweed sub-line did NOT propagate into Holiday 1999 —
+  Fall 1999 was a one-season Tweed experiment.
+
+Critical absences from Holiday 1999: **Madison Satchel 9725, Duffle
+Sac 9085, Classic Shoulder Bag 9170 NOT visible** — all three
+foundational silhouettes (the Madison Satchel debut Spring 1986
+per O1, the Duffle Sac at-least-since-1973 per N4, and the
+"original Coach bag" 9170 pre-1969 per M2) had retired sometime
+between 1996 and 1999. This is **earlier than the 2002 Autumn
+sunset that retired the rest of the heritage line**.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
+### September 1999 — Krakoff promotion is SILENT in 1999 catalogs
+Per Q1 (all three 1999 catalogs): **Zero Krakoff body-copy mention,
+zero colophon designer credit, zero portrait, zero "creative
+direction" language** [coach-catalogs-1960-1989]. Holiday 1999 is
+the first catalog after the September 1999 promotion to President +
+Executive Creative Director, and it contains no acknowledgment.
+
+This **reinforces and extends** the documented Coach pattern:
+creative-director silence is the house style across decades. Per
+N4 cross-cut, Cashin was never named in 1981-1984 catalogs. Per
+Q2, Krakoff was never named in 2000-2002 catalogs. **Q1 confirms
+the pattern held across his September 1999 promotion** — the
+explicit attribution moment that would have been the most natural
+opportunity to credit him in catalog text. The pattern now spans
+**at least 21 years** (Fall 1981 through Autumn 2002) across the
+Cahn → Sara Lee → standalone Coach Inc. ownership transitions.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
+### 1999 — coach.com URL ABSENT from any 1999 catalog
+Per Q1 (all three 1999 catalogs): **www.coach.com is not on any
+spread** [coach-catalogs-1960-1989]. Primary CTA is "TO ORDER
+CALL 1 800 223-8647" running as page footer. This **refines**
+Q2's framing of coach.com as "ambient by Holiday 2000": the URL
+**debuts catalog-side between Holiday 1999 and Holiday 2000**.
+The exact debut catalog is the 2000-spring or 2000-fall (not in
+archive corpus) — narrowed window.
+- confidence: confirmed
+- sources: [coach-catalogs-1960-1989]
+
 ### 1999 — Baker Furniture licensing; coach.com launches (October)
 - confidence: likely
 - sources: [fundinguniverse-coach]
