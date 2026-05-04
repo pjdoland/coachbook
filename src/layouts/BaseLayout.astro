@@ -2,12 +2,42 @@
 interface Props {
   title: string;
   description?: string;
+  /**
+   * Optional schema.org JSON-LD object to inject into <head>. Pages can
+   * pass a Product (model bag), Person (designer), Article (history
+   * event), or any other valid schema.org type. The site-level
+   * WebSite + Organization JSON-LD is always emitted alongside.
+   */
+  jsonLd?: Record<string, unknown>;
 }
 
-const { title, description } = Astro.props;
+const { title, description, jsonLd } = Astro.props;
 const siteName = 'coachbook';
 const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
 const base = import.meta.env.BASE_URL;
+
+// Site-wide JSON-LD: identifies the archive as a structured WebSite
+// with editorial metadata. Crawlers and downstream knowledge graphs
+// can resolve "vintage Coach Leatherware archive" to a single entity.
+const siteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'coachbook',
+  description: 'Independent reference archive of vintage Coach Leatherware, 1941–2002.',
+  url: 'https://pjdoland.github.io/coachbook/',
+  inLanguage: 'en',
+  about: {
+    '@type': 'Brand',
+    name: 'Coach',
+    description: 'Coach, Inc. — leather goods manufacturer founded 1941 in Manhattan.',
+  },
+  author: {
+    '@type': 'Person',
+    name: 'PJ Doland',
+  },
+  license: 'https://github.com/pjdoland/coachbook',
+  isAccessibleForFree: true,
+};
 ---
 
 <!doctype html>
@@ -25,6 +55,10 @@ const base = import.meta.env.BASE_URL;
     />
     {description && <meta name="description" content={description} />}
     <title>{fullTitle}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(siteJsonLd)} />
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
     <style is:global>
       /* ---------------------------------------------------------------------
        * coachbook visual language

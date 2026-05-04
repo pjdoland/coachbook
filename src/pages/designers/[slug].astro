@@ -19,9 +19,29 @@ const base = import.meta.env.BASE_URL;
 const tenureStart =
   entry.data.tenure_start ?? entry.data.coach_tenure_start;
 const tenureEnd = entry.data.tenure_end ?? entry.data.coach_tenure_end;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: label,
+  ...(entry.data.born ? { birthDate: String(entry.data.born) } : {}),
+  ...(entry.data.died ? { deathDate: String(entry.data.died) } : {}),
+  ...(entry.data.role ? { jobTitle: entry.data.role } : {}),
+  ...(tenureStart || tenureEnd
+    ? {
+        worksFor: {
+          '@type': 'Organization',
+          name: 'Coach, Inc.',
+          ...(tenureStart || tenureEnd
+            ? { startDate: String(tenureStart ?? ''), endDate: String(tenureEnd ?? '') }
+            : {}),
+        },
+      }
+    : {}),
+};
 ---
 
-<BaseLayout title={label}>
+<BaseLayout title={label} jsonLd={jsonLd}>
   <article>
     <Breadcrumbs trail={[
       { label: 'Designers and people', href: `${base}designers/` },

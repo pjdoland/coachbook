@@ -16,6 +16,31 @@ const { Content } = await render(entry);
 const label = entry.data.name ?? entry.data.title ?? entry.id;
 const base = import.meta.env.BASE_URL;
 
+// schema.org Product: a vintage Coach silhouette is a manufactured
+// good, even if production has long ended. Captures style numbers,
+// designer (when known), brand (Coach), and citations.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: label,
+  description: `${label} — vintage Coach Leatherware${entry.data.era ? `, ${entry.data.era} era` : ''}.`,
+  brand: { '@type': 'Brand', name: 'Coach' },
+  category: 'Handbag',
+  ...(entry.data.style_numbers && entry.data.style_numbers.length > 0
+    ? { sku: entry.data.style_numbers.join(', '), productID: entry.data.style_numbers[0] }
+    : {}),
+  ...(entry.data.designer
+    ? { designer: { '@type': 'Person', name: entry.data.designer } }
+    : {}),
+  ...(entry.data.also_known_as && entry.data.also_known_as.length > 0
+    ? { alternateName: entry.data.also_known_as }
+    : {}),
+  ...(entry.data.introduced ? { releaseDate: String(entry.data.introduced) } : {}),
+  ...(entry.data.discontinued
+    ? { productionDate: `${entry.data.introduced ?? ''}/${entry.data.discontinued}` }
+    : {}),
+};
+
 // Resolve the related: frontmatter array (slug strings) to actual model
 // entries. Drop any that don't resolve so a typo doesn't crash the build.
 const relatedSlugs = entry.data.related ?? [];
@@ -24,7 +49,7 @@ const related = relatedSlugs
   .filter((m) => m != null);
 ---
 
-<BaseLayout title={label}>
+<BaseLayout title={label} jsonLd={jsonLd}>
   <article>
     <Breadcrumbs trail={[
       { label: 'Models', href: `${base}models/` },

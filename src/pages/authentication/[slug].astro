@@ -15,9 +15,23 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const label = entry.data.title ?? entry.data.name ?? entry.id;
 const base = import.meta.env.BASE_URL;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TechArticle',
+  headline: label,
+  about: 'Vintage Coach handbag authentication',
+  inLanguage: 'en',
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'coachbook',
+    url: 'https://pjdoland.github.io/coachbook/',
+  },
+  ...(entry.data.feature ? { keywords: entry.data.feature } : {}),
+};
 ---
 
-<BaseLayout title={label}>
+<BaseLayout title={label} jsonLd={jsonLd}>
   <article>
     <Breadcrumbs trail={[
       { label: 'Authentication', href: `${base}authentication/` },
