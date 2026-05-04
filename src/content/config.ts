@@ -11,6 +11,32 @@
 
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Build a registry-ID set at config-load time. Every value passed to
+// the `sources` array in any collection's frontmatter is validated
+// against this set: an entry citing a source ID that doesn't resolve
+// in sources/registry.md is a build-time error, not a silent
+// dangling reference. Empty registry (e.g. tests, brand-new repo)
+// disables the check rather than failing every entry.
+function loadRegistryIds(): Set<string> {
+  const file = path.resolve('sources/registry.md');
+  const ids = new Set<string>();
+  if (!fs.existsSync(file)) return ids;
+  const text = fs.readFileSync(file, 'utf8');
+  for (const m of text.matchAll(/^###\s+([a-z0-9][a-z0-9-]*)\s*$/gm)) {
+    ids.add(m[1]);
+  }
+  return ids;
+}
+const REGISTRY = loadRegistryIds();
+const sourceId = z
+  .string()
+  .refine(
+    (id) => REGISTRY.size === 0 || REGISTRY.has(id),
+    (id) => ({ message: `Source ID "${id}" not found in sources/registry.md` }),
+  );
 
 // --- Shared primitives ------------------------------------------------------
 
@@ -59,7 +85,7 @@ const factsBlock = z
     z.object({
       claim: z.string(),
       confidence: confidence,
-      sources: z.array(z.string()),
+      sources: z.array(sourceId),
       notes: z.string().optional(),
     }),
   )
@@ -72,7 +98,7 @@ const baseFields = {
   slug: z.string(),
   status: status,
   confidence: confidence,
-  sources: z.array(z.string()),
+  sources: z.array(sourceId),
   facts: factsBlock,
 };
 
