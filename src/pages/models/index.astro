@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const models = (await getCollection('models')).slice().sort((a, b) =>
+const allModels = (await getCollection('models')).slice().sort((a, b) =>
   (a.data.name ?? a.data.title ?? a.id).localeCompare(
     b.data.name ?? b.data.title ?? b.id,
   ),
@@ -23,10 +23,9 @@ const ERAS = [
 // Normalize the per-entry era field into a list of era codes. Many
 // bags genuinely span multiple eras (e.g. "cashin-through-classic-nyc",
 // "classic-nyc-late") and should match a filter for any window they
-// touch. Returns a space-joined string of E-codes for the data-era
-// attribute; the runtime filter splits and checks for membership.
+// touch. Returns a sorted array of E-codes.
 function normalizeEras(raw) {
-  if (!raw) return '';
+  if (!raw) return [];
   const s = String(raw).toLowerCase();
   const out = new Set();
   const codeMatches = s.match(/\be[1-5]\b/gi);
@@ -35,17 +34,56 @@ function normalizeEras(raw) {
   if (s.includes('cashin')) out.add('E2');
   if (s.includes('classic-nyc') || s.includes('early-nyc') || s.includes('post-cashin') || s.includes('1970')) out.add('E3');
   if (s.includes('classic-nyc-late') || s.includes('late-nyc') || s.includes('1985') || s.includes('1989') || s.includes('lightweight')) out.add('E4');
-  if (s.includes('krakoff') || s.includes('transition') || s.includes('199') && /\b(199[5-9]|200[0-2])\b/.test(s)) out.add('E5');
-  return Array.from(out).join(' ');
+  if (s.includes('krakoff') || s.includes('transition') || (s.includes('199') && /\b(199[5-9]|200[0-2])\b/.test(s))) out.add('E5');
+  return [...out].sort();
+}
+
+// Bag → primary era for sectioning. Specific tokens in the raw era
+// string override generic groupings: 'classic-nyc-late' goes to E4,
+// not E3; 'cashin-or-classic-nyc' goes to E2 (the earlier window is
+// usually the more diagnostic anchor for compound entries). Falls
+// through to the earliest normalized era code.
+function primaryEra(raw, eras) {
+  if (!raw) return eras[0] ?? null;
+  const s = String(raw).toLowerCase();
+  if (s.includes('krakoff')) return 'E5';
+  if (s.includes('classic-nyc-late') || s.includes('late-nyc')) return 'E4';
+  if (s.includes('lightweight') && s.includes('1989')) return 'E4';
+  if (s.includes('classic-nyc') && !s.includes('cashin')) return 'E3';
+  if (s.includes('cashin') && !s.includes('pre-cashin')) return 'E2';
+  if (s.includes('pre-cashin')) return 'E1';
+  return eras[0] ?? null;
+}
+
+// Pre-bucket models into per-era sections so the page renders as a
+// chronology rather than an A-Z wall.
+const buckets = new Map();
+const unsorted = [];
+for (const era of ERAS) buckets.set(era.code, []);
+
+for (const entry of allModels) {
+  const eras = normalizeEras(entry.data.era);
+  const home = primaryEra(entry.data.era, eras);
+  const card = {
+    id: entry.id,
+    label: entry.data.name ?? entry.data.title ?? entry.id,
+    style_numbers: entry.data.style_numbers ?? [],
+    aliases: entry.data.also_known_as ?? [],
+    era: entry.data.era ?? '',
+    eraCodes: eras.join(' '),
+    confidence: entry.data.confidence ?? '',
+  };
+  if (home) buckets.get(home).push(card);
+  else unsorted.push(card);
 }
 ---
 
 <BaseLayout title="Models" description="All vintage Coach models in the archive.">
   <h1>Models</h1>
   <p class="lede">
-    {models.length} silhouettes from the Cashin era through the Krakoff
-    transition. Each entry carries catalog citations where available;
-    community sources are flagged where they aren't.
+    {allModels.length} silhouettes from the Cashin era through the
+    Krakoff transition. Grouped chronologically by era; each entry
+    carries catalog citations where available.
   </p>
 
   <div class="filters" role="region" aria-label="Filter models">
@@ -71,50 +109,86 @@ function normalizeEras(raw) {
     </fieldset>
 
     <p class="filter-status" id="model-filter-status" aria-live="polite">
-      {models.length} models
+      {allModels.length} models
     </p>
   </div>
 
-  <ul class="card-grid model-list" id="model-list">
-    {
-      models.map((entry) => {
-        const label = entry.data.name ?? entry.data.title ?? entry.id;
-        const styles = entry.data.style_numbers ?? [];
-        const aliases = entry.data.also_known_as ?? [];
-        const eraCodes = normalizeEras(entry.data.era);
-        const meta = [
-          styles.length > 0 ? styles.join(', ') : null,
-          entry.data.era ?? null,
-        ].filter(Boolean).join(' · ');
-        const haystack = [
-          label,
-          ...aliases,
-          ...styles,
-          entry.data.era ?? '',
-          entry.id,
-        ].join(' ').toLowerCase();
-        return (
-          <li
-            class="model-card"
-            data-name={label.toLowerCase()}
-            data-haystack={haystack}
-            data-era={eraCodes}
-            data-confidence={entry.data.confidence ?? ''}
-          >
-            <a href={`${base}models/${entry.id}/`}>
-              <strong>{label}</strong>
-              {meta && <span class="card-meta">{meta}</span>}
-              {entry.data.confidence && (
-                <span class="chip" data-confidence={entry.data.confidence}>
-                  {entry.data.confidence}
-                </span>
-              )}
-            </a>
-          </li>
-        );
-      })
-    }
-  </ul>
+  <div id="model-sections">
+    {ERAS.map((era) => {
+      const items = buckets.get(era.code);
+      if (!items || items.length === 0) return null;
+      return (
+        <section class="era-section" data-era={era.code}>
+          <header class="era-heading">
+            <h2>
+              <span class="era-code">{era.code}</span>
+              {era.label}
+            </h2>
+            <span class="era-range">{era.range}</span>
+            <span class="era-count">
+              {items.length} {items.length === 1 ? 'model' : 'models'}
+            </span>
+          </header>
+          <ul class="card-grid model-list">
+            {items.map((c) => (
+              <li
+                class="model-card"
+                data-name={c.label.toLowerCase()}
+                data-haystack={[c.label, ...c.aliases, ...c.style_numbers, c.era, c.id].join(' ').toLowerCase()}
+                data-era={c.eraCodes}
+                data-confidence={c.confidence}
+              >
+                <a href={`${base}models/${c.id}/`}>
+                  <strong>{c.label}</strong>
+                  {(c.style_numbers.length > 0 || c.era) && (
+                    <span class="card-meta">
+                      {[c.style_numbers.join(', ') || null, c.era || null].filter(Boolean).join(' · ')}
+                    </span>
+                  )}
+                  {c.confidence && (
+                    <span class="chip" data-confidence={c.confidence}>{c.confidence}</span>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+    })}
+
+    {unsorted.length > 0 && (
+      <section class="era-section" data-era="unsorted">
+        <header class="era-heading">
+          <h2>Unsorted</h2>
+          <span class="era-range">Era unparsed</span>
+          <span class="era-count">{unsorted.length}</span>
+        </header>
+        <ul class="card-grid model-list">
+          {unsorted.map((c) => (
+            <li
+              class="model-card"
+              data-name={c.label.toLowerCase()}
+              data-haystack={[c.label, ...c.aliases, ...c.style_numbers, c.era, c.id].join(' ').toLowerCase()}
+              data-era={c.eraCodes}
+              data-confidence={c.confidence}
+            >
+              <a href={`${base}models/${c.id}/`}>
+                <strong>{c.label}</strong>
+                {(c.style_numbers.length > 0 || c.era) && (
+                  <span class="card-meta">
+                    {[c.style_numbers.join(', ') || null, c.era || null].filter(Boolean).join(' · ')}
+                  </span>
+                )}
+                {c.confidence && (
+                  <span class="chip" data-confidence={c.confidence}>{c.confidence}</span>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </div>
 
   <p class="empty-state" id="model-filter-empty" hidden>
     No models match. Try a different search term or clear the era filter.
@@ -122,13 +196,14 @@ function normalizeEras(raw) {
 </BaseLayout>
 
 <script>
-  const list = document.getElementById('model-list');
+  const root = document.getElementById('model-sections');
   const q = document.getElementById('model-filter-q');
   const status = document.getElementById('model-filter-status');
   const empty = document.getElementById('model-filter-empty');
   const pills = document.querySelectorAll('.era-pill');
-  if (list && q && status && empty) {
-    const cards = Array.from(list.querySelectorAll('.model-card'));
+  if (root && q && status && empty) {
+    const sections = Array.from(root.querySelectorAll('.era-section'));
+    const cards = Array.from(root.querySelectorAll('.model-card'));
     let activeEra = '';
     let activeQuery = '';
 
@@ -142,6 +217,11 @@ function normalizeEras(raw) {
         const visible = matchesEra && matchesQ;
         card.hidden = !visible;
         if (visible) shown += 1;
+      }
+      // Hide whole era sections that are now empty.
+      for (const section of sections) {
+        const visibleHere = section.querySelectorAll('.model-card:not([hidden])').length;
+        section.hidden = visibleHere === 0;
       }
       status.textContent = `${shown} model${shown === 1 ? '' : 's'}`;
       empty.hidden = shown !== 0;
@@ -231,6 +311,48 @@ function normalizeEras(raw) {
     font-size: 0.82rem;
     color: var(--ink-quiet);
     font-variant-numeric: tabular-nums;
+  }
+  .era-section { margin-top: 2.25rem; }
+  .era-section:first-of-type { margin-top: 1rem; }
+  .era-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 0.85rem;
+    margin: 0 0 0.85rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--surface-line);
+  }
+  .era-heading h2 {
+    margin: 0;
+    font-size: 1.45rem;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.55rem;
+  }
+  .era-heading .era-code {
+    display: inline-block;
+    min-width: 1.6rem;
+    padding: 0.05em 0.4em;
+    background: var(--bridle);
+    color: var(--paper);
+    border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: 0.2em;
+  }
+  .era-heading .era-range {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .era-heading .era-count {
+    font-size: 0.82rem;
+    color: var(--ink-quiet);
+    font-variant-numeric: tabular-nums;
+    margin-left: auto;
   }
   .empty-state {
     margin-top: 1.5rem;
