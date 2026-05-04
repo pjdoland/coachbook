@@ -328,7 +328,7 @@ const base = import.meta.env.BASE_URL;
 
   const STEPS = {
     'creed': {
-      n: 1, of: 6,
+      n: 2, of: 6,
       title: 'Is there a leather creed patch?',
       hint: 'The creed is the leather rectangle inside the bag with "COACH" wording and (usually) a serial number.',
       options: [
@@ -359,7 +359,7 @@ const base = import.meta.env.BASE_URL;
     },
 
     'wordmark': {
-      n: 2, of: 6,
+      n: 3, of: 6,
       title: 'What does the creed say?',
       hint: 'Look for the second word stamped beneath "COACH" on the creed.',
       options: [
@@ -384,7 +384,7 @@ const base = import.meta.env.BASE_URL;
     },
 
     'country': {
-      n: 3, of: 6,
+      n: 4, of: 6,
       title: 'What does the country-of-origin marking say?',
       hint: 'Usually stamped on the creed below the brand wording.',
       options: [
@@ -400,28 +400,28 @@ const base = import.meta.env.BASE_URL;
     },
 
     'serial': {
-      n: 4, of: 6,
+      n: 5, of: 6,
       title: 'What is the serial format?',
       hint: 'Below the brand and country wording on the creed.',
       options: [
-        { label: 'All digits: "xxx-xxxx" or "xxxx-xxx"', sub: 'Pre-1994. Should pair with LEATHERWARE wording and US origin.', era: ['e3', 'e4'], next: 'hardware' },
-        { label: 'Letter-digit-letter, e.g. "B6D-9927"', sub: '1994 onward. Single-digit-year ambiguity (1996 vs 2006) — never publish a year from the code alone.', era: ['e5'], next: 'hardware' },
-        { label: 'Two-digit year, e.g. "B16D-9927"', sub: '2004 onward — post-vintage for this archive.', era: ['post-vintage'], next: 'hardware' },
-        { label: 'No serial', sub: 'Era-context dependent. Pre-1980 bags and small accessories shipped without serials. Absence is not by itself a fake tell.', flags: 0, next: 'hardware' },
-        { label: "I can't read the serial — it's too worn", sub: 'No era hint recorded; common on heavily-used vintage examples.', next: 'hardware' },
+        { label: 'All digits: "xxx-xxxx" or "xxxx-xxx"', sub: 'Pre-1994. Should pair with LEATHERWARE wording and US origin.', era: ['e3', 'e4'], next: 'construction' },
+        { label: 'Letter-digit-letter, e.g. "B6D-9927"', sub: '1994 onward. Single-digit-year ambiguity (1996 vs 2006) — never publish a year from the code alone.', era: ['e5'], next: 'construction' },
+        { label: 'Two-digit year, e.g. "B16D-9927"', sub: '2004 onward — post-vintage for this archive.', era: ['post-vintage'], next: 'construction' },
+        { label: 'No serial', sub: 'Era-context dependent. Pre-1980 bags and small accessories shipped without serials. Absence is not by itself a fake tell.', flags: 0, next: 'construction' },
+        { label: "I can't read the serial — it's too worn", sub: 'No era hint recorded; common on heavily-used vintage examples.', next: 'construction' },
       ],
     },
 
     'hardware': {
-      n: 5, of: 6,
+      n: 1, of: 6,
       title: 'Does the hardware pass the magnet test?',
-      hint: 'Hold a refrigerator magnet to the turnlock face, the dogleash clip, and any visible D-rings.',
+      hint: 'Hold a refrigerator magnet to the turnlock face, the dogleash clip, and any visible D-rings. Fastest single-check triage on the page — the rest of the questions help calibrate your reading.',
       options: [
-        { label: 'Magnet does not stick to any of the brass-looking hardware', sub: 'Solid brass — era-correct for pre-2000 vintage Coach', flags: 0, next: 'construction' },
-        { label: 'Magnet sticks', sub: 'Plated steel — likely fake or post-vintage replacement hardware', flags: 2, next: 'construction' },
-        { label: 'Mixed — some pieces stick, some don\'t', sub: 'Possible replacement component (Coach Repair) or partial fake. One red flag for now.', flags: 1, next: 'construction' },
-        { label: 'Hardware looks lighter or shows silver-grey under wear', sub: 'Plated, not solid brass. Strong fake tell.', flags: 2, next: 'construction' },
-        { label: 'Hardware is nickel/silver-finished by design', sub: 'Krakoff-era 1998+ Coach Neo, music-named Classics, and Krakoff-era sub-collections shipped with nickel hardware. Era-correct for E5.', era: ['e5'], next: 'construction' },
+        { label: 'Magnet does not stick to any of the brass-looking hardware', sub: 'Solid brass — era-correct for pre-2000 vintage Coach', flags: 0, next: 'creed' },
+        { label: 'Magnet sticks', sub: 'Plated steel — likely fake or post-vintage replacement hardware', flags: 2, next: 'creed' },
+        { label: 'Mixed — some pieces stick, some don\'t', sub: 'Possible replacement component (Coach Repair) or partial fake. One red flag for now.', flags: 1, next: 'creed' },
+        { label: 'Hardware looks lighter or shows silver-grey under wear', sub: 'Plated, not solid brass. Strong fake tell.', flags: 2, next: 'creed' },
+        { label: 'Hardware is nickel/silver-finished by design', sub: 'Krakoff-era 1998+ Coach Neo, music-named Classics, and Krakoff-era sub-collections shipped with nickel hardware. Era-correct for E5.', era: ['e5'], next: 'creed' },
       ],
     },
 
@@ -444,7 +444,7 @@ const base = import.meta.env.BASE_URL;
   const wiz = document.getElementById('wizard');
   const state = {
     history: [], // [{stepId, optionIndex, label, era, flags}]
-    current: 'creed',
+    current: 'hardware',
   };
 
   /* ---------- era-consistency check ---------- */
