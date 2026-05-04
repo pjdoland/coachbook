@@ -6,13 +6,21 @@ export async function getStaticPaths() {
   const models = await getCollection('models');
   return models.map((entry) => ({
     params: { slug: entry.id },
-    props: { entry },
+    props: { entry, allModels: models },
   }));
 }
 
-const { entry } = Astro.props;
+const { entry, allModels } = Astro.props;
 const { Content } = await render(entry);
 const label = entry.data.name ?? entry.data.title ?? entry.id;
+const base = import.meta.env.BASE_URL;
+
+// Resolve the related: frontmatter array (slug strings) to actual model
+// entries. Drop any that don't resolve so a typo doesn't crash the build.
+const relatedSlugs = entry.data.related ?? [];
+const related = relatedSlugs
+  .map((slug) => allModels.find((m) => m.id === slug))
+  .filter((m) => m != null);
 ---
 
 <BaseLayout title={label}>
@@ -36,6 +44,30 @@ const label = entry.data.name ?? entry.data.title ?? entry.id;
       {entry.data.status && (<><dt>Status</dt><dd>{entry.data.status}</dd></>)}
     </dl>
     <Content />
+
+    {related.length > 0 && (
+      <section class="related-models">
+        <h2>Related models</h2>
+        <ul class="card-grid">
+          {related.map((m) => {
+            const mlabel = m.data.name ?? m.data.title ?? m.id;
+            const meta = [
+              (m.data.style_numbers ?? []).join(', ') || null,
+              m.data.era ?? null,
+            ].filter(Boolean).join(' · ');
+            return (
+              <li>
+                <a href={`${base}models/${m.id}/`}>
+                  <strong>{mlabel}</strong>
+                  {meta && <span class="card-meta">{meta}</span>}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )}
+
     {
       entry.data.sources && entry.data.sources.length > 0 && (
         <section>
