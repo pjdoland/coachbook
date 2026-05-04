@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Content, getHeadings } from '../../sources/registry.md';
+
+const headings = await getHeadings();
+
+// h2s are tier sections (Tier 1, Tier 2, etc.); h3s are individual sources
+const tiers = headings.filter((h) => h.depth === 2);
+const sources = headings.filter((h) => h.depth === 3);
+---
+
+<BaseLayout
+  title="Source registry"
+  description="The canonical source-ID mapping. Every claim in the archive cites here."
+>
+  <article>
+    <p class="standfirst">Bibliography</p>
+    <h1 id="top">Source registry</h1>
+    <p class="lede">
+      Every claim in this archive cites a source by stable ID. This is
+      the canonical mapping. {sources.length} sources across {tiers.length} tiers.
+    </p>
+
+    {tiers.length > 0 && (
+      <nav class="sources-toc" aria-label="Source registry navigation">
+        <h2>Tiers</h2>
+        <ul class="card-grid">
+          {tiers.map((t) => (
+            <li>
+              <a href={`#${t.slug}`}>
+                <strong>{t.text}</strong>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
+    <div class="sources-body">
+      <Content />
+    </div>
+
+    <p class="back-to-top"><a href="#top">↑ Back to top</a></p>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .standfirst {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-quiet);
+    margin: 0 0 0.5rem;
+    font-weight: 500;
+  }
+  .sources-toc {
+    margin: 1.5rem 0 2.5rem;
+  }
+  .sources-toc h2 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin: 0 0 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+  .sources-body {
+    margin-top: 2.5rem;
+  }
+  .sources-body h2 {
+    font-size: 1.55rem;
+    margin: 3rem 0 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--surface-line);
+    scroll-margin-top: clamp(1rem, 8vh, 4rem);
+  }
+  .sources-body h3 {
+    font-size: 1.05rem;
+    margin: 2rem 0 0.5rem;
+    padding-left: 0.85rem;
+    border-left: 3px solid var(--brass);
+    line-height: 1.3;
+    scroll-margin-top: clamp(1rem, 8vh, 4rem);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    /* Source IDs are kebab-case; render them as code-style for stability. */
+  }
+  .sources-body h3 + ul {
+    list-style: none;
+    padding-left: 0.95rem;
+    border-left: 1px solid var(--surface-line);
+    margin-top: 0.4rem;
+  }
+  .sources-body h3 + ul li {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: 0.25rem 0;
+  }
+  .sources-body h3 + ul li strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+</style>
