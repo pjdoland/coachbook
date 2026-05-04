@@ -203,8 +203,8 @@ sources: [source-id-1, source-id-2, ...]                        # every cited ID
 **`models/<slug>.md`** — bag models:
 ```yaml
 style_numbers: ["9927", ...]            # known style numbers
-era: E1 | E2 | E3 | E4 | E5             # canonical era code (preferred)
-era_code: E1 | E2 | E3 | E4 | E5        # cross-cutting query field (see below)
+era: <human-readable era>               # see era field rules below
+era_code: E1 | E2 | E3 | E4 | E5 | E1-E2 | ...   # canonical code or range
 introduced: <year or "unknown">
 discontinued: <year or "ongoing" or "unknown">
 designer: <slug or "in-house">
@@ -219,20 +219,33 @@ authentication:                          # block — see PLAN.md §12
   hardware_stamps: ...
 ```
 
-`era` accepts the canonical E-codes (`E1`–`E5`) **and** human-readable
-era names (`pre-cashin`, `cashin`, `classic-nyc`, `transition`,
-`krakoff`) plus boundary tags (`cashin-or-post-cashin`,
-`cashin-through-transition`, `krakoff-transition`,
-`classic-nyc-or-early-1990s`) that some entries use to express genuine
-ambiguity. Both forms are accepted by the schema.
+#### Era fields
 
-When an entry uses a named era (or a boundary tag) for human
-readability, **also** set `era_code` to the corresponding E-code so
-cross-cutting era queries work. `era_code` is single-valued and uses
-the strict `E1`–`E5` enum. For ambiguity-tag entries, pick the era
-where the bag most likely sits and document the ambiguity in prose.
-For multi-era models, `era` may list multiple codes; `era_code`
-remains single-valued.
+The archive tracks era in **two** parallel fields, by design:
+
+- `era` — human-readable, free-form, may carry ambiguity. Examples
+  in current entries: `cashin`, `classic-nyc`, `classic-nyc-late`,
+  `krakoff-transition`, `cashin-or-post-cashin`,
+  `cashin-through-classic-nyc`. Whatever phrase reads best in context.
+- `era_code` — machine-readable, drawn from the canonical enum.
+  Single code (`E1`–`E5`) for bags that sit cleanly in one era;
+  hyphenated range (`E3-E4`, `E2-E5`) for bags whose production span
+  crosses era boundaries.
+
+Era windows:
+
+| Code | Window | Label |
+|------|--------|-------|
+| `E1` | 1941–1961 | Pre-Cashin |
+| `E2` | 1962–1974 | Cashin |
+| `E3` | 1975–1984 | Early NYC |
+| `E4` | 1985–1994 | Late NYC |
+| `E5` | 1995–2002 | Krakoff transition |
+
+Both fields are required for `models/` entries. The split exists
+because authors want to write `era: cashin-or-post-cashin` without
+breaking machine queries, and code consumers want to filter by
+`era_code: E2-E3` without reasoning about every author's phrasing.
 
 **`designers/<slug>.md`** — designers:
 ```yaml

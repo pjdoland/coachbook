@@ -68,7 +68,7 @@ const evidence = summarize(entry.data.sources);
           </>
         )
       }
-      {entry.data.era && (<><dt>Era</dt><dd>{entry.data.era}</dd></>)}
+      {entry.data.era && (<><dt>Era</dt><dd>{entry.data.era}{entry.data.era_code && (<><span class="era-code-pill">{entry.data.era_code}</span></>)}</dd></>)}
       {entry.data.introduced && (<><dt>Introduced</dt><dd>{entry.data.introduced}</dd></>)}
       {entry.data.discontinued && (<><dt>Discontinued</dt><dd>{entry.data.discontinued}</dd></>)}
       {entry.data.designer && (<><dt>Designer</dt><dd>{entry.data.designer}</dd></>)}
@@ -240,6 +240,19 @@ const evidence = summarize(entry.data.sources);
   .tier-pill[data-tier="2"] { background: var(--brass); color: var(--paper); border-color: var(--brass); }
   .tier-pill[data-tier="3"] { background: var(--bridle-soft); color: var(--ink); border-color: var(--bridle-soft); }
   .tier-pill[data-tier="4"] { background: var(--paper); color: var(--ink-quiet); }
+  .era-code-pill {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.05rem 0.4rem;
+    background: var(--bridle);
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    border-radius: 3px;
+    vertical-align: 0.15em;
+    letter-spacing: 0.04em;
+  }
 
   .facts-block { margin-top: 2.5rem; }
   .facts-intro { color: var(--ink-soft); max-width: 60ch; margin-top: 0; }

@@ -58,20 +58,20 @@ const confidence = z.enum([
   'framework',
 ]);
 
-// Eras: STYLE.md prescribes E1–E5 codes, but several existing entries use
-// human-readable era names ("classic-nyc", "cashin"). Accept either form
-// for now; a future cleanup pass can normalize on the codes.
-const era = z.union([
-  z.enum(['E1', 'E2', 'E3', 'E4', 'E5']),
-  z.enum([
-    'pre-cashin',
-    'cashin',
-    'classic-nyc',
-    'transition',
-    'krakoff',
-  ]),
-  z.string(), // permissive fallback
-]);
+// Eras (STYLE.md §5 — Era fields). Two parallel fields by design:
+//
+// - `era`: human-readable, free-form. Authors write whatever phrase
+//   carries the right ambiguity ("classic-nyc-late", "cashin-or-post-cashin").
+// - `era_code`: machine-readable code. Single value (E1-E5) for bags
+//   that sit cleanly in one window, or a hyphenated range (E3-E4,
+//   E2-E5) for bags whose production span crosses boundaries.
+const era = z.string();
+const eraCode = z
+  .string()
+  .refine(
+    (v) => /^E[1-5](-E[1-5])?$/.test(v),
+    (v) => ({ message: `era_code must be E1-E5 or a range like E3-E4, got "${v}"` }),
+  );
 
 // Models and designers use `name`; authentication and history pages use
 // `title`. The schema below requires at least one to be present (see
@@ -146,6 +146,7 @@ const models = defineCollection({
       discontinued: yearOrString.optional(),
       discontinued_confidence: confidence.optional(),
       era: era.optional(),
+      era_code: eraCode.optional(),
       designer: z.string().optional(),
       designer_confidence: confidence.optional(),
       dimensions_in: dimensionsSchema.optional(),
