@@ -198,9 +198,18 @@ const eraGroups = ERAS.map((era) => ({
     color: var(--ink-soft);
     padding: 0.4rem 0;
     user-select: none;
+    /* list-style: none and ::-webkit-details-marker hide are coupled —
+     * we substitute a custom CSS glyph below. If CSS fails (or the
+     * browser can't suppress the native marker), the native marker
+     * survives as a graceful fallback. */
     list-style: none;
   }
   .sections-toggle summary::-webkit-details-marker { display: none; }
+  .sections-toggle summary:focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
   .sections-toggle summary::before {
     content: "▸ ";
     color: var(--ink-quiet);
