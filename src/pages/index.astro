@@ -2,13 +2,12 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const [models, designers, authentication, colors, catalogs, history] = await Promise.all([
+const [models, designers, authentication, colors, catalogs] = await Promise.all([
   getCollection('models'),
   getCollection('designers'),
   getCollection('authentication'),
   getCollection('colors'),
   getCollection('catalogs'),
-  getCollection('history'),
 ]);
 
 const base = import.meta.env.BASE_URL;
@@ -22,18 +21,24 @@ const repo = 'https://github.com/pjdoland/coachbook/blob/main';
   <p class="standfirst">Vintage Coach handbags, 1941–2002.</p>
   <h1>coachbook</h1>
   <p class="lede">
-    A reference archive of vintage Coach Leatherware, 1941–2002 —
-    the Cashin years through the Krakoff transition. Every claim is
-    cited; every source is named.
+    A reference archive of vintage Coach Leatherware, from the 1941
+    Manhattan founding through the Krakoff transition. Every claim is
+    cited; every source is named; corrections are dated and logged.
   </p>
 
-  <section>
-    <h2>Authentication</h2>
+  <section class="department">
+    <p class="department-eyebrow">Authenticate</p>
+    <h2>Is this bag real?</h2>
+    <p class="department-blurb">
+      No single signal proves a bag authentic or fake. Combine the
+      era-windowed checks across creed, country, hardware, and
+      construction.
+    </p>
     <ul class="card-grid">
       <li>
         <a href={`${base}wizard/`}>
           <strong>Wizard</strong>
-          <span class="card-meta">Step-through flow · 6 questions</span>
+          <span class="card-meta">Step-through · 6 questions · cross-checked</span>
         </a>
       </li>
       <li>
@@ -44,20 +49,25 @@ const repo = 'https://github.com/pjdoland/coachbook/blob/main';
       </li>
       <li>
         <a href={`${base}authentication/`}>
-          <strong>All topics</strong>
-          <span class="card-meta">{authentication.length} entries</span>
+          <strong>Topic index</strong>
+          <span class="card-meta">{authentication.length} entries · grouped by what they tell you</span>
         </a>
       </li>
     </ul>
   </section>
 
-  <section>
-    <h2>Browse</h2>
+  <section class="department">
+    <p class="department-eyebrow">Browse the archive</p>
+    <h2>What was Coach making?</h2>
+    <p class="department-blurb">
+      The catalog corpus, era by era — silhouettes, colorways, and the
+      catalogs themselves. The company timeline anchors the dates.
+    </p>
     <ul class="card-grid">
       <li>
         <a href={`${base}models/`}>
           <strong>Models</strong>
-          <span class="card-meta">{models.length} silhouettes documented</span>
+          <span class="card-meta">{models.length} silhouettes · grouped by era</span>
         </a>
       </li>
       <li>
@@ -87,9 +97,43 @@ const repo = 'https://github.com/pjdoland/coachbook/blob/main';
     </ul>
   </section>
 
-  <section>
+  <section class="department">
+    <p class="department-eyebrow">The work</p>
+    <h2>How the archive was built</h2>
+    <p class="department-blurb">
+      Citations, conflicts, corrections — the editorial substrate.
+      Where claims come from, what's been disputed, what's been wrong.
+    </p>
+    <ul class="card-grid">
+      <li><a href={`${base}sources/`}><strong>Source registry</strong><span class="card-meta">Bibliography, tiered</span></a></li>
+      <li><a href={`${base}research/`}><strong>Research method</strong><span class="card-meta">16 investigation streams</span></a></li>
+      <li><a href={`${base}errata/`}><strong>Errata</strong><span class="card-meta">Corrections, dated</span></a></li>
+      <li><a href={`${base}disputes/`}><strong>Disputes</strong><span class="card-meta">Where sources disagree</span></a></li>
+      <li><a href={`${base}about/`}><strong>About</strong><span class="card-meta">Scope, standards, colophon</span></a></li>
+    </ul>
+  </section>
+
+  <section class="department">
+    <p class="department-eyebrow">In the repo</p>
+    <h2>Reference</h2>
+    <p class="department-blurb">
+      Working files in the public repo — project scope, editorial
+      conventions, and topics not yet promoted to standalone pages.
+    </p>
+    <ul class="card-grid">
+      <li><a href={`${repo}/PLAN.md`}><strong>PLAN</strong><span class="card-meta">Project scope and method</span></a></li>
+      <li><a href={`${repo}/STYLE.md`}><strong>STYLE</strong><span class="card-meta">Editorial conventions</span></a></li>
+      <li><a href={`${repo}/market.md`}><strong>Market and pricing</strong><span class="card-meta">Pricing and resale notes</span></a></li>
+      <li><a href={`${repo}/care/`}><strong>Care and restoration</strong><span class="card-meta">Cleaning, conditioning, repair</span></a></li>
+    </ul>
+  </section>
+
+  <section class="department legend">
+    <p class="department-eyebrow">Vocabulary</p>
     <h2>Confidence</h2>
-    <p>Every claim carries a confidence tag and a source citation.</p>
+    <p class="department-blurb">
+      Every claim in the archive carries one of these tags.
+    </p>
     <dl class="confidence-legend">
       <dt><span class="chip" data-confidence="confirmed">confirmed</span></dt>
       <dd>Primary source, or two independent reputable sources</dd>
@@ -100,20 +144,6 @@ const repo = 'https://github.com/pjdoland/coachbook/blob/main';
       <dt><span class="chip" data-confidence="disputed">disputed</span></dt>
       <dd>Sources disagree; both readings shown side-by-side</dd>
     </dl>
-  </section>
-
-  <section>
-    <h2>Reference</h2>
-    <ul class="card-grid">
-      <li><a href={`${repo}/PLAN.md`}><strong>PLAN</strong><span class="card-meta">Project scope and method</span></a></li>
-      <li><a href={`${repo}/STYLE.md`}><strong>STYLE</strong><span class="card-meta">Editorial conventions</span></a></li>
-      <li><a href={`${base}sources/`}><strong>Source registry</strong><span class="card-meta">Bibliography, tiered</span></a></li>
-      <li><a href={`${base}research/`}><strong>Research method</strong><span class="card-meta">16 streams, behind the work</span></a></li>
-      <li><a href={`${base}errata/`}><strong>Errata</strong><span class="card-meta">Corrections, dated</span></a></li>
-      <li><a href={`${base}disputes/`}><strong>Disputes</strong><span class="card-meta">Where sources disagree</span></a></li>
-      <li><a href={`${repo}/market.md`}><strong>Market and pricing</strong><span class="card-meta">Pricing and resale notes</span></a></li>
-      <li><a href={`${repo}/care/`}><strong>Care and restoration</strong><span class="card-meta">Cleaning, conditioning, repair</span></a></li>
-    </ul>
   </section>
 </BaseLayout>
 
@@ -130,9 +160,34 @@ const repo = 'https://github.com/pjdoland/coachbook/blob/main';
   .lede {
     font-size: 1.08rem;
     color: var(--ink-soft);
-    max-width: 56ch;
-    margin-bottom: 2rem;
+    max-width: 60ch;
+    margin-bottom: 2.5rem;
   }
+  .department {
+    margin: 0 0 2.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--surface-line);
+  }
+  .department-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--brass-deep);
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+  }
+  .department h2 {
+    margin: 0 0 0.4rem;
+    font-size: 1.55rem;
+    line-height: 1.15;
+  }
+  .department-blurb {
+    color: var(--ink-soft);
+    max-width: 60ch;
+    margin: 0 0 1rem;
+  }
+  .legend { margin-bottom: 1rem; }
   .confidence-legend {
     grid-template-columns: max-content 1fr;
     align-items: baseline;
