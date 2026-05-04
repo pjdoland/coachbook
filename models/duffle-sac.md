@@ -4,8 +4,9 @@ slug: duffle-sac
 style_numbers: ["9085", "9088"]  # 9085 standard, 9088 Ruff-Out variant per 1975 catalog
 introduced: pre-1975
 introduced_confidence: confirmed  # primary-confirmed in 1975 catalog at style 9085
-discontinued: early-2000s
-discontinued_confidence: likely
+discontinued: 1996-1999  # window narrowed via Q1c finding (absent from Holiday 1999); name survives as Coach Duffle Sac sub-collection through Autumn 2002 but not in 9085 heritage configuration
+discontinued_confidence: confirmed
+discontinued_evidence: "Q1c Holiday 1999 deep-read confirms Duffle Sac 9085 NOT visible in heritage configuration. Last documented appearance in 1995-1996 Source Book per M3 (continuous since 1973 per N4 / per 1996-97 Source Book brand voice). Per Q2 follow-up Autumn 2002, the 'Coach Duffle Sac' name survives as a sub-collection but not at Style 9085 in the heritage configuration. The 9085-specific run retired sometime between Holiday 1996 and Holiday 1999 — earlier than the broader Autumn 2002 heritage Coach Classics sunset."
 era: cashin-through-transition
 era_code: E2-E5
 era_role: authentication-anchor

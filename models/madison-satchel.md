@@ -14,6 +14,9 @@ material: glove-tanned-cowhide
 spring_1986_price_9725: 104
 spring_1989_price_9725: 140
 spring_1989_price_9765: 168
+discontinued: 1996-1999  # window narrowed via Q1c finding (absent from Holiday 1999)
+discontinued_confidence: confirmed
+discontinued_evidence: "Q1c Holiday 1999 deep-read confirms Madison Satchel 9725 NOT visible. Last documented appearance in 1995-1996 Source Book per M3. Retired sometime between Holiday 1996 and Holiday 1999. By Autumn 2002 (Q2 follow-up) the 'Madison' name survives only as eyewear S412 [coach-catalogs-1960-1989]."
 spring_1989_dimensions_9725_in: { width: 11, height: 7, depth: 4.5 }
 spring_1989_dimensions_9765_in: { width: 12, height: 7.5, depth: 5.5 }
 status: published

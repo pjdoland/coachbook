@@ -127,6 +127,14 @@ Primary launch (1998 New Collection):
    metal plaque mounted on the front face of the bag
 5. **Hangtag**: fabric-faced / leather-backed with metal grommet
    (Neo-specific variant of the standard leather hangtag)
+6. **"COACH EST 1941" hangtag plaque** — debuts Fall 1999 catalog
+   on Coach Neo per Q1b primary [coach-catalogs-1960-1989]. This
+   is the **first explicit "EST 1941" mark** in the Coach brand
+   timeline. Predates the Autumn 2002 embossed-leather "COACH
+   LEATHERWARE EST. 1941" patch (per Q2 follow-up) by ~3 years.
+   Hangtag-format precedes embossed-leather-format. Authentication:
+   a "COACH EST 1941" hangtag plaque claiming pre-1999 manufacture
+   is wrong on its face.
 
 ## The metal-plaque pivot (load-bearing finding)
 

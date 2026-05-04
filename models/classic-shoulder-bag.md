@@ -4,6 +4,9 @@ slug: classic-shoulder-bag
 also_known_as: ["The Original Coach Bag", "Classic Shoulder"]
 style_numbers: ["9170"]
 introduced: pre-1969
+discontinued: 1996-1999  # window narrowed via Q1c finding (absent from Holiday 1999)
+discontinued_confidence: confirmed
+discontinued_evidence: "Q1c Holiday 1999 deep-read confirms Classic Shoulder Bag 9170 NOT visible. Last documented appearance in 1995-1996 Source Book. The 'original Coach bag' (per Spring 1989 brand voice in M2; per Spring 1984 'first bag we ever made' in N3) retired sometime between Holiday 1996 and Holiday 1999. **30+ year run** pre-1969 → 1996-1999 retirement makes the 9170 one of the longest-running silhouettes in Coach history [coach-catalogs-1960-1989]."
 introduced_confidence: confirmed
 introduced_evidence: "Spring 1989 catalog primary copy: 'After more than two decades, women still regard this bag—the original Coach bag—as an essential part of their Coach collection.' 1989 − 20+ years = pre-1969."
 era: cashin-era-or-earlier
