@@ -276,6 +276,17 @@ const base = import.meta.env.BASE_URL;
         color: var(--ink);
       }
       header.site-header .brand:hover { color: var(--bridle); }
+      header.site-header .tagline {
+        font-size: 0.78rem;
+        color: var(--ink-quiet);
+        letter-spacing: 0.04em;
+        font-style: italic;
+      }
+      @media (max-width: 540px) {
+        /* On the narrowest screens the tagline is redundant with the
+         * home-page standfirst; hide it so the brand + nav have room. */
+        header.site-header .tagline { display: none; }
+      }
 
       header.site-header nav {
         margin-left: auto;
@@ -454,6 +465,7 @@ const base = import.meta.env.BASE_URL;
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="brand" href={base}>coachbook</a>
+      <span class="tagline">Vintage Coach reference, 1941–2002</span>
       <nav aria-label="Primary">
         <a href={`${base}models/`}>Models</a>
         <a href={`${base}authentication/`}>Authenticate</a>
