@@ -45,6 +45,35 @@ const related = relatedSlugs
     </dl>
     <Content />
 
+    {entry.data.facts && entry.data.facts.length > 0 && (
+      <section class="facts-block">
+        <h2>Facts and provenance</h2>
+        <p class="facts-intro">
+          Per-claim breakdown: each statement carries its confidence
+          and the sources that support it.
+        </p>
+        <ol class="facts-list">
+          {entry.data.facts.map((f) => (
+            <li class="fact" data-confidence={f.confidence}>
+              <p class="fact-claim">{f.claim}</p>
+              <p class="fact-meta">
+                <span class="chip" data-confidence={f.confidence}>{f.confidence}</span>
+                <span class="fact-sources">
+                  {f.sources.map((sid, i) => (
+                    <>
+                      {i > 0 && ' · '}
+                      <a href={`${base}sources/#${sid}`} class="source-cite">[{sid}]</a>
+                    </>
+                  ))}
+                </span>
+              </p>
+              {f.notes && <p class="fact-notes">{f.notes}</p>}
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+
     {related.length > 0 && (
       <section class="related-models">
         <h2>Related models</h2>
@@ -125,5 +154,60 @@ const related = relatedSlugs
   }
   .source-list li {
     margin: 0.2rem 0;
+  }
+
+  .facts-block { margin-top: 2.5rem; }
+  .facts-intro { color: var(--ink-soft); max-width: 60ch; margin-top: 0; }
+  .facts-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 1.25rem 0 0;
+    counter-reset: fact;
+  }
+  .fact {
+    padding: 0.85rem 1rem 0.85rem 2.4rem;
+    margin: 0 0 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--surface-line);
+    border-left: 3px solid var(--bridle);
+    border-radius: 3px;
+    position: relative;
+    counter-increment: fact;
+  }
+  .fact::before {
+    content: counter(fact);
+    position: absolute;
+    left: 0.85rem;
+    top: 0.95rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--brass-deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .fact[data-confidence="confirmed"] { border-left-color: var(--brass-deep); }
+  .fact[data-confidence="likely"] { border-left-color: var(--brass); }
+  .fact[data-confidence="tentative"] { border-left-color: var(--bridle); }
+  .fact[data-confidence="disputed"] { border-left-color: #b15a3c; }
+  .fact-claim {
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .fact-meta {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .fact-notes {
+    margin: 0.5rem 0 0;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    line-height: 1.5;
   }
 </style>
