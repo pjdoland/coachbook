@@ -1,7 +1,7 @@
 ---
 name: Miles and Lillian Cahn
 slug: cahn-family
-employment_status: owners
+employment_status: owner
 tenure_start: 1946
 tenure_end: 1985-07
 status: published

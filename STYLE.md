@@ -253,9 +253,14 @@ born: YYYY-MM-DD
 died: YYYY-MM-DD                         # if applicable
 tenure_start: YYYY                       # at Coach (the only employer this archive tracks)
 tenure_end: YYYY                         # at Coach
-employment_status: contracted | employee
+employment_status: contracted | employee | owner
 role: <title>
 ```
+
+`employment_status` is a closed enum:
+- `contracted` — outside designer (e.g. Bonnie Cashin, 1962–1974).
+- `employee` — Coach payroll (e.g. Reed Krakoff from 1996).
+- `owner` — Coach owner-operator (Cahn family, 1946–1985).
 
 Use `tenure_start` / `tenure_end` (not `coach_tenure_start` /
 `coach_tenure_end`). Coach is the only employer this archive tracks

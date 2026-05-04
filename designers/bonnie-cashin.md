@@ -5,7 +5,7 @@ born: 1908-09-28
 died: 2000-02-03
 tenure_start: 1962
 tenure_end: 1974
-employment_status: contract
+employment_status: contracted
 status: published
 confidence: confirmed
 sources:

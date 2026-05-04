@@ -185,7 +185,9 @@ const designers = defineCollection({
       // (STYLE.md §5).
       tenure_start: z.union([z.number(), z.string()]).optional(),
       tenure_end: z.union([z.number(), z.string()]).optional(),
-      employment_status: z.string().optional(),
+      // STYLE.md §5: contracted (Cashin), employee (Krakoff), owner
+      // (Cahn family). Three values cover the archive's scope.
+      employment_status: z.enum(['contracted', 'employee', 'owner']).optional(),
       role: z.string().optional(),
     })
     .passthrough()
