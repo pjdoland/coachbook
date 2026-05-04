@@ -26,7 +26,7 @@ This is the printable one-page flow for "I have a bag and want to know if
 it is real." Each step branches to the relevant detailed page in
 `/authentication/` for full evidence and caveats. **No single check is
 sufficient**; era-consistent answers across creed, country, serial,
-hardware, and construction are required before a bag can :qbe called
+hardware, and construction are required before a bag can be called
 authentic.
 
 ## Step 1 — Is there a leather creed patch?

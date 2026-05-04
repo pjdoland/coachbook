@@ -32,7 +32,7 @@ const label = entry.data.name ?? entry.data.title ?? entry.id;
       {entry.data.discontinued && (<><dt>Discontinued</dt><dd>{entry.data.discontinued}</dd></>)}
       {entry.data.designer && (<><dt>Designer</dt><dd>{entry.data.designer}</dd></>)}
       {entry.data.closure && (<><dt>Closure</dt><dd>{entry.data.closure}</dd></>)}
-      {entry.data.confidence && (<><dt>Confidence</dt><dd>{entry.data.confidence}</dd></>)}
+      {entry.data.confidence && (<><dt>Confidence</dt><dd><span class="chip" data-confidence={entry.data.confidence}>{entry.data.confidence}</span></dd></>)}
       {entry.data.status && (<><dt>Status</dt><dd>{entry.data.status}</dd></>)}
     </dl>
     <Content />

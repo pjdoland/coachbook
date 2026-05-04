@@ -12,24 +12,39 @@ const base = import.meta.env.BASE_URL;
 
 <BaseLayout title="Models" description="All vintage Coach models in the archive.">
   <h1>Models</h1>
-  <p>{models.length} model{models.length === 1 ? '' : 's'} in the archive.</p>
-  <ul>
+  <p class="lede">
+    {models.length} silhouettes documented from the Cashin era through the
+    Krakoff transition. Each entry carries primary-catalog citations
+    where available, and Tier 3 community sources where not.
+  </p>
+  <ul class="card-grid">
     {
       models.map((entry) => {
         const label = entry.data.name ?? entry.data.title ?? entry.id;
+        const styles = entry.data.style_numbers ?? [];
+        const meta = [
+          styles.length > 0 ? styles.join(', ') : null,
+          entry.data.era ?? null,
+        ].filter(Boolean).join(' · ');
         return (
           <li>
-            <a href={`${base}models/${entry.id}/`}>{label}</a>
-            {entry.data.style_numbers && entry.data.style_numbers.length > 0 && (
-              <small> — {entry.data.style_numbers.join(', ')}</small>
-            )}
-            {entry.data.era && <small> — {entry.data.era}</small>}
-            {entry.data.confidence && (
-              <small> — {entry.data.confidence}</small>
-            )}
+            <a href={`${base}models/${entry.id}/`}>
+              <strong>{label}</strong>
+              {meta && <span class="card-meta">{meta}</span>}
+              {entry.data.confidence && (
+                <span class="chip" data-confidence={entry.data.confidence}>
+                  {entry.data.confidence}
+                </span>
+              )}
+            </a>
           </li>
         );
       })
     }
   </ul>
 </BaseLayout>
+
+<style>
+  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1.5rem; max-width: 60ch; }
+  .card-grid .chip { margin-top: 0.4rem; }
+</style>

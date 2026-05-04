@@ -14,20 +14,32 @@ const base = import.meta.env.BASE_URL;
 
 <BaseLayout title="Catalogs">
   <h1>Catalogs</h1>
-  <p>
+  <p class="lede">
     Coach catalogs are the most valuable primary source for dating
     models. The free-online catalog landscape is fragmented; this
     directory tracks what's known, with stubs for catalog years not
     yet retrieved.
   </p>
-  <ul>
-    {sorted.map((entry) => (
-      <li>
-        <a href={`${base}catalogs/${entry.id}/`}>
-          {entry.data.title ?? entry.id}
-        </a>
-        {entry.data.status === 'stub' && <em> (stub — no scan yet)</em>}
-      </li>
-    ))}
+  <ul class="card-grid">
+    {sorted.map((entry) => {
+      const meta = [
+        entry.data.year ? String(entry.data.year) : null,
+        entry.data.season ?? null,
+      ].filter(Boolean).join(' · ');
+      return (
+        <li>
+          <a href={`${base}catalogs/${entry.id}/`}>
+            <strong>{entry.data.title ?? entry.id}</strong>
+            {meta && <span class="card-meta">{meta}</span>}
+            {entry.data.status === 'stub' && <span class="chip">stub</span>}
+          </a>
+        </li>
+      );
+    })}
   </ul>
 </BaseLayout>
+
+<style>
+  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1.5rem; max-width: 60ch; }
+  .card-grid .chip { margin-top: 0.4rem; }
+</style>

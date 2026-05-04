@@ -13,18 +13,61 @@ const base = import.meta.env.BASE_URL;
 
 <BaseLayout title="Authentication">
   <h1>Authentication</h1>
-  <p>
-    Topic-by-topic authentication reference. Combine multiple checks
-    — no single signal proves authentic or fake.
+  <p class="lede">
+    Topic-by-topic authentication reference. Combine multiple
+    checks — no single signal proves authentic or fake.
   </p>
-  <ul>
+
+  <p class="cta-row">
+    <a class="cta primary" href={`${base}wizard/`}>Start the wizard →</a>
+    <a class="cta" href={`${base}authentication/decision-tree/`}>Printable decision tree</a>
+  </p>
+
+  <h2>All topics</h2>
+  <ul class="card-grid">
     {sorted.map((entry) => (
       <li>
         <a href={`${base}authentication/${entry.id}/`}>
-          {entry.data.title ?? entry.data.name ?? entry.id}
+          <strong>{entry.data.title ?? entry.data.name ?? entry.id}</strong>
+          {entry.data.confidence && (
+            <span class="chip" data-confidence={entry.data.confidence}>
+              {entry.data.confidence}
+            </span>
+          )}
         </a>
-        {entry.data.confidence && <em> ({entry.data.confidence})</em>}
       </li>
     ))}
   </ul>
 </BaseLayout>
+
+<style>
+  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1.5rem; max-width: 60ch; }
+  .card-grid .chip { margin-top: 0.4rem; }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.5rem 0 2.5rem;
+  }
+  .cta {
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--surface-line);
+    border-radius: 3px;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--surface);
+    font-weight: 500;
+  }
+  .cta:hover { border-color: var(--brass); background: var(--paper-soft); }
+  .cta.primary {
+    background: var(--bridle);
+    color: var(--paper);
+    border-color: var(--bridle);
+  }
+  .cta.primary:hover {
+    background: var(--bridle-soft);
+    border-color: var(--bridle-soft);
+    color: var(--paper);
+  }
+</style>

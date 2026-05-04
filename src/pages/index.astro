@@ -17,58 +17,108 @@ const repo = 'https://github.com/pjdoland/coachbook/blob/main';
 
 <BaseLayout
   title="coachbook"
-  description="Vintage Coach handbag archive — reference for the 1941–2002 NYC era."
+  description="Vintage Coach handbag archive — primary-source reference for the 1941–2002 NYC era."
 >
   <h1>coachbook</h1>
-  <p>
-    A reference archive of vintage Coach Leatherware (1941–2002), built
-    from free public sources with citation discipline. See
-    <a href={`${repo}/PLAN.md`}>PLAN</a> for scope and
-    <a href={`${repo}/STYLE.md`}>STYLE</a> for editorial conventions.
+  <p class="lede">
+    A primary-source reference archive of vintage Coach Leatherware,
+    1941–2002 — the Cashin years through the Krakoff transition. Every
+    claim citation-tagged; every source registered.
   </p>
 
   <section>
-    <h2>Start here</h2>
-    <ul>
-      <li><a href={`${base}authentication/decision-tree/`}>Authentication decision tree</a> — "is this real?" in seven steps</li>
-      <li><a href={`${base}authentication/`}>Authentication topics</a> ({authentication.length})</li>
-      <li><a href={`${base}history/`}>Company timeline</a> 1941–2002</li>
-      <li><a href={`${base}designers/`}>Designers and people</a> ({designers.length})</li>
+    <h2>Authenticate a bag</h2>
+    <ul class="card-grid">
+      <li>
+        <a href={`${base}wizard/`}>
+          <strong>Authentication wizard</strong>
+          <span class="card-meta">Step-through flow · 5–7 questions</span>
+        </a>
+      </li>
+      <li>
+        <a href={`${base}authentication/decision-tree/`}>
+          <strong>Decision tree</strong>
+          <span class="card-meta">Printable one-page reference</span>
+        </a>
+      </li>
+      <li>
+        <a href={`${base}authentication/`}>
+          <strong>All topics</strong>
+          <span class="card-meta">{authentication.length} authentication pages</span>
+        </a>
+      </li>
     </ul>
   </section>
 
   <section>
     <h2>Browse</h2>
-    <ul>
-      <li><a href={`${base}models/`}>Models</a> ({models.length}) — every documented vintage Coach silhouette</li>
-      <li><a href={`${base}colors/`}>Colors</a> ({colors.length}) — the Coach palette, era-by-era</li>
-      <li><a href={`${base}catalogs/`}>Catalogs</a> ({catalogs.length}) — primary-source catalog records</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Reference</h2>
-    <ul>
-      <li><a href={`${repo}/bibliography.md`}>Bibliography</a></li>
-      <li><a href={`${repo}/market.md`}>Market and pricing</a></li>
-      <li><a href={`${repo}/care/`}>Care and restoration</a></li>
-      <li><a href={`${repo}/errata.md`}>Errata</a> — corrections log</li>
+    <ul class="card-grid">
+      <li>
+        <a href={`${base}models/`}>
+          <strong>Models</strong>
+          <span class="card-meta">{models.length} silhouettes documented</span>
+        </a>
+      </li>
+      <li>
+        <a href={`${base}colors/`}>
+          <strong>Colors</strong>
+          <span class="card-meta">{colors.length} entries · era-by-era</span>
+        </a>
+      </li>
+      <li>
+        <a href={`${base}catalogs/`}>
+          <strong>Catalogs</strong>
+          <span class="card-meta">{catalogs.length} primary records</span>
+        </a>
+      </li>
+      <li>
+        <a href={`${base}designers/`}>
+          <strong>Designers and people</strong>
+          <span class="card-meta">{designers.length} entries</span>
+        </a>
+      </li>
+      <li>
+        <a href={`${base}history/`}>
+          <strong>Company timeline</strong>
+          <span class="card-meta">1941–2002</span>
+        </a>
+      </li>
     </ul>
   </section>
 
   <section>
     <h2>Confidence</h2>
     <p>
-      Every claim in this archive carries a confidence tag and a source
-      citation. <code>confirmed</code> = primary source or two independent
-      reputable sources; <code>likely</code> = single primary or
-      multiple agreeing secondary; <code>tentative</code> = community
-      sources only; <code>disputed</code> = sources disagree, both shown.
-    </p>
-    <p>
-      Many entries are currently <code>tentative</code> — Phase 3 retrieval
-      operations (see <a href={`${repo}/RETRIEVAL.md`}>RETRIEVAL</a>) will
-      upgrade them as primary sources are pulled.
+      Every claim carries a confidence tag and a source citation:
+      <span class="chip" data-confidence="confirmed">confirmed</span>
+      = primary source or two independent reputable sources;
+      <span class="chip" data-confidence="likely">likely</span>
+      = single primary or multiple agreeing secondary;
+      <span class="chip">tentative</span>
+      = community sources only;
+      <span class="chip" data-confidence="disputed">disputed</span>
+      = sources disagree, both shown.
     </p>
   </section>
+
+  <section>
+    <h2>Reference</h2>
+    <ul class="card-grid">
+      <li><a href={`${repo}/PLAN.md`}><strong>PLAN</strong><span class="card-meta">Scope and method</span></a></li>
+      <li><a href={`${repo}/STYLE.md`}><strong>STYLE</strong><span class="card-meta">Editorial conventions</span></a></li>
+      <li><a href={`${repo}/bibliography.md`}><strong>Bibliography</strong><span class="card-meta">Source registry</span></a></li>
+      <li><a href={`${repo}/errata.md`}><strong>Errata</strong><span class="card-meta">Corrections log</span></a></li>
+      <li><a href={`${repo}/market.md`}><strong>Market and pricing</strong><span class="card-meta">Reference</span></a></li>
+      <li><a href={`${repo}/care/`}><strong>Care and restoration</strong><span class="card-meta">Reference</span></a></li>
+    </ul>
+  </section>
 </BaseLayout>
+
+<style>
+  .lede {
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    max-width: 56ch;
+    margin-bottom: 2rem;
+  }
+</style>

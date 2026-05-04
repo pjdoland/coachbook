@@ -13,19 +13,28 @@ const base = import.meta.env.BASE_URL;
 
 <BaseLayout title="Colors">
   <h1>Colors</h1>
-  <p>
+  <p class="lede">
     Coach color names, with model coverage and authentication notes.
     Color is rarely an era anchor — combine with creed, serial,
     hardware, and country-of-origin.
   </p>
-  <ul>
+  <ul class="card-grid">
     {sorted.map((entry) => (
       <li>
         <a href={`${base}colors/${entry.id}/`}>
-          {entry.data.name ?? entry.data.title ?? entry.id}
+          <strong>{entry.data.name ?? entry.data.title ?? entry.id}</strong>
+          {entry.data.confidence && (
+            <span class="chip" data-confidence={entry.data.confidence}>
+              {entry.data.confidence}
+            </span>
+          )}
         </a>
-        {entry.data.confidence && <em> ({entry.data.confidence})</em>}
       </li>
     ))}
   </ul>
 </BaseLayout>
+
+<style>
+  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1.5rem; max-width: 60ch; }
+  .card-grid .chip { margin-top: 0.4rem; }
+</style>

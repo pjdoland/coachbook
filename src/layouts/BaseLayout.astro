@@ -17,71 +17,392 @@ const base = import.meta.env.BASE_URL;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap"
+    />
     {description && <meta name="description" content={description} />}
     <title>{fullTitle}</title>
     <style is:global>
-      /* minimal reset — replace with a proper system later */
+      /* ---------------------------------------------------------------------
+       * coachbook visual language
+       *
+       * Subtle nod to Coach's 1981–1994 catalog editorial register without
+       * literal logo or trademark mimicry: warm paper-toned background,
+       * serif headings (Cormorant Garamond — old-style figures, generous
+       * x-height; close in feel to the Garamonds Coach used in the
+       * Cahn-era catalogs), sans-serif body for readability, restrained
+       * brass accent for links, raw-edge dividers.
+       *
+       * Mobile-first. Most layout collapses to a single column under
+       * 720px. Card-style sub-collection navigation on the index, tighter
+       * dl rendering on model pages.
+       * ------------------------------------------------------------------- */
+
+      :root {
+        /* Paper + ink — warm bone-tinted neutrals close to a 1980s Coach
+         * catalog's matte paper stock. */
+        --paper: #f5efe4;
+        --paper-soft: #ede5d4;
+        --paper-deeper: #e6dcc6;
+        --ink: #1f1a14;
+        --ink-soft: #4a4035;
+        --ink-quiet: #7a6f5e;
+
+        /* Brass accent — link color and section rules. Restrained;
+         * approximates the warm yellow-brown of solid brass turnlock
+         * hardware in artificial light. Not literal Coach-orange. */
+        --brass: #8a6a2b;
+        --brass-deep: #6b5021;
+        --brass-soft: #b89a5e;
+
+        /* Bridle leather accent — used sparingly for state highlighting
+         * (active wizard step, primary CTA). */
+        --bridle: #6b3a1e;
+        --bridle-soft: #8c5638;
+
+        /* Surface elevations — for cards / wizard panels. */
+        --surface: #fbf7ee;
+        --surface-line: #d8ccae;
+      }
+
       *,
       *::before,
       *::after {
         box-sizing: border-box;
       }
+
       html {
         -webkit-text-size-adjust: 100%;
       }
+
       body {
         margin: 0;
-        font-family:
-          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-          Ubuntu, Cantarell, sans-serif;
-        line-height: 1.5;
-        max-width: 72ch;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          Roboto, sans-serif;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: var(--ink);
+        background: var(--paper);
+        max-width: 64ch;
         margin-inline: auto;
-        padding: 1.5rem 1rem 4rem;
-        color: #1a1a1a;
-        background: #fafafa;
+        padding: 1.25rem 1.25rem 4rem;
+        font-feature-settings: 'kern' 1, 'liga' 1;
       }
-      a {
-        color: inherit;
+
+      @media (min-width: 720px) {
+        body {
+          padding: 2.5rem 1.5rem 6rem;
+          line-height: 1.65;
+        }
       }
-      header,
-      main,
-      footer {
-        display: block;
+
+      /* Headings — serif, optical-style sizing. */
+      h1, h2, h3, h4, h5, h6 {
+        font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+        font-weight: 500;
+        line-height: 1.15;
+        margin: 1.75em 0 0.5em;
+        color: var(--ink);
+        letter-spacing: 0.005em;
       }
-      header {
-        margin-bottom: 2rem;
+
+      h1 {
+        font-size: clamp(2rem, 6vw, 2.75rem);
+        font-weight: 500;
+        margin-top: 0.25em;
+        margin-bottom: 0.4em;
       }
-      header a {
-        text-decoration: none;
-        font-weight: 600;
+
+      h2 {
+        font-size: clamp(1.4rem, 3.5vw, 1.75rem);
+        margin-top: 2em;
       }
-      footer {
-        margin-top: 4rem;
-        padding-top: 1rem;
-        border-top: 1px solid #ddd;
-        font-size: 0.85rem;
-        color: #555;
-      }
-      h1,
-      h2,
+
       h3 {
-        line-height: 1.2;
+        font-size: clamp(1.15rem, 2.6vw, 1.35rem);
+      }
+
+      p, li, dd, dt {
+        font-size: 1rem;
+      }
+
+      /* Body links — brass accent with thin underline that doesn't drown
+       * paragraphs of citation links. */
+      a {
+        color: var(--brass);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.18em;
+        text-decoration-color: var(--brass-soft);
+        transition: color 120ms ease, text-decoration-color 120ms ease;
+      }
+      a:hover, a:focus-visible {
+        color: var(--brass-deep);
+        text-decoration-color: var(--brass-deep);
+      }
+
+      /* Inline code + frontmatter style numbers — slightly recessed. */
+      code {
+        font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo,
+          Consolas, monospace;
+        font-size: 0.9em;
+        background: var(--paper-soft);
+        padding: 0.08em 0.35em;
+        border-radius: 2px;
+      }
+
+      pre {
+        background: var(--paper-soft);
+        padding: 1rem;
+        border-radius: 4px;
+        overflow-x: auto;
+        font-size: 0.875rem;
+      }
+
+      blockquote {
+        margin: 1.5em 0;
+        padding: 0.75em 1.25em;
+        border-left: 3px solid var(--brass);
+        background: var(--paper-soft);
+        font-style: italic;
+        color: var(--ink-soft);
+      }
+      blockquote p:first-child { margin-top: 0; }
+      blockquote p:last-child { margin-bottom: 0; }
+
+      /* Tables — common in catalog roster sections. Compact, no
+       * heavy borders, alternating warmth. */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.92rem;
+      }
+      th, td {
+        text-align: left;
+        padding: 0.5rem 0.75rem;
+        border-bottom: 1px solid var(--surface-line);
+      }
+      th {
+        font-weight: 600;
+        color: var(--ink-soft);
+        background: var(--paper-soft);
+      }
+      tr:nth-child(even) td { background: rgba(232, 220, 195, 0.25); }
+
+      /* Definition lists — used heavily on model spec pages. */
+      dl {
+        display: grid;
+        grid-template-columns: minmax(8em, 1fr) 2fr;
+        gap: 0.4rem 1rem;
+        margin: 1.5rem 0;
+        padding: 1rem 1.25rem;
+        background: var(--surface);
+        border-top: 1px solid var(--surface-line);
+        border-bottom: 1px solid var(--surface-line);
+        font-size: 0.95rem;
+      }
+      @media (max-width: 540px) {
+        dl {
+          grid-template-columns: 1fr;
+          gap: 0.15rem 0;
+        }
+        dt { margin-top: 0.5rem; }
+        dt:first-child { margin-top: 0; }
+      }
+      dt {
+        font-weight: 600;
+        color: var(--ink-soft);
+        font-variant-numeric: tabular-nums;
+      }
+      dd {
+        margin: 0;
+      }
+
+      /* Lists — generous tap targets, no excessive bullet drift. */
+      ul, ol {
+        padding-left: 1.5em;
+      }
+      li + li { margin-top: 0.25em; }
+
+      /* Layout regions ----------------------------------------------------- */
+
+      header.site-header {
+        margin: 0 -1.25rem 2rem;
+        padding: 1rem 1.25rem 0.75rem;
+        border-bottom: 1px solid var(--surface-line);
+        display: flex;
+        align-items: baseline;
+        gap: 1rem;
+      }
+      @media (min-width: 720px) {
+        header.site-header {
+          margin: 0 0 3rem;
+          padding: 0 0 1rem;
+        }
+      }
+
+      header.site-header .brand {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        text-decoration: none;
+        color: var(--ink);
+      }
+      header.site-header .brand:hover { color: var(--bridle); }
+
+      header.site-header nav {
+        margin-left: auto;
+        font-size: 0.85rem;
+        display: flex;
+        gap: 1rem;
+      }
+      header.site-header nav a {
+        color: var(--ink-soft);
+        text-decoration: none;
+      }
+      header.site-header nav a:hover { color: var(--brass-deep); }
+
+      footer.site-footer {
+        margin: 5rem -1.25rem 0;
+        padding: 1.5rem 1.25rem;
+        border-top: 1px solid var(--surface-line);
+        font-size: 0.85rem;
+        color: var(--ink-quiet);
+      }
+      @media (min-width: 720px) {
+        footer.site-footer {
+          margin: 6rem 0 0;
+          padding: 1.5rem 0;
+        }
+      }
+      footer.site-footer p { margin: 0.4em 0; }
+
+      main { display: block; }
+
+      /* Card grid — used by index pages for sub-collections. */
+      .card-grid {
+        display: grid;
+        gap: 0.75rem;
+        list-style: none;
+        padding: 0;
+        margin: 1.5rem 0;
+      }
+      @media (min-width: 540px) {
+        .card-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (min-width: 860px) {
+        .card-grid { grid-template-columns: repeat(3, 1fr); }
+      }
+      .card-grid li {
+        margin-top: 0;
+      }
+      .card-grid a {
+        display: block;
+        padding: 0.85rem 1rem;
+        background: var(--surface);
+        border: 1px solid var(--surface-line);
+        border-radius: 3px;
+        text-decoration: none;
+        color: var(--ink);
+        transition: border-color 120ms ease, background 120ms ease,
+          transform 120ms ease;
+      }
+      .card-grid a:hover, .card-grid a:focus-visible {
+        border-color: var(--brass);
+        background: var(--paper-soft);
+      }
+      .card-grid .card-meta {
+        display: block;
+        margin-top: 0.25em;
+        font-size: 0.85rem;
+        color: var(--ink-quiet);
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* Confidence chips — small inline tags. */
+      .chip {
+        display: inline-block;
+        padding: 0.05em 0.5em;
+        font-size: 0.78rem;
+        font-weight: 500;
+        text-transform: lowercase;
+        letter-spacing: 0.03em;
+        border-radius: 999px;
+        background: var(--paper-soft);
+        color: var(--ink-soft);
+        border: 1px solid var(--surface-line);
+        vertical-align: 0.1em;
+      }
+      .chip[data-confidence='confirmed'] {
+        background: rgba(138, 106, 43, 0.12);
+        color: var(--brass-deep);
+        border-color: var(--brass-soft);
+      }
+      .chip[data-confidence='likely'] {
+        background: rgba(138, 106, 43, 0.05);
+        color: var(--ink-soft);
+        border-color: var(--brass-soft);
+      }
+      .chip[data-confidence='disputed'] {
+        background: rgba(107, 58, 30, 0.08);
+        color: var(--bridle);
+        border-color: var(--bridle-soft);
+      }
+
+      /* Print — strip nav, full-bleed paper. */
+      @media print {
+        body {
+          background: white;
+          color: black;
+          max-width: none;
+        }
+        header.site-header nav, footer.site-footer { display: none; }
+        a { color: black; text-decoration: none; }
+      }
+
+      /* Accessibility */
+      :focus-visible {
+        outline: 2px solid var(--brass);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
+      /* Skip link */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0.5rem;
+      }
+      .skip-link:focus {
+        left: 0.5rem;
+        background: var(--ink);
+        color: var(--paper);
+        padding: 0.5rem 0.75rem;
+        z-index: 99;
       }
     </style>
   </head>
   <body>
-    <header>
-      <a href={base}>coachbook</a>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="brand" href={base}>coachbook</a>
+      <nav>
+        <a href={`${base}models/`}>Models</a>
+        <a href={`${base}authentication/`}>Authenticate</a>
+        <a href={`${base}history/`}>History</a>
+      </nav>
     </header>
-    <main>
+    <main id="main">
       <slot />
     </main>
-    <footer>
-      <p>
-        Vintage Coach archive. Reference only. See PLAN.md and STYLE.md
-        for editorial conventions.
-      </p>
+    <footer class="site-footer">
+      <p>Vintage Coach archive — primary-source reference for the 1941–2002 NYC era.</p>
+      <p>Not affiliated with Coach, Inc.</p>
     </footer>
   </body>
 </html>

@@ -1,0 +1,591 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Authentication wizard"
+  description="Step-through authentication flow for vintage Coach bags. 5–7 questions, era-consistency checking, source-cited verdict."
+>
+  <h1>Authentication wizard</h1>
+  <p class="lede">
+    Walk through the authentication flow one question at a time.
+    The wizard tracks era-consistency across the answers and flags
+    mismatches. Verdicts cite the relevant authentication topics for
+    full evidence — this is a navigation tool, not a final answer.
+  </p>
+
+  <noscript>
+    <div class="noscript-warn">
+      <p>
+        The wizard needs JavaScript. If you can't run it, the
+        <a href={`${base}authentication/decision-tree/`}>printable decision tree</a>
+        covers the same flow on a single page.
+      </p>
+    </div>
+  </noscript>
+
+  <div id="wizard" data-base={base}>
+    <div class="wiz-intro">
+      <p>Loading…</p>
+    </div>
+  </div>
+
+  <p class="footnote">
+    Based on
+    <a href={`${base}authentication/decision-tree/`}>the printable decision tree</a>.
+    No single check is sufficient — era-consistent answers across
+    creed, country, serial, hardware, and construction are required
+    before a bag can be called authentic.
+  </p>
+</BaseLayout>
+
+<style>
+  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1.5rem; max-width: 60ch; }
+  .footnote { font-size: 0.88rem; color: var(--ink-quiet); margin-top: 3rem; }
+
+  .noscript-warn {
+    padding: 1rem;
+    background: var(--paper-soft);
+    border-left: 3px solid var(--bridle);
+    margin: 1.5rem 0;
+  }
+
+  /* Wizard chrome ------------------------------------------------------ */
+  #wizard {
+    margin: 2rem 0;
+    background: var(--surface);
+    border: 1px solid var(--surface-line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .wiz-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--paper-soft);
+    border-bottom: 1px solid var(--surface-line);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .wiz-progress .pip {
+    flex: 1;
+    height: 3px;
+    background: var(--surface-line);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .wiz-progress .pip span {
+    display: block;
+    height: 100%;
+    background: var(--brass);
+    transition: width 200ms ease;
+  }
+
+  .wiz-step {
+    padding: 1.25rem 1rem 1.5rem;
+  }
+  @media (min-width: 720px) {
+    .wiz-step { padding: 1.75rem 1.75rem 2rem; }
+  }
+
+  .wiz-step h2 {
+    font-size: 1.4rem;
+    margin: 0 0 0.5rem;
+  }
+  .wiz-step .step-hint {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin: 0 0 1rem;
+  }
+
+  .wiz-options {
+    display: grid;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+  }
+  .wiz-options li { margin-top: 0; }
+  .wiz-options button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.85rem 1rem;
+    background: var(--paper);
+    border: 1px solid var(--surface-line);
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.98rem;
+    color: var(--ink);
+    transition: border-color 120ms ease, background 120ms ease;
+  }
+  .wiz-options button:hover, .wiz-options button:focus-visible {
+    border-color: var(--brass);
+    background: var(--paper-soft);
+  }
+  .wiz-options button strong { display: block; margin-bottom: 0.15rem; }
+  .wiz-options button .sub { display: block; font-size: 0.85rem; color: var(--ink-quiet); }
+
+  .wiz-controls {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--surface-line);
+    background: var(--paper-soft);
+    flex-wrap: wrap;
+  }
+  .wiz-controls button {
+    padding: 0.5rem 0.85rem;
+    background: var(--surface);
+    border: 1px solid var(--surface-line);
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .wiz-controls button:hover { border-color: var(--brass); }
+  .wiz-controls button[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+  /* Trail / running summary ------------------------------------------- */
+  .wiz-trail {
+    padding: 0.5rem 1rem;
+    border-top: 1px solid var(--surface-line);
+    font-size: 0.85rem;
+    color: var(--ink-quiet);
+  }
+  .wiz-trail ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.25rem;
+  }
+  .wiz-trail li {
+    display: grid;
+    grid-template-columns: 5em 1fr;
+    gap: 0.5em;
+  }
+  .wiz-trail .step-num { color: var(--ink-soft); font-weight: 500; }
+
+  /* Verdict ----------------------------------------------------------- */
+  .wiz-verdict {
+    padding: 1.5rem 1rem;
+  }
+  @media (min-width: 720px) {
+    .wiz-verdict { padding: 2rem 1.75rem; }
+  }
+  .wiz-verdict .verdict-tag {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-radius: 3px;
+    margin-bottom: 0.75rem;
+  }
+  .wiz-verdict .verdict-tag[data-verdict='likely-authentic'] {
+    background: rgba(138, 106, 43, 0.12);
+    color: var(--brass-deep);
+    border: 1px solid var(--brass);
+  }
+  .wiz-verdict .verdict-tag[data-verdict='caveats'] {
+    background: var(--paper-soft);
+    color: var(--ink-soft);
+    border: 1px solid var(--surface-line);
+  }
+  .wiz-verdict .verdict-tag[data-verdict='red-flags'] {
+    background: rgba(107, 58, 30, 0.1);
+    color: var(--bridle);
+    border: 1px solid var(--bridle-soft);
+  }
+  .wiz-verdict .verdict-tag[data-verdict='no-creed'] {
+    background: var(--paper-soft);
+    color: var(--ink-soft);
+    border: 1px solid var(--surface-line);
+  }
+  .wiz-verdict h3 {
+    font-size: 1.05rem;
+    margin: 1.5em 0 0.4em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+  .wiz-verdict ul { padding-left: 1.25em; }
+  .wiz-verdict .next-reads {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .wiz-verdict .next-reads a {
+    display: block;
+    padding: 0.6rem 0.85rem;
+    background: var(--paper-soft);
+    border: 1px solid var(--surface-line);
+    border-radius: 3px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .wiz-verdict .next-reads a:hover { border-color: var(--brass); }
+  .wiz-verdict .next-reads a strong { display: block; }
+  .wiz-verdict .next-reads a .sub { font-size: 0.85rem; color: var(--ink-quiet); }
+</style>
+
+<script is:inline define:vars={{ wizardBase: import.meta.env.BASE_URL }}>
+  /* Authentication wizard — pure client-side state machine.
+   * Steps mirror authentication/decision-tree.md. Each option
+   * carries optional era hints (e2a/e2b/e3/e4/e5/transitional)
+   * and red_flag deltas. Verdict is computed from accumulated
+   * era hints + flags. */
+
+  const STEPS = {
+    'creed': {
+      n: 1, of: 7,
+      title: 'Is there a leather creed patch?',
+      hint: 'The creed is the leather rectangle inside the bag with "COACH" wording and (usually) a serial number.',
+      options: [
+        {
+          label: 'No creed, but a small metal interior tag',
+          sub: 'A metal plaque rather than a leather patch',
+          era: ['e2a'],
+          next: 'verdict-no-creed',
+        },
+        {
+          label: 'No creed, no metal tag — just an inked leather stamp inside',
+          sub: 'No patch, no plaque; brand stamped directly on lining or seam',
+          era: ['e2b'],
+          next: 'verdict-no-creed',
+        },
+        {
+          label: 'Yes — a leather creed with a serial number',
+          sub: 'The standard rectangular patch with brand wording and digits',
+          next: 'wordmark',
+        },
+        {
+          label: "There's a creed but no serial",
+          sub: 'Pre-1980 bags, small accessories, and some 1990s pebbled-leather models legitimately shipped without serials',
+          flags: 0,
+          next: 'wordmark',
+        },
+      ],
+    },
+
+    'wordmark': {
+      n: 2, of: 7,
+      title: 'What does the creed say?',
+      hint: 'Look for the second word stamped beneath "COACH" on the creed.',
+      options: [
+        {
+          label: '"COACH" with small-caps "LEATHERWARE" beneath',
+          sub: 'Pre-1994 — E3 or E4 era',
+          era: ['e3', 'e4'],
+          next: 'country',
+        },
+        {
+          label: 'Just "COACH" — no LEATHERWARE',
+          sub: '1994 or later — E5 or modern',
+          era: ['e5'],
+          next: 'country',
+        },
+      ],
+    },
+
+    'country': {
+      n: 3, of: 7,
+      title: 'What does the country-of-origin marking say?',
+      hint: 'Usually stamped on the creed below the brand wording.',
+      options: [
+        { label: '"Made in New York City, U.S.A."', sub: '1970s through ~1980 (early E3); should pair with LEATHERWARE', era: ['e3'], next: 'serial' },
+        { label: '"Made in United States" / "Made in U.S.A."', sub: '1980 through 1994 (late E3 into E4); should pair with LEATHERWARE', era: ['e3', 'e4'], next: 'serial' },
+        { label: '"Made in Costa Rica" / "Hungary" / "Turkey" / "Dominican Republic" / "Mexico"', sub: '1994 through early 2000s (E5); should pair with LEATHERWARE-absent creed', era: ['e5'], next: 'serial' },
+        { label: '"Made in Italy"', sub: 'Exotic-skin or Madison/Gramercy line; line-specific, not era-specific', era: ['line-specific'], next: 'serial' },
+        { label: '"Made in Puerto Rico, U.S.A."', sub: 'Through April 2002 (Lares facility, last in-house plant)', era: ['e5'], next: 'serial' },
+        { label: '"Handcrafted in China"', sub: '2000s onward — post-vintage for this archive', era: ['post-vintage'], next: 'serial' },
+        { label: 'No country marking visible', sub: 'Pre-late-1970s common; era-context dependent', flags: 0, next: 'serial' },
+      ],
+    },
+
+    'serial': {
+      n: 4, of: 7,
+      title: 'What is the serial format?',
+      hint: 'Below the brand and country wording on the creed.',
+      options: [
+        { label: 'All digits: "xxx-xxxx" or "xxxx-xxx"', sub: 'Pre-1994. Should pair with LEATHERWARE wording and US origin.', era: ['e3', 'e4'], next: 'hardware' },
+        { label: 'Letter-digit-letter, e.g. "B6D-9927"', sub: '1994 onward. Single-digit-year ambiguity (1996 vs 2006) — never publish a year from the code alone.', era: ['e5'], next: 'hardware' },
+        { label: 'Two-digit year, e.g. "B16D-9927"', sub: '2004 onward — post-vintage for this archive.', era: ['post-vintage'], next: 'hardware' },
+        { label: 'No serial', sub: 'Era-context dependent. Pre-1980 bags and small accessories shipped without serials. Absence is not by itself a fake tell.', flags: 0, next: 'hardware' },
+      ],
+    },
+
+    'hardware': {
+      n: 5, of: 7,
+      title: 'Hardware — magnet test',
+      hint: 'Hold a refrigerator magnet to the turnlock face, the dogleash clip, and any visible D-rings.',
+      options: [
+        { label: 'Magnet does not stick to any of the brass-looking hardware', sub: 'Solid brass — era-correct for pre-2000 vintage Coach', flags: 0, next: 'construction' },
+        { label: 'Magnet sticks', sub: 'Plated steel — likely fake or post-vintage replacement hardware', flags: 2, next: 'construction' },
+        { label: 'Mixed — some pieces stick, some don\'t', sub: 'Possible replacement component (Coach Repair) or partial fake. One red flag for now.', flags: 1, next: 'construction' },
+        { label: 'Hardware looks lighter or shows silver-grey under wear', sub: 'Plated, not solid brass. Strong fake tell.', flags: 2, next: 'construction' },
+        { label: 'Hardware is nickel/silver-finished by design', sub: 'Krakoff-era 1998+ Coach Neo, music-named Classics, and Krakoff-era sub-collections shipped with nickel hardware. Era-correct for E5.', era: ['e5'], next: 'construction' },
+      ],
+    },
+
+    'construction': {
+      n: 6, of: 7,
+      title: 'Construction',
+      hint: 'Edge treatment, smell, lining material — multiple checks combined.',
+      options: [
+        { label: 'Raw or burnished edges; leather-and-neatsfoot smell; era-correct lining', sub: 'Era-consistent with vintage Coach construction', flags: 0, next: 'verdict' },
+        { label: 'Glossy painted edges on a bag claiming pre-1995 manufacture', sub: 'Strong fake tell — vintage Coach edges are raw or burnished', flags: 2, next: 'verdict' },
+        { label: 'Acetone, plastic, or chemical-solvent smell', sub: 'Fake signal — glove-tanned leather has a distinct neatsfoot odor', flags: 2, next: 'verdict' },
+        { label: 'Heat-cut polyester pockets on a pre-1995 bag', sub: 'Fake tell — early Coach NYC-era bags use raw-suede or unlined interiors', flags: 1, next: 'verdict' },
+        { label: 'Zipper maker mismatched to creed era (e.g., YKK on a 1960s creed, Talon on an E5 offshore creed)', sub: 'Possible replacement zipper or fake. One flag in isolation; more if other dimensions disagree.', flags: 1, next: 'verdict' },
+        { label: "Construction looks correct — I can't see a red flag here", sub: 'No flag added. Combined with era-consistency, points to authentic.', flags: 0, next: 'verdict' },
+      ],
+    },
+  };
+
+  /* ---------- state ---------- */
+  const wiz = document.getElementById('wizard');
+  const state = {
+    history: [], // [{stepId, optionIndex, label, era, flags}]
+    current: 'creed',
+  };
+
+  /* ---------- era-consistency check ---------- */
+  function isInconsistent() {
+    const eras = state.history
+      .flatMap(h => h.era || [])
+      .filter(e => !['line-specific', 'post-vintage'].includes(e));
+    if (eras.length < 2) return false;
+
+    // Allow E3 + E4 to coexist. Anything else mixed is inconsistent.
+    const hasPre = eras.some(e => ['e2a', 'e2b', 'e3', 'e4'].includes(e));
+    const hasPost = eras.some(e => e === 'e5');
+    return hasPre && hasPost;
+  }
+
+  function totalFlags() {
+    return state.history.reduce((sum, h) => sum + (h.flags || 0), 0);
+  }
+
+  /* ---------- rendering ---------- */
+  function render() {
+    if (state.current.startsWith('verdict')) {
+      renderVerdict();
+      return;
+    }
+    const step = STEPS[state.current];
+    if (!step) return;
+
+    wiz.innerHTML = '';
+
+    // progress
+    const prog = document.createElement('div');
+    prog.className = 'wiz-progress';
+    prog.innerHTML = `
+      <span>Step ${step.n} of ${step.of}</span>
+      <span class="pip"><span style="width:${(step.n / step.of) * 100}%"></span></span>
+    `;
+    wiz.appendChild(prog);
+
+    // step body
+    const body = document.createElement('div');
+    body.className = 'wiz-step';
+    const h = document.createElement('h2');
+    h.textContent = step.title;
+    const hint = document.createElement('p');
+    hint.className = 'step-hint';
+    hint.textContent = step.hint;
+    const ul = document.createElement('ul');
+    ul.className = 'wiz-options';
+    step.options.forEach((opt, i) => {
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.innerHTML = `<strong>${opt.label}</strong>${opt.sub ? `<span class="sub">${opt.sub}</span>` : ''}`;
+      btn.addEventListener('click', () => choose(i));
+      li.appendChild(btn);
+      ul.appendChild(li);
+    });
+    body.appendChild(h);
+    body.appendChild(hint);
+    body.appendChild(ul);
+    wiz.appendChild(body);
+
+    renderControls();
+    renderTrail();
+  }
+
+  function renderControls() {
+    const ctl = document.createElement('div');
+    ctl.className = 'wiz-controls';
+    const back = document.createElement('button');
+    back.type = 'button';
+    back.textContent = '← Back';
+    back.disabled = state.history.length === 0;
+    back.addEventListener('click', goBack);
+    const restart = document.createElement('button');
+    restart.type = 'button';
+    restart.textContent = 'Start over';
+    restart.addEventListener('click', restartWizard);
+    ctl.appendChild(back);
+    ctl.appendChild(restart);
+    wiz.appendChild(ctl);
+  }
+
+  function renderTrail() {
+    if (state.history.length === 0) return;
+    const trail = document.createElement('div');
+    trail.className = 'wiz-trail';
+    const heading = document.createElement('p');
+    heading.style.margin = '0 0 0.4rem';
+    heading.style.fontWeight = '500';
+    heading.textContent = 'Your answers so far:';
+    trail.appendChild(heading);
+    const ol = document.createElement('ol');
+    state.history.forEach((h, i) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="step-num">Step ${i + 1}</span><span>${h.label}</span>`;
+      ol.appendChild(li);
+    });
+    trail.appendChild(ol);
+    wiz.appendChild(trail);
+  }
+
+  function choose(i) {
+    const step = STEPS[state.current];
+    const opt = step.options[i];
+    state.history.push({
+      stepId: state.current,
+      optionIndex: i,
+      label: opt.label,
+      era: opt.era || [],
+      flags: opt.flags ?? 0,
+    });
+    state.current = opt.next;
+    render();
+    // smooth scroll to top of wizard for mobile
+    wiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function goBack() {
+    if (state.history.length === 0) return;
+    const last = state.history.pop();
+    state.current = last.stepId;
+    render();
+  }
+
+  function restartWizard() {
+    state.history = [];
+    state.current = 'creed';
+    render();
+  }
+
+  /* ---------- verdict ---------- */
+  function renderVerdict() {
+    wiz.innerHTML = '';
+
+    const flags = totalFlags();
+    const inconsistent = isInconsistent();
+    const noCreed = state.current === 'verdict-no-creed';
+
+    let verdict, verdictLabel, summary, body;
+
+    if (noCreed) {
+      verdict = 'no-creed';
+      verdictLabel = 'No-creed era flow';
+      summary = 'Bags without a creed are typically Cashin-era (1962–early 1970s). The creed-based steps below do not apply — authentication relies on hardware, leather, and construction tells.';
+      body = [
+        'Begin with the magnet test on hardware (Step 5 in the printable tree).',
+        'Examine leather edges (raw or burnished only — never painted glossy on a Cashin-era bag).',
+        'Look for hand-stitched seams, brass turnlocks (post-1964 only), and cowhide-and-neatsfoot smell.',
+        'When in doubt, post the canonical photo set to PurseForum\'s "Authenticate This COACH" thread.',
+      ];
+    } else if (inconsistent) {
+      verdict = 'red-flags';
+      verdictLabel = 'Era inconsistency detected';
+      summary = 'Your answers describe combinations that should not coexist on an authentic vintage Coach bag (for example: pre-1994 LEATHERWARE wording with offshore country marking, or 1970s "New York City" stamp with a 1994+ letter-digit-letter serial).';
+      body = [
+        'Most likely a fake or replacement creed. See country-of-origin §"Era-inconsistency = fake."',
+        'Less likely but possible: legitimate Coach Repair work (Jacksonville FL from July 1999 onward) replaced creeds during restoration. The replacement explanation only covers one mismatch — not multiple.',
+        'Treat the bag as suspect until you can resolve the era contradiction. Photograph everything and post to a community thread.',
+      ];
+    } else if (flags >= 2) {
+      verdict = 'red-flags';
+      verdictLabel = '2+ red flags';
+      summary = 'Two or more red flags in independent dimensions. This is a fake or Frankenbag pattern.';
+      body = [
+        'Do not buy without significant additional verification.',
+        'A single red flag in isolation can be a replacement component (Coach Repair). Two flags in independent dimensions cannot.',
+        'Photograph the bag fully and post to PurseForum\'s "Authenticate This COACH" thread for a second opinion.',
+      ];
+    } else if (flags === 1) {
+      verdict = 'caveats';
+      verdictLabel = 'One red flag — possibly a replacement component';
+      summary = 'A single red flag in one dimension is consistent with a replacement component (Coach Repair work) on an otherwise authentic bag — not by itself a fake tell.';
+      body = [
+        'Re-check the dimensions you didn\'t flag. Era-consistent results across creed, country, serial, hardware, and construction are needed before calling the bag authentic.',
+        'If a second flag appears on a closer look, the replacement explanation no longer covers it.',
+        'Coach Repair (Jacksonville FL from July 1999) replaced creeds, hardware, hangtags, and zippers during legitimate restoration through the program\'s lifetime.',
+      ];
+    } else {
+      verdict = 'likely-authentic';
+      verdictLabel = 'Likely authentic';
+      summary = 'No red flags surfaced and your answers are era-consistent across creed, country, serial, hardware, and construction. This is the strongest pattern an authentication walkthrough can produce.';
+      body = [
+        'No single check is sufficient on its own; the strength of this verdict comes from the era-consistency across multiple independent dimensions.',
+        'Cross-check the bag\'s style number against the model entry for additional dating signals (palette, dimensions, era-specific features).',
+        'For high-value purchases, a community second opinion is still worthwhile — see the PurseForum link below.',
+      ];
+    }
+
+    const v = document.createElement('div');
+    v.className = 'wiz-verdict';
+    v.innerHTML = `
+      <span class="verdict-tag" data-verdict="${verdict}">${verdictLabel}</span>
+      <p>${summary}</p>
+      <h3>What this means</h3>
+      <ul>${body.map(b => `<li>${b}</li>`).join('')}</ul>
+      <h3>Read next</h3>
+      <ul class="next-reads">
+        ${nextReads(verdict, noCreed).map(r => `
+          <li><a href="${r.url}"><strong>${r.title}</strong><span class="sub">${r.sub}</span></a></li>
+        `).join('')}
+      </ul>
+    `;
+    wiz.appendChild(v);
+
+    renderControls();
+    renderTrail();
+  }
+
+  function nextReads(verdict, noCreed) {
+    const reads = [
+      { url: `${wizardBase}authentication/decision-tree/`, title: 'Decision tree', sub: 'Printable one-page reference covering the same flow' },
+    ];
+    if (noCreed) {
+      reads.push({ url: `${wizardBase}authentication/pre-creed-era/`, title: 'Pre-creed era', sub: 'How to authenticate Cashin-era bags without a creed' });
+      reads.push({ url: `${wizardBase}authentication/hardware/`, title: 'Hardware', sub: 'Brass turnlock construction, the magnet test, dogleash clip' });
+      reads.push({ url: `${wizardBase}authentication/leather/`, title: 'Leather', sub: 'Glove-tanned cowhide, edge treatment, smell' });
+    } else if (verdict === 'red-flags') {
+      reads.push({ url: `${wizardBase}authentication/country-of-origin/`, title: 'Country of origin', sub: 'Era-inconsistency = fake; per-country progression' });
+      reads.push({ url: `${wizardBase}authentication/creed-formats/`, title: 'Creed formats', sub: 'Era-by-era breakdown of the leather creed wording' });
+      reads.push({ url: `${wizardBase}authentication/counterfeits/`, title: 'Counterfeit catalog', sub: 'Documented fake families' });
+    } else {
+      reads.push({ url: `${wizardBase}authentication/creed-formats/`, title: 'Creed formats', sub: 'Pin the bag\'s era window from the creed wording' });
+      reads.push({ url: `${wizardBase}authentication/serial-numbers/`, title: 'Serial numbers', sub: 'Decode the serial; single-digit-year ambiguity caveat' });
+      reads.push({ url: `${wizardBase}authentication/hardware/`, title: 'Hardware', sub: 'The magnet test, brass patina, turnlock construction' });
+    }
+    return reads;
+  }
+
+  render();
+</script>

@@ -8,21 +8,28 @@ const base = import.meta.env.BASE_URL;
 
 <BaseLayout title="Designers and people">
   <h1>Designers and people</h1>
-  <p>
+  <p class="lede">
     People who shaped vintage Coach: Bonnie Cashin (1962–1974,
     contracted designer); the Cahn family (owners 1961–1985);
     Reed Krakoff (creative director 1996–2014, transition era).
   </p>
-  <ul>
-    {entries.map((entry) => (
-      <li>
-        <a href={`${base}designers/${entry.id}/`}>
-          {entry.data.name ?? entry.id}
-        </a>
-        {entry.data.tenure_start && entry.data.tenure_end && (
-          <em> ({entry.data.tenure_start}–{entry.data.tenure_end})</em>
-        )}
-      </li>
-    ))}
+  <ul class="card-grid">
+    {entries.map((entry) => {
+      const tenure = entry.data.tenure_start && entry.data.tenure_end
+        ? `${entry.data.tenure_start}–${entry.data.tenure_end}`
+        : null;
+      return (
+        <li>
+          <a href={`${base}designers/${entry.id}/`}>
+            <strong>{entry.data.name ?? entry.id}</strong>
+            {tenure && <span class="card-meta">{tenure}</span>}
+          </a>
+        </li>
+      );
+    })}
   </ul>
 </BaseLayout>
+
+<style>
+  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1.5rem; max-width: 60ch; }
+</style>
