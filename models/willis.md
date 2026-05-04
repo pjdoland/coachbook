@@ -224,7 +224,7 @@ What to check on a Willis specifically:
 See `authentication/` (forthcoming) for the era-keyed matrix used to
 ground these checks.
 
-## Modern re-issue
+## Re-releases vs. originals
 
 Yourgreatfinds (D1) notes that Willis has appeared in Coach's recent
 "Coach Originals" / Archive re-release line. Coach.com's vintage
