@@ -24,7 +24,7 @@ const base = import.meta.env.BASE_URL;
     </div>
   </noscript>
 
-  <div id="wizard" data-base={base} hidden></div>
+  <div id="wizard" data-base={base} hidden role="region" aria-live="polite" aria-atomic="false"></div>
 
   <p class="footnote">
     Based on
@@ -474,6 +474,13 @@ const base = import.meta.env.BASE_URL;
     body.className = 'wiz-step';
     const h = document.createElement('h2');
     h.textContent = step.title;
+    /* tabindex=-1 so we can move focus to the new heading on each
+     * step change. AT users will hear the new question announced
+     * naturally; sighted keyboard users see the focus jump up to the
+     * top of the step instead of staying on the no-longer-visible
+     * previous button. WCAG SC 2.4.3 + 4.1.3. */
+    h.setAttribute('tabindex', '-1');
+    h.id = `wiz-step-${state.current}`;
     const hint = document.createElement('p');
     hint.className = 'step-hint';
     hint.textContent = step.hint;
@@ -495,6 +502,11 @@ const base = import.meta.env.BASE_URL;
 
     renderControls();
     renderTrail();
+
+    /* Move focus to the new heading after the DOM is in place so AT
+     * announces the step change instead of staying on the now-detached
+     * previous button. */
+    if (state.history.length > 0) h.focus();
   }
 
   function renderControls() {
