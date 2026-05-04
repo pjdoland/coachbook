@@ -42,19 +42,18 @@ const sourceId = z
 
 const status = z.enum(['draft', 'published', 'stub']);
 
+// Per STYLE.md §3, every entry's `confidence:` is one of seven values:
+// the four claim tags (confirmed, likely, tentative, disputed), the
+// rollup tag (mixed) for aggregate pages whose children carry their
+// own claim tags, and two meta tags (log, framework) for pages that
+// don't bear claims of their own — change-logs, bibliographies, and
+// structural index pages.
 const confidence = z.enum([
   'confirmed',
   'likely',
   'tentative',
   'disputed',
-  // `mixed` shows up on aggregate entries (e.g. timeline) where individual
-  // claims carry their own tags. STYLE.md §3 only enumerates the four core
-  // values, but the timeline entry uses `mixed` as a rollup; allow it here
-  // and tighten later if we want to drop it.
   'mixed',
-  // Meta-pages that don't bear claims of their own. `log` is for change-
-  // logs and bibliographies; `framework` is for structural index pages
-  // where individual children carry their own confidence tags.
   'log',
   'framework',
 ]);

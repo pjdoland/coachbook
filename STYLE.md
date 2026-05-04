@@ -80,8 +80,15 @@ Every fact gets a confidence tag. Apply them in frontmatter `facts:`
 blocks and inline in prose where helpful.
 
 ```yaml
-confidence: confirmed | likely | tentative | disputed | mixed
+confidence: confirmed | likely | tentative | disputed | mixed | log | framework
 ```
+
+The first four are *claim* tags — the kind any fact in the archive
+can carry. The last three are *meta* tags reserved for entries that
+don't bear claims of their own (rollups, change-logs, structural
+index pages); they exist so the schema can validate every entry's
+confidence field without lying about pages where a single rollup tag
+would misrepresent the contents.
 
 | Tag | Definition | Example |
 |-----|------------|---------|
@@ -89,7 +96,9 @@ confidence: confirmed | likely | tentative | disputed | mixed
 | `likely` | 1 Tier-1, or multiple Tier-2 sources that agree. | "1996: Reed Krakoff hired as creative director" — widely cited but not yet found in primary source. |
 | `tentative` | 1 Tier-2 source, or multiple Tier-3 community sources only. Renders with a "tentative" badge on the site. | "Pre-1994 serial format `xxxx-xxx`" — repeated across Tier 3 collector sources without primary citation. |
 | `disputed` | Sources disagree. The entry shows both positions and cites each. Renders with a "disputed" badge linked to a notes section. | "`B6D-9927` resolves to either Feb 1996 or Feb 2006 under the single-digit-year scheme" — see `research/E-authentication.md` §2. |
-| `mixed` | Aggregate / rollup pages only (e.g., `history/timeline.md`) where individual claims carry their own per-event confidence tags and a single rollup tag would misrepresent the entry. Use sparingly; prefer per-claim tags wherever possible. | `history/timeline.md` — every event in the timeline has its own `confidence:` line; the page's frontmatter rollup is `mixed`. |
+| `mixed` | Aggregate / rollup pages where individual claims carry their own per-event confidence tags and a single rollup tag would misrepresent the entry. Use sparingly; prefer per-claim tags wherever possible. | `history/timeline.md` — every event in the timeline has its own `confidence:` line; the page's frontmatter rollup is `mixed`. |
+| `log` | Change-log entries: errata, bibliographies, and other meta-pages whose individual rows are dated records, not claims about Coach. | `errata.md`, `bibliography.md`. |
+| `framework` | Structural index pages where the children carry their own confidence tags and the parent is purely a navigation node. | `authentication/counterfeits/index.md` — each counterfeit family beneath it has its own confidence tag. |
 
 ### Independence
 
@@ -172,9 +181,9 @@ must require.
 name: <human-readable name>     # or
 title: <document title>
 slug: <kebab-case slug, matches filename>
-status: draft | published
-confidence: confirmed | likely | tentative | disputed | mixed   # rollup
-sources: [source-id-1, source-id-2, ...]                        # every cited ID
+status: draft | published | stub
+confidence: confirmed | likely | tentative | disputed | mixed | log | framework
+sources: [source-id-1, source-id-2, ...]                        # every cited ID; each must resolve in sources/registry.md
 ```
 
 `name` vs `title` (canonical):
