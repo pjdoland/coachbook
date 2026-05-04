@@ -19,20 +19,14 @@ general convention, not Coach-specific.
 
 ## Coach Repair / Factory Restoration program
 
-- **July 1999** — Coach consolidated worldwide warehousing,
-  distribution, and **repair** functions into a 560,000 sq ft facility
-  in Jacksonville, Florida [coach-10k-fiscal-2003]. This is the primary
-  anchor for the program's location after July 1999.
-- Pre-1999 repair locations are not in the 2003 10-K. Open research
-  item.
-- **Replacement-component caveat**: Coach Repair installed replacement
-  turnlocks, dogleash clips, beanbag hangtags, and creed patches during
-  legitimate restoration. A bag with a "wrong era" component may be
-  authentic with a Coach Repair replacement, not a fake or a
-  Frankenbag. See `authentication/` for the era-keyed matrix; treat
-  single-component anomalies as a prompt for further checks, not as a
-  verdict.
-- **Program end date** — not in the research files; needs research.
+The canonical page for the repair program — what Coach Repair
+replaced, how the replacement-component caveat applies to
+authentication, and what's still open research — is at
+[`authentication/coach-repair/`](../authentication/coach-repair/).
+The short version: Coach Repair routinely shipped vintage bags back
+to customers with later-era replacement components. **A bag with one
+wrong-era component is not automatically a fake** — it may be
+authentic and serviced.
 
 ## Leather conditioning
 

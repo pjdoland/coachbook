@@ -171,24 +171,13 @@ For authentication purposes:
 
 ## Replacement-component caveat
 
-Coach's repair operation — consolidated in **Jacksonville, Florida from
-July 1999** [coach-10k-fiscal-2003] — installed replacement turnlocks,
-dogleash clips, and other hardware during legitimate restoration work
-through the Coach Repair / Factory Restoration program.
-
-A bag with a "wrong era" hardware component is therefore **not
-automatically a fake**. It may be:
-
-1. A counterfeit (the most common case for a bag with multiple wrong
-   tells stacked together).
-2. An authentic bag that went through Coach Repair and received a
-   later-era replacement part — still authentic, just no longer all
-   original.
-3. A "Frankenbag" assembled from real parts plus replacements outside
-   the Coach Repair channel.
-
-Reading hardware in isolation without checking the creed, lining,
-construction, and provenance will misclassify case (2) as case (1).
+Coach's repair program installed replacement turnlocks, dogleash
+clips, and other hardware during legitimate restoration. A "wrong era"
+hardware component on an otherwise consistent bag is **not
+automatically a fake** — see
+[Coach Repair and Factory Restoration](../coach-repair/) for the
+canonical caveat and the three readings (counterfeit / repaired /
+Frankenbag) to weigh before declaring on hardware evidence alone.
 
 ## Open verification items
 

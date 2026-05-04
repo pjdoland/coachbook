@@ -57,14 +57,12 @@ been corroborated against dated catalogs. `Tentative`.
 
 ## Replacement caveat
 
-Coach Repair shipped restored bags with new beanbag hangtags as a matter
-of routine. Coach consolidated its repair operations at a Jacksonville,
-Florida facility in July 1999 [coach-10k-fiscal-2003], and restored bags
-returning to customers from that facility (and its predecessors)
-frequently carried newer hangtags than the bag itself. **A vintage bag
-with a newer-style hangtag is not necessarily inauthentic.** Cross-check
-the creed, hardware, and construction before drawing conclusions from
-the hangtag alone.
+Coach Repair shipped restored bags with new beanbag hangtags as a
+matter of routine — see
+[Coach Repair and Factory Restoration](../coach-repair/) for the
+canonical caveat. **A vintage bag with a newer-style hangtag is not
+necessarily inauthentic.** Cross-check creed, hardware, and
+construction before drawing conclusions from the hangtag alone.
 
 ## The bag-without-tag question
 

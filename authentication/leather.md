@@ -46,10 +46,11 @@ Authentic vintage Coach edges are typically **raw or burnished**, not painted
 [coachbagrehab-dating, vintagecoachbags-authenticity]. A glossy painted edge
 on a bag presented as 1980s Coach is a strong fake or reproduction signal.
 
-Caveat: Coach Repair refinished edges as part of restoration through the
-program's lifetime, so a refinished edge on an otherwise-authentic bag is
-not by itself disqualifying. Combine the edge signal with creed wording,
-hardware, and lining before declaring a fake.
+Caveat: Coach Repair refinished edges as part of restoration —
+see [Coach Repair and Factory Restoration](../coach-repair/). A
+refinished edge on an otherwise-authentic bag is not disqualifying.
+Combine the edge signal with creed wording, hardware, and lining
+before declaring a fake.
 
 ## Weight and thickness
 

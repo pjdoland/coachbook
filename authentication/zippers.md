@@ -63,15 +63,11 @@ caveat below.
 
 ## Replacement-zipper caveat
 
-Coach Repair (consolidated at the Jacksonville, Florida facility from July
-1999 [coach-10k-fiscal-2003]) replaced zippers as part of legitimate
-restoration work. A wrong-era zipper on an otherwise consistent bag may
-indicate a service swap rather than a counterfeit. This is the same
-caveat that applies to turnlocks, dogleash clips, and beanbag hangtags —
-Coach Repair routinely swapped these during the program's run.
-
-Combine with other signals before rejecting a bag on zipper evidence
-alone:
+Coach Repair replaced zippers as part of legitimate restoration —
+see [Coach Repair and Factory Restoration](../coach-repair/) for the
+canonical caveat. A wrong-era zipper on an otherwise consistent bag
+may indicate a service swap, not a counterfeit. Combine with other
+signals before rejecting a bag on zipper evidence alone:
 - creed wording and serial format
 - hardware stamping and brass response to a magnet
 - lining, edge treatment, and stitching
