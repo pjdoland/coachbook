@@ -90,13 +90,12 @@ sources:
 
 # Willis
 
-The Willis is the flagship flap-front shoulder bag of Coach's Classic NYC
-era — small enough to read as a personal bag, structured enough to hold its
-shape for decades. Style **9927** is one of the most consistently
-documented numbers in the vintage Coach canon, and Willis examples turn
-up across every NYC-era color and every post-1974 hardware generation.
-Yourgreatfinds calls it "one of Coach's most popular and classic styles"
-(D1).
+Willis is the small flap-front shoulder bag that came to define Coach's
+Classic NYC silhouette — rectangular, structured, glove-tanned, made to
+hold its shape for decades. Style **9927** is one of the most
+consistently documented numbers in the vintage Coach canon; Willis
+examples turn up across every NYC-era color and every post-1974
+hardware generation.
 
 ## Description
 
