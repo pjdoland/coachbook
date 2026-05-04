@@ -14,8 +14,14 @@ const base = import.meta.env.BASE_URL;
 <BaseLayout title="Authentication">
   <h1>Authentication</h1>
   <p class="lede">
-    No single check proves a bag authentic or fake. This is a
-    topic-by-topic reference; combine multiple checks for any verdict.
+    No single check proves a bag authentic or fake. Combine multiple
+    checks for any verdict.
+  </p>
+
+  <p class="paths">
+    <strong>If you have a bag in hand</strong>, start the wizard.
+    <strong>For a printable reference</strong>, use the decision tree.
+    <strong>To browse by topic</strong>, see the index below.
   </p>
 
   <p class="cta-row">
@@ -23,7 +29,7 @@ const base = import.meta.env.BASE_URL;
     <a class="cta" href={`${base}authentication/decision-tree/`}>Printable decision tree</a>
   </p>
 
-  <h2>All topics</h2>
+  <h2>Browse topics</h2>
   <ul class="card-grid">
     {sorted.map((entry) => (
       <li>
@@ -41,7 +47,15 @@ const base = import.meta.env.BASE_URL;
 </BaseLayout>
 
 <style>
-  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1.5rem; max-width: 60ch; }
+  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 0.75rem; max-width: 60ch; }
+  .paths {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin: 0 0 1.5rem;
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+  .paths strong { color: var(--ink); font-weight: 600; }
   .card-grid .chip { margin-top: 0.4rem; }
   .cta-row {
     display: flex;
