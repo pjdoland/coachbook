@@ -20,18 +20,23 @@ const ERAS = [
   { code: 'E5', label: 'Krakoff transition', range: '1995–2002' },
 ];
 
-// Normalize the per-entry era field (which can be 'E2', 'cashin',
-// 'classic-nyc', etc.) into a code so the data-attribute is uniform.
-function normalizeEra(raw) {
+// Normalize the per-entry era field into a list of era codes. Many
+// bags genuinely span multiple eras (e.g. "cashin-through-classic-nyc",
+// "classic-nyc-late") and should match a filter for any window they
+// touch. Returns a space-joined string of E-codes for the data-era
+// attribute; the runtime filter splits and checks for membership.
+function normalizeEras(raw) {
   if (!raw) return '';
   const s = String(raw).toLowerCase();
-  if (/^e[1-5]/.test(s)) return s.slice(0, 2).toUpperCase();
-  if (s.includes('pre-cashin')) return 'E1';
-  if (s.includes('cashin')) return 'E2';
-  if (s.includes('classic-nyc') || s.includes('early-nyc')) return 'E3';
-  if (s.includes('late-nyc') || s.includes('transition') && !s.includes('krakoff')) return 'E4';
-  if (s.includes('krakoff')) return 'E5';
-  return '';
+  const out = new Set();
+  const codeMatches = s.match(/\be[1-5]\b/gi);
+  if (codeMatches) codeMatches.forEach((m) => out.add(m.toUpperCase()));
+  if (s.includes('pre-cashin') || s.includes('or-earlier')) out.add('E1');
+  if (s.includes('cashin')) out.add('E2');
+  if (s.includes('classic-nyc') || s.includes('early-nyc') || s.includes('post-cashin') || s.includes('1970')) out.add('E3');
+  if (s.includes('classic-nyc-late') || s.includes('late-nyc') || s.includes('1985') || s.includes('1989') || s.includes('lightweight')) out.add('E4');
+  if (s.includes('krakoff') || s.includes('transition') || s.includes('199') && /\b(199[5-9]|200[0-2])\b/.test(s)) out.add('E5');
+  return Array.from(out).join(' ');
 }
 ---
 
@@ -76,7 +81,7 @@ function normalizeEra(raw) {
         const label = entry.data.name ?? entry.data.title ?? entry.id;
         const styles = entry.data.style_numbers ?? [];
         const aliases = entry.data.also_known_as ?? [];
-        const eraCode = normalizeEra(entry.data.era);
+        const eraCodes = normalizeEras(entry.data.era);
         const meta = [
           styles.length > 0 ? styles.join(', ') : null,
           entry.data.era ?? null,
@@ -93,7 +98,7 @@ function normalizeEra(raw) {
             class="model-card"
             data-name={label.toLowerCase()}
             data-haystack={haystack}
-            data-era={eraCode}
+            data-era={eraCodes}
             data-confidence={entry.data.confidence ?? ''}
           >
             <a href={`${base}models/${entry.id}/`}>
@@ -131,7 +136,8 @@ function normalizeEra(raw) {
       const needle = activeQuery.trim().toLowerCase();
       let shown = 0;
       for (const card of cards) {
-        const matchesEra = !activeEra || card.dataset.era === activeEra;
+        const eras = (card.dataset.era || '').split(/\s+/).filter(Boolean);
+        const matchesEra = !activeEra || eras.includes(activeEra);
         const matchesQ = !needle || (card.dataset.haystack || '').includes(needle);
         const visible = matchesEra && matchesQ;
         card.hidden = !visible;

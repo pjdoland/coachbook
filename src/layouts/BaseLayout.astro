@@ -361,6 +361,10 @@ const base = import.meta.env.BASE_URL;
         margin-top: 0;
         display: flex;
       }
+      /* The HTML hidden attribute defaults to display: none, but the
+       * card-grid li display: flex above is more specific and wins.
+       * Re-assert hidden so client-side filters work. */
+      .card-grid li[hidden] { display: none; }
       .card-grid a {
         display: flex;
         flex-direction: column;
