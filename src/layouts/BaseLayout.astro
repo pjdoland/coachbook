@@ -135,7 +135,21 @@ const siteJsonLd = {
         max-width: 64ch;
         margin-inline: auto;
         padding: 1.25rem 1.25rem 4rem;
-        font-feature-settings: 'kern' 1, 'liga' 1;
+        font-feature-settings: 'kern' 1, 'liga' 1, 'clig' 1, 'onum' 1;
+        font-variant-numeric: oldstyle-nums;
+        font-variant-ligatures: common-ligatures contextual;
+      }
+      /* Tabular contexts override — anywhere we need digit columns to
+       * align (year ranges in dl, history h3 dates, card-meta style
+       * numbers, sticky era strip), the explicit tabular-nums rule
+       * already applied at those nodes wins. lining-nums is added
+       * here so figures sit on the baseline at heights consistent
+       * with the surrounding lining-figure typography. */
+      [data-tabular],
+      .card-meta,
+      .era-range,
+      .strip-range {
+        font-variant-numeric: tabular-nums lining-nums;
       }
 
       @media (min-width: 720px) {
@@ -318,17 +332,17 @@ const siteJsonLd = {
       dt {
         font-weight: 600;
         color: var(--ink-soft);
-        font-variant-numeric: tabular-nums;
+        font-variant-numeric: tabular-nums lining-nums;
       }
       dd {
         margin: 0;
-        font-variant-numeric: tabular-nums;
+        font-variant-numeric: tabular-nums lining-nums;
       }
       /* Year-heavy contexts get column-true digits for less jitter
        * across the 99-event timeline and the year-led card metas. */
       .card-meta,
       .history-body h3 {
-        font-variant-numeric: tabular-nums;
+        font-variant-numeric: tabular-nums lining-nums;
       }
 
       /* Lists — generous tap targets, no excessive bullet drift. */
@@ -464,7 +478,7 @@ const siteJsonLd = {
         margin-top: auto;
         font-size: 0.85rem;
         color: var(--ink-quiet);
-        font-variant-numeric: tabular-nums;
+        font-variant-numeric: tabular-nums lining-nums;
         padding-top: 0.25rem;
       }
 
