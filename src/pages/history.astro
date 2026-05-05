@@ -90,9 +90,9 @@ const eraGroups = ERAS.map((era) => ({
         {eraGroups.map((era) => (
           <li>
             <a href={era.events[0]?.slug ? `#${era.events[0].slug}` : '#top'} class="era-card">
-              <span class="era-code">{era.code}</span>
-              <strong>{era.label}</strong>
+              <strong class="era-label">{era.label}</strong>
               <span class="era-range">{era.range}</span>
+              <span class="era-code" aria-label={`Era code ${era.code}`}>{era.code}</span>
               <span class="era-count">
                 {era.events.length} {era.events.length === 1 ? 'event' : 'events'}
               </span>
@@ -245,14 +245,18 @@ const eraGroups = ERAS.map((era) => ({
     border-color: var(--brass);
     background: var(--paper-soft);
   }
+  /* DOM order leads with the era label (so screen readers hear the
+   * meaningful word before the era-code abbreviation). Visual order
+   * keeps the brass code on top — flex `order` does the swap. */
   .era-card .era-code {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     color: var(--brass-deep);
+    order: -1;
   }
-  .era-card strong {
+  .era-card .era-label {
     font-size: 1rem;
     line-height: 1.25;
     font-weight: 600;
