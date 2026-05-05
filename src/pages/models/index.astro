@@ -86,6 +86,23 @@ for (const entry of allModels) {
     when the only source is Tier 3.
   </p>
 
+  <p class="curatorial-intro">
+    A handful of silhouettes carry the Coach vocabulary: the
+    <a href={`${base}models/cashin-carry/`}>Cashin Carry</a> tote
+    (1962, the founding handbag), the
+    <a href={`${base}models/willis/`}>Willis</a> 9927 (the brand's
+    self-described best-seller in the 1996–97 Source Book), the
+    <a href={`${base}models/court/`}>Court Bag</a> 9870 and
+    <a href={`${base}models/companion-flap/`}>Companion Flap</a> 9076
+    (Late-NYC heritage flap silhouettes), the
+    <a href={`${base}models/daypack/`}>Daypack</a> 9960 (the late-1980s
+    backpack vocabulary), and the
+    <a href={`${base}models/bonnie-tote/`}>Bonnie Tote</a> (the
+    Cashin-era side-pocketed tote). The remaining {allModels.length - 6}+
+    entries fill out sub-collections, variants, and one-off silhouettes
+    around that spine.
+  </p>
+
   <div class="filters" role="region" aria-label="Filter models">
     <label class="filter-search">
       <span class="visually-hidden">Search models by name or style number</span>
@@ -243,7 +260,13 @@ for (const entry of allModels) {
 </script>
 
 <style>
-  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 1rem; max-width: 60ch; }
+  .lede { font-size: 1.05rem; color: var(--ink-soft); margin-bottom: 0.85rem; max-width: 60ch; }
+  .curatorial-intro {
+    color: var(--ink-soft);
+    max-width: 65ch;
+    margin: 0 0 1.25rem;
+    line-height: 1.55;
+  }
   .filters {
     margin: 1.25rem 0 1.75rem;
     display: flex;
