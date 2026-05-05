@@ -162,6 +162,20 @@ used different closures.
 - notes: New source added to registry under H stream. Primary anchor
   (USPTO design patent or 1964 press piece) still to be pulled.
 
+---
+
+**E2 → E3 — Cashin departs, Coach reorganizes around mail-order.**
+Bonnie Cashin's twelve-year contract ended in 1974
+[wwd-coach-early-years]. The post-Cashin years are the company's
+quietest in the archive — no in-house lead designer named in the
+primary record, no sub-collection branding visible in the 1981–1984
+catalogs, no toll-free line until later. What changed was the
+distribution model: Coach launched mail-order and opened the first
+specialty stores in this window [fundinguniverse-coach], setting up
+the brand-direct sales channel that would carry through Sara Lee.
+
+---
+
 ### Late 1970s / early 1980s — mail-order business launched; first specialty stores opened
 Date imprecise in source.
 - confidence: likely
@@ -284,6 +298,22 @@ within Cahn-era ownership, not a Sara-Lee-era action.
   Tabac).
 - confidence: confirmed
 - sources: [coach-catalogs-1960-1989]
+
+---
+
+**E3 → E4 — Cahns sell to Sara Lee, the brand voice survives the
+transition.** July 1985 is the corporate-ownership boundary, but the
+catalog evidence shows the editorial register continued unchanged
+into late 1985 and beyond. The "small family owned company" framing,
+the "no unnecessary ornamentation, no gadgets, no gimmicks" copy,
+the "brass through and through" voice — all preserved verbatim in
+the Winter 1985 catalog months after the acquisition
+[coach-catalogs-1960-1989]. Sara Lee's investment funded the next
+decade's sub-collection diversification (Lightweight 1989, Soho
+1991-rename-1994, Sheridan 1992, Madison era), but the heritage line
+kept its tonal register through 1994.
+
+---
 
 ### July 1985 — Cahns sell Coach to Sara Lee Corporation
 Specific to month per primary 10-K. Reported sale price ~$30 million. Sara
@@ -719,6 +749,23 @@ Products + CEO Sara Lee Accessories. Begins a 3.5-year period away
 from Coach's day-to-day leadership.
 - confidence: confirmed
 - sources: [coach-s1-2000]
+
+---
+
+**E4 → E5 — The wordmark drops, production goes offshore, identity
+shifts.** Two changes anchor the boundary into the Krakoff era. First,
+the **LEATHERWARE wordmark dropped** from new creeds in late 1994 —
+the moment the brand name printed inside every bag stopped naming
+the material. Second, US in-house manufacturing wound down across
+1995–1996 in favor of multi-country offshore production (Costa Rica,
+Hungary, Turkey, Mexico, China, India, Italy, Spain per the 2000 S-1
+[coach-s1-2000]). The Lares, Puerto Rico facility kept producing
+under the new wordmark until April 2002 [coach-10k-fiscal-2003] —
+the last in-house plant. The visual identity pivot from solid-leather
+heritage to logo monogramming arrives separately with the Signature C
+launch in November 2001.
+
+---
 
 ### November 1995 — Frankfort returns to Coach as Chairman and CEO
 Per primary S-1: Frankfort's specific Chairman/CEO start date is
