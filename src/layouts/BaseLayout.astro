@@ -391,9 +391,10 @@ const siteJsonLd = {
 
       header.site-header nav {
         margin-left: auto;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         display: flex;
-        gap: 1rem;
+        gap: 1.1rem;
+        flex-wrap: wrap;
       }
       header.site-header nav a {
         color: var(--ink-soft);
@@ -407,6 +408,101 @@ const siteJsonLd = {
       header.site-header nav a:focus-visible {
         color: var(--brass-deep);
         text-decoration-color: currentColor;
+      }
+
+      /* Hamburger toggle — visible only on narrow screens. The button
+       * sits to the right of the brand; tapping it slides the nav
+       * down as a full-width panel under the header. Above 720px the
+       * button is display:none and the nav stays inline. */
+      header.site-header .nav-toggle {
+        display: none;
+        margin-left: auto;
+        appearance: none;
+        background: transparent;
+        border: 1px solid var(--surface-line);
+        border-radius: 3px;
+        padding: 0.45rem 0.6rem;
+        cursor: pointer;
+        min-height: 44px;
+        min-width: 44px;
+        color: var(--ink);
+      }
+      header.site-header .nav-toggle:focus-visible {
+        outline: 2px solid var(--brass);
+        outline-offset: 2px;
+      }
+      header.site-header .nav-toggle:hover {
+        border-color: var(--brass);
+      }
+      header.site-header .hamburger {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 22px;
+        height: 14px;
+      }
+      header.site-header .hamburger span {
+        display: block;
+        height: 2px;
+        background: var(--ink);
+        border-radius: 1px;
+        transition: transform 160ms ease, opacity 160ms ease;
+      }
+      /* Open state morphs the three bars into an X so the affordance
+       * doubles as the close button. */
+      header.site-header.is-open .hamburger span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+      header.site-header.is-open .hamburger span:nth-child(2) {
+        opacity: 0;
+      }
+      header.site-header.is-open .hamburger span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        header.site-header .hamburger span {
+          transition: none;
+        }
+      }
+
+      @media (max-width: 719px) {
+        header.site-header {
+          flex-wrap: wrap;
+        }
+        header.site-header .nav-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        /* Nav becomes a slide-down panel: hidden by default,
+         * full-width when the header has .is-open. */
+        header.site-header nav {
+          display: none;
+          flex-basis: 100%;
+          margin: 0.85rem -1.25rem 0;
+          padding: 0.5rem 1.25rem 0.85rem;
+          border-top: 1px solid var(--surface-line);
+          flex-direction: column;
+          gap: 0;
+          font-size: 1rem;
+        }
+        header.site-header.is-open nav {
+          display: flex;
+        }
+        header.site-header nav a {
+          padding: 0.7rem 0;
+          border-bottom: 1px solid var(--surface-line);
+          min-height: 44px;
+          display: flex;
+          align-items: center;
+          /* Persistent underline on inline nav was a 720px+ rule; on
+           * the mobile panel each link is a row with a divider, so
+           * underline noise isn't needed. */
+          text-decoration: none;
+        }
+        header.site-header nav a:last-child {
+          border-bottom: none;
+        }
       }
 
       footer.site-footer {
@@ -571,12 +667,65 @@ const siteJsonLd = {
     <header class="site-header">
       <a class="brand" href={base}>coachbook</a>
       <span class="tagline">Vintage Coach reference, 1941–2002</span>
-      <nav aria-label="Primary">
+      <button
+        type="button"
+        class="nav-toggle"
+        aria-controls="primary-nav"
+        aria-expanded="false"
+        aria-label="Open navigation menu"
+      >
+        <span class="hamburger" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+      <nav id="primary-nav" aria-label="Primary">
         <a href={`${base}models/`}>Models</a>
         <a href={`${base}authentication/`}>Authenticate</a>
+        <a href={`${base}catalogs/`}>Catalogs</a>
+        <a href={`${base}designers/`}>Designers</a>
+        <a href={`${base}colors/`}>Colors</a>
         <a href={`${base}history/`}>History</a>
       </nav>
     </header>
+    <script>
+      // Hamburger nav: pure click-to-toggle. The CSS does the heavy
+      // lifting — on narrow screens the .nav-toggle button is the
+      // only thing visible; clicking it sets aria-expanded=true and
+      // adds .is-open to the header, which un-hides the nav as a
+      // panel beneath. Closes on link click and on Escape.
+      const header = document.querySelector('header.site-header');
+      const toggle = header?.querySelector('.nav-toggle');
+      const nav = header?.querySelector('#primary-nav');
+      if (header && toggle && nav) {
+        const close = () => {
+          header.classList.remove('is-open');
+          (toggle as HTMLButtonElement).setAttribute('aria-expanded', 'false');
+          (toggle as HTMLButtonElement).setAttribute('aria-label', 'Open navigation menu');
+        };
+        const open = () => {
+          header.classList.add('is-open');
+          (toggle as HTMLButtonElement).setAttribute('aria-expanded', 'true');
+          (toggle as HTMLButtonElement).setAttribute('aria-label', 'Close navigation menu');
+        };
+        toggle.addEventListener('click', () => {
+          if (header.classList.contains('is-open')) close();
+          else open();
+        });
+        // Close on link click so internal navigation lands on a clean
+        // page, not with the menu still open mid-screen.
+        nav.querySelectorAll('a').forEach((a) => {
+          a.addEventListener('click', close);
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && header.classList.contains('is-open')) {
+            close();
+            (toggle as HTMLButtonElement).focus();
+          }
+        });
+      }
+    </script>
     <main id="main">
       <slot />
     </main>
