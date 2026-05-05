@@ -15,8 +15,8 @@ discontinued_confidence: tentative  # needs 1998+ catalog deep-read to settle
 source_book_1996_price: 258
 source_book_1996_quote: "Willis Bag introduced the use of the dowel as a design motif"
 source_book_1996_status: "Coach's best-selling handbag"
-era: classic-nyc
-era_code: E3
+era: classic-nyc-late
+era_code: E4-E5
 designer: in-house
 designer_confidence: confirmed  # NOT Cashin — she left 1974, Willis is post-1974
 dimensions_in:
