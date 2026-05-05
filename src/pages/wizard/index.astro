@@ -106,6 +106,15 @@ const base = import.meta.env.BASE_URL;
     margin: 0 0 0.5rem;
     color: var(--ink);
   }
+  /* Programmatic focus (script moves focus to the heading on each
+   * step change so AT users hear the question). The browser would
+   * draw a default focus ring; suppress it because the heading
+   * isn't a user-actionable target — it just wants to be the
+   * announcement anchor. */
+  .wiz-step h2:focus,
+  .wiz-step h2:focus-visible {
+    outline: none;
+  }
   .wiz-step .step-hint {
     font-size: 0.95rem;
     color: var(--ink-soft);
@@ -141,9 +150,12 @@ const base = import.meta.env.BASE_URL;
     color: var(--ink);
     transition: border-color 120ms ease, background 120ms ease;
   }
+  /* Hover keeps the cursor's option visible but doesn't fill the
+   * background — that fill is reserved for focus-visible (intent),
+   * since on each step transition the cursor lands over a fresh
+   * button which would otherwise read as half-selected. */
   ul.wiz-options button:hover {
     border-color: var(--brass);
-    background: var(--paper-soft);
   }
   /* Stronger focus-visible — outline + box-shadow ring so keyboard
    * users get an unambiguous indicator separate from hover styling. */
