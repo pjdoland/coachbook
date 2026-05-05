@@ -9,17 +9,9 @@ interface Props {
    * WebSite + Organization JSON-LD is always emitted alongside.
    */
   jsonLd?: Record<string, unknown>;
-  /**
-   * Wide-layout opt-in. Default body measure is 64ch (a prose
-   * reading measure); pages dense with cards or tables — models
-   * index, history timeline, era matrix, catalogs, colors — pass
-   * wide={true} to expand to a desktop measure that gives those
-   * grids breathing room. Prose pages leave it false.
-   */
-  wide?: boolean;
 }
 
-const { title, description, jsonLd, wide = false } = Astro.props;
+const { title, description, jsonLd } = Astro.props;
 const siteName = 'coachbook';
 const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
 const base = import.meta.env.BASE_URL;
@@ -140,21 +132,12 @@ const siteJsonLd = {
         line-height: 1.6;
         color: var(--ink);
         background: var(--paper);
-        max-width: 64ch;
+        max-width: 64rem;
         margin-inline: auto;
         padding: 1.25rem 1.25rem 4rem;
         font-feature-settings: 'kern' 1, 'liga' 1, 'clig' 1, 'onum' 1;
         font-variant-numeric: oldstyle-nums;
         font-variant-ligatures: common-ligatures contextual;
-      }
-      /* Wide layout — pages dense with grids or tables (models index,
-       * history timeline, era matrix, catalogs, colors) opt in via
-       * wide={true} on BaseLayout. The desktop measure expands to
-       * 64rem (~1024px) on screens wide enough; mobile and narrow-
-       * desktop stay at 64ch so the prose-reading bound still applies
-       * where it matters. */
-      body.wide {
-        max-width: 64rem;
       }
       /* Tabular contexts override — anywhere we need digit columns to
        * align (year ranges in dl, history h3 dates, card-meta style
@@ -583,7 +566,7 @@ const siteJsonLd = {
       }
     </style>
   </head>
-  <body class:list={[wide && 'wide']}>
+  <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <a class="brand" href={base}>coachbook</a>
