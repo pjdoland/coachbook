@@ -76,6 +76,11 @@ const siteJsonLd = {
        * ------------------------------------------------------------------- */
 
       :root {
+        /* Tell user agents the page is intentionally light-themed. Browsers
+         * use this to pick the right form-control / scrollbar / autofill
+         * defaults; without it, dark-mode users see paper-toned page chrome
+         * mixed with dark form-control defaults. */
+        color-scheme: light;
         /* Paper + ink — warm bone-tinted neutrals close to a 1980s Coach
          * catalog's matte paper stock. */
         --paper: #f5efe4;
@@ -185,6 +190,14 @@ const siteJsonLd = {
       }
       a:hover, a:focus-visible {
         color: var(--brass-deep);
+      }
+
+      /* Text selection in the brass family rather than the default
+       * blue. Soft enough that a paragraph of selected source-cite
+       * links remains readable. */
+      ::selection {
+        background: var(--brass-soft);
+        color: var(--ink);
       }
 
       /* Source citation links: small, monospace, recessed but still
