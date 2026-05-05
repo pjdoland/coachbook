@@ -79,6 +79,7 @@ Schema for each entry:
 - url: https://unitproj.library.ucla.edu/cataloging/procedures/CashinMap.pdf
 - snapshot: TODO
 - type: finding-aid
+- rights: institutional
 - tier: 1
 - title: Cashin Collection box list (PDF)
 - accessed: 2026-05-01
@@ -87,6 +88,7 @@ Schema for each entry:
 - url: https://www.bonniecashinarchive.org
 - snapshot: TODO
 - type: archive-portal
+- rights: fair-use-commentary
 - tier: 1
 - title: Bonnie Cashin Archive
 - author/operator: Stephanie Lake (Cashin's biographer/archivist)
@@ -97,6 +99,7 @@ Schema for each entry:
 - url: https://nyplorg-data-archives.s3.amazonaws.com/uploads/collection/pdf_finding_aid/Guide_to_the_Bonnie_Cashin_Designs.pdf
 - snapshot: TODO
 - type: finding-aid
+- rights: institutional
 - tier: 1
 - title: Guide to the Bonnie Cashin Designs (NYPL)
 - accessed: 2026-05-01
@@ -105,6 +108,7 @@ Schema for each entry:
 - url: https://findingaids.archives.newschool.edu/repositories/3/resources/75
 - snapshot: TODO
 - type: finding-aid
+- rights: institutional
 - tier: 1
 - title: Bonnie Cashin, Philip Sills & Company publicity photographs
 - author/operator: The New School Archives & Special Collections
@@ -114,6 +118,7 @@ Schema for each entry:
 - url: https://asufidmmuseum.asu.edu/learn/articles/bonnie-cashin
 - snapshot: TODO
 - type: museum-article
+- rights: fair-use-commentary
 - tier: 1
 - title: Bonnie Cashin (ASU FIDM Museum)
 - accessed: 2026-05-01
@@ -122,6 +127,7 @@ Schema for each entry:
 - url: https://www.thehenryford.org/explore/blog/bonnie-cashin-innovative-and-influential
 - snapshot: TODO
 - type: museum-article
+- rights: fair-use-commentary
 - tier: 1
 - title: Bonnie Cashin: Innovative and Influential (The Henry Ford)
 - accessed: 2026-05-01
@@ -130,6 +136,7 @@ Schema for each entry:
 - url: https://licf.org/wp-content/uploads/2018/03/Cashinfund-1.pdf
 - snapshot: TODO
 - type: foundation-doc
+- rights: fair-use-commentary
 - tier: 1
 - title: Bonnie Cashin Fund (Long Island Community Foundation)
 - accessed: 2026-05-01
@@ -148,6 +155,7 @@ Schema for each entry:
 - url: https://www.coach.com/shop/new/featured/the-coach-originals
 - snapshot: TODO
 - type: brand-page
+- rights: brand
 - tier: 1
 - title: The Coach Originals (re-release line)
 - accessed: 2026-05-01
@@ -155,6 +163,7 @@ Schema for each entry:
 ### coach-vintage-soho
 - url: https://www.coach.com/products/vintage-soho-bag/CU909.html
 - type: brand-page
+- rights: brand
 - tier: 1
 - accessed: 2026-05-01
 - notes: Brand-published "first introduced 1994" date for Soho.
@@ -162,6 +171,7 @@ Schema for each entry:
 ### coach-vintage-sheridan-stewart
 - url: https://www.coach.com/products/vintage-sheridan-stewart-bag/CDE04.html
 - type: brand-page
+- rights: brand
 - tier: 1
 - accessed: 2026-05-01
 - notes: Brand-published "first introduced 1993" date for Sheridan Stewart.
@@ -169,6 +179,7 @@ Schema for each entry:
 ### coach-vintage-bleecker
 - url: https://www.coach.com/products/vintage-bleecker-satchel/CK664.html
 - type: brand-page
+- rights: brand
 - tier: 1
 - accessed: 2026-05-01
 - notes: Brand-published "first introduced 2000" date for Bleecker Satchel.
@@ -191,6 +202,7 @@ Schema for each entry:
 - local-screenshot: /Users/pjdoland/Repos/coachbook/sources/primary/uspto-tsdr/coach-leatherware-73345984.png
 - snapshot: TODO
 - type: trademark-record
+- rights: public-domain
 - tier: 1
 - title: COACH LEATHERWARE — Reg 1242098 (Serial 73345984)
 - accessed: 2026-05-02
@@ -202,6 +214,7 @@ Schema for each entry:
 - local-screenshot: /Users/pjdoland/Repos/coachbook/sources/primary/uspto-patents/turnlock-US3201162A.png
 - snapshot: TODO
 - type: patent
+- rights: public-domain
 - tier: 1
 - title: US3201162A — "Turn lock assembly"
 - inventor: Paynor Melvin
@@ -235,6 +248,7 @@ Schema for each entry:
 - url: https://www.artsy.net/artwork/bonnie-cashin-cashin-carry-for-coach
 - snapshot: TODO
 - type: museum-collection-record
+- rights: institutional
 - tier: 1
 - title: Bonnie Cashin, "Cashin Carry for Coach" (1962) — RISD Museum collection record (via Artsy)
 - accessed: 2026-05-02
@@ -247,6 +261,7 @@ Schema for each entry:
 - url: https://www.fundinguniverse.com/company-histories/coach-inc-history/
 - snapshot: TODO
 - type: company-history-reference
+- rights: fair-use-commentary
 - tier: 2
 - title: History of Coach, Inc.
 - author/operator: International Directory of Company Histories (republished by FundingUniverse)
@@ -256,24 +271,28 @@ Schema for each entry:
 ### encyclopedia-com-coach-inc
 - url: https://www.encyclopedia.com/economics/economics-magazines/coach-inc
 - type: encyclopedia
+- rights: fair-use-commentary
 - tier: 2
 - accessed: 2026-05-01
 
 ### encyclopedia-com-coach-leatherware
 - url: https://www.encyclopedia.com/books/politics-and-business-magazines/coach-leatherware
 - type: encyclopedia
+- rights: fair-use-commentary
 - tier: 2
 - accessed: 2026-05-01
 
 ### encyclopedia-com-cashin
 - url: https://www.encyclopedia.com/people/literature-and-arts/fashion-biographies/bonnie-cashin
 - type: encyclopedia
+- rights: fair-use-commentary
 - tier: 2
 - accessed: 2026-05-01
 
 ### wwd-coach-early-years
 - url: https://wwd.com/fashion-news/designer-luxury/coach-the-early-years-5220127/
 - type: trade-press-article
+- rights: fair-use-commentary
 - tier: 2
 - title: Coach: The Early Years
 - accessed: 2026-05-01
@@ -283,6 +302,7 @@ Schema for each entry:
 - url: https://wwd.com/accessories-news/leather-goods/lillian-cahn-cofounder-of-coach-dies-at-89-6838763/
 - snapshot: TODO
 - type: trade-press-obituary
+- rights: fair-use-commentary
 - tier: 2
 - title: "Lillian Cahn, Cofounder of Coach, Dies at 89" (WWD)
 - accessed: 2026-05-02
@@ -293,6 +313,7 @@ Schema for each entry:
 - url: https://www.maharam.com/stories/ping_bonnie-cashin
 - snapshot: TODO
 - type: design-essay
+- rights: fair-use-commentary
 - tier: 2
 - title: Bonnie Cashin (Maharam Story essay)
 - accessed: 2026-05-02
@@ -302,6 +323,7 @@ Schema for each entry:
 - url: https://vintagefashionguild.org/resources/item/label/cashin-bonnie/
 - snapshot: TODO
 - type: reference-site-label-entry
+- rights: fair-use-commentary
 - tier: 2
 - title: Cashin, Bonnie — Vintage Fashion Guild Label Resource
 - accessed: 2026-05-01
@@ -310,6 +332,7 @@ Schema for each entry:
 ### lake-cashin-2016
 - url: <Google Books snippet view via ISBN>
 - type: book
+- rights: fair-use-commentary
 - tier: 2
 - title: Bonnie Cashin: Chic Is Where You Find It
 - author/operator: Stephanie Lake (Rizzoli, 2016)
@@ -323,6 +346,7 @@ Schema for each entry:
 - url: https://www.coacharchive.com/
 - snapshot: TODO
 - type: dedicated-reference-site
+- rights: fair-use-commentary
 - tier: 3
 - title: Vintage Coach Library
 - accessed: 2026-05-01
@@ -331,6 +355,7 @@ Schema for each entry:
 ### vintagecoachdatabase
 - url: https://www.vintagecoachdatabase.com/
 - type: searchable-database
+- rights: fair-use-commentary
 - tier: 3
 - accessed: 2026-05-01
 
@@ -340,18 +365,21 @@ Schema for each entry:
   - https://www.vintagecoachie.com/style-guide
   - https://www.vintagecoachie.com/style-guide/coach-leatherware
 - type: collector-blog
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 
 ### vintagecoachbags-authenticity
 - url: http://vintagecoachbags.com/index.php/authenticity-guide/
 - type: dealer-authentication-guide
+- rights: fair-use-commentary
 - tier: 3
 - accessed: 2026-05-01
 
 ### coachbagrehab-dating
 - url: http://coachbagrehab.blogspot.com/2012/04/guide-to-dates-of-vintage-coach-bags.html
 - type: collector-blog
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 - notes: Most specific Tier 3 source on serial-number format change at 1994.
@@ -359,6 +387,7 @@ Schema for each entry:
 ### coachbagrehab-style-numbers
 - url: http://coachbagrehab.blogspot.com/2012/05/coach-style-numbers-and-photos.html
 - type: collector-blog
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 - notes: Page renders poorly via WebFetch; revisit in browser.
@@ -366,6 +395,7 @@ Schema for each entry:
 ### yourgreatfinds-collectors-guide
 - url: https://yourgreatfinds.net/blogs/news/collectors-guide-to-vintage-coach-bags
 - type: dealer-blog
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 - notes: Most exhaustive single free list of vintage Coach styles with style numbers (~80 models named).
@@ -373,42 +403,49 @@ Schema for each entry:
 ### essexfashionhouse-serials
 - url: https://essexfashionhouse.com/blogs/news/the-ultimate-guide-to-coach-serial-numbers
 - type: dealer-blog
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 
 ### lovetoknow-coach-serials
 - url: https://www.lovetoknow.com/life/style/coach-purse-serial-numbers
 - type: editorial-howto
+- rights: fair-use-commentary
 - tier: 3
 - accessed: 2026-05-01
 
 ### shopgoodwill-serials
 - url: https://blog.shopgoodwill.com/english/coach-purse-serial-number-guide
 - type: reseller-blog
+- rights: fair-use-commentary
 - tier: 3
 - accessed: 2026-05-01
 
 ### thriftyrunner-authenticating
 - url: https://thriftyrunner.blogspot.com/2016/01/authenticating-coach.html
 - type: collector-blog
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 
 ### valentinasvault-creed
 - url: http://valentinasvault.blogspot.com/2013/09/the-mystery-revealedthe-coach-creed.html
 - type: collector-blog
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 
 ### bagforum-creed-history
 - url: http://www.thebagforum.com/coach-bags/2816-authentic-vs-fake-history-coach-creed-serial-s.html
 - type: forum-thread
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 
 ### purseforum-vintage-coach
 - url: https://forum.purseblog.com/threads/vintage-coach.122565/
 - type: forum-thread
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 - notes: General vintage Coach megathread.
@@ -416,6 +453,7 @@ Schema for each entry:
 ### purseforum-authenticate-coach
 - url: https://forum.purseblog.com/threads/authenticate-this-coach-see-first-post-for-format.889527/
 - type: forum-thread
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 - notes: Active authentication thread; >500-post members authenticate.
@@ -423,6 +461,7 @@ Schema for each entry:
 ### purseforum-vintage-date-codes
 - url: https://forum.purseblog.com/threads/vintage-coach-date-codes.1048132/
 - type: forum-thread
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 - notes: Most-cited single thread on date code mechanics.
@@ -430,6 +469,7 @@ Schema for each entry:
 ### purseforum-vintage-catalogs
 - url: https://forum.purseblog.com/threads/vintage-coach-catalogs.1045341/
 - type: forum-thread
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 - notes: Member-uploaded catalog scans. Returns 403 to headless WebFetch; browser only.
@@ -437,12 +477,14 @@ Schema for each entry:
 ### purseforum-coach-rehab-rescue
 - url: https://forum.purseblog.com/threads/coach-rehab-and-rescue-club.833400/
 - type: forum-thread
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 
 ### purseforum-costa-rica
 - url: https://forum.purseblog.com/threads/what-years-were-coach-made-in-costa-rica.333490/
 - type: forum-thread
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 - notes: "P" factory letter = Costa Rica reference.
@@ -450,12 +492,14 @@ Schema for each entry:
 ### purseforum-made-in-usa
 - url: https://forum.purseblog.com/threads/did-coach-ever-make-bags-in-made-in-usa-or-was-it-always-china.281987/
 - type: forum-thread
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 
 ### pinterest-ilexberry-catalog-pages
 - url: https://www.pinterest.com/ilexberry/vintage-coach-catalogue-pages/
 - type: pinterest-board
+- rights: fair-use-commentary
 - tier: 3
 - accessed: 2026-05-01
 - notes: ~300 pinned catalog pages from various sources; verify per-pin origins.
@@ -463,6 +507,7 @@ Schema for each entry:
 ### pinterest-shershegoes-styles
 - url: https://www.pinterest.com/shershegoes/vintage-coach-bag-styles/
 - type: pinterest-board
+- rights: fair-use-commentary
 - tier: 3
 - accessed: 2026-05-01
 
@@ -473,18 +518,21 @@ Schema for each entry:
 ### wikipedia-cashin
 - url: https://en.wikipedia.org/wiki/Bonnie_Cashin
 - type: wiki
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 
 ### wikipedia-miles-cahn
 - url: https://en.wikipedia.org/wiki/Miles_Cahn
 - type: wiki
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 
 ### wikipedia-coach-ny
 - url: https://en.wikipedia.org/wiki/Coach_New_York
 - type: wiki
+- rights: community
 - tier: 3
 - accessed: 2026-05-01
 
@@ -495,12 +543,14 @@ Schema for each entry:
 ### ebay-vintage-coach
 - url: https://www.ebay.com/b/Coach-Vintage-Bags-Handbags-Cases/74962/bn_8223573
 - type: marketplace-category
+- rights: fair-use-commentary
 - tier: 4
 - accessed: 2026-05-01
 
 ### etsy-vintage-coach
 - url: https://www.etsy.com/market/vintage_coach_soho
 - type: marketplace-category
+- rights: fair-use-commentary
 - tier: 4
 - accessed: 2026-05-01
 
