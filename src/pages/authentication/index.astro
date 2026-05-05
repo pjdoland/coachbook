@@ -67,7 +67,13 @@ const counterfeits = (await getCollection('authentication')).filter((e) =>
     explanation, and that's when fakes show.
   </p>
 
-  <h2>Three ways into the work</h2>
+  <h2>Authenticate a bag</h2>
+  <p class="cta-row">
+    <a class="cta primary" href={`${base}wizard/`}>Start the wizard</a>
+    <span class="cta-sub">six questions, cross-checked across era windows</span>
+  </p>
+
+  <p class="paths-intro">Or pick the path that fits how you work:</p>
   <ul class="card-grid path-grid">
     <li>
       <a href={`${base}wizard/`}>
@@ -178,4 +184,35 @@ const counterfeits = (await getCollection('authentication')).filter((e) =>
   .group-blurb { color: var(--ink-soft); max-width: 62ch; margin: 0 0 1rem; }
   .card-grid .chip { margin-top: 0.4rem; }
   .path-grid { margin-bottom: 1rem; }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.85rem;
+    margin: 1.25rem 0 1.5rem;
+  }
+  .cta {
+    display: inline-block;
+    padding: 0.7rem 1.15rem;
+    border: 1px solid var(--surface-line);
+    border-radius: 3px;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--surface);
+    font-weight: 600;
+    min-height: 44px;
+    line-height: 1.6;
+  }
+  .cta.primary {
+    background: var(--bridle);
+    color: var(--paper);
+    border-color: var(--bridle);
+  }
+  .cta.primary:hover, .cta.primary:focus-visible {
+    background: var(--brass-deep);
+    border-color: var(--brass-deep);
+    color: var(--paper);
+  }
+  .cta-sub { color: var(--ink-soft); font-size: 0.95rem; }
+  .paths-intro { color: var(--ink-soft); margin: 1.5rem 0 0.75rem; }
 </style>
