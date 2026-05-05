@@ -27,11 +27,24 @@ sources:
 
 ## Lead
 
-This timeline tracks Coach from its 1941 founding as a six-person Manhattan
-leather workshop through its 2001 Signature-C launch — the vintage era this
-archive covers. Events are drawn from trade-press and reference sources;
-each is tagged with a confidence level, and unresolved questions are
-preserved in the disputes and open-pulls sections at the bottom.
+Coach from its 1941 founding through the 2001 Signature-C launch —
+sixty years bracketed by two specific changes. **In 1941, Gail
+Leather Products opens in Manhattan with six leatherworkers making
+men's wallets** [fundinguniverse-coach][wwd-coach-early-years];
+the archive's start date is the company's, not the brand name's
+(the "Coach" wordmark followed). **In November 2001, Coach launches
+the Signature C double-C jacquard** [fundinguniverse-coach], shifting
+the visual identity from solid-leather heritage toward logo
+monogramming — and out of this archive's vintage scope.
+
+Between those two events lies the period when the brand's
+distinctive vocabulary was set: Bonnie Cashin's 1962-1974 contracted
+tenure, the brass turnlock from 1964, the LEATHERWARE creed wordmark
+from 1973, the post-Cashin reorganization, the 1985 Sara Lee
+acquisition, the Krakoff transition from 1996, the October 2000 IPO,
+and the offshoring of US production. Every event is tagged with a
+confidence level; unresolved questions are preserved in the disputes
+and open-pulls sections at the bottom.
 
 ## Era summary
 
