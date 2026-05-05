@@ -235,10 +235,22 @@ for (const entry of allModels) {
         card.hidden = !visible;
         if (visible) shown += 1;
       }
-      // Hide whole era sections that are now empty.
+      // Section header logic depends on whether a specific era is
+      // active. With no era filter (or only a text query), section
+      // headers are meaningful — they group cards by primary era.
+      // With a specific era selected, headers become misleading: a
+      // card with era_code E2-E3 lives in the E2 section by primary
+      // bucket but matches the E3 filter, so 'E2 Cashin' would
+      // appear when the user filtered to E3. Hide all section
+      // headers when an era is filtered; re-show in the all-eras
+      // view. The section <section> stays in the DOM either way so
+      // the cards keep flowing.
+      const filteringByEra = activeEra !== '';
       for (const section of sections) {
         const visibleHere = section.querySelectorAll('.model-card:not([hidden])').length;
         section.hidden = visibleHere === 0;
+        const heading = section.querySelector('.era-heading');
+        if (heading) heading.hidden = filteringByEra;
       }
       status.textContent = `${shown} model${shown === 1 ? '' : 's'}`;
       empty.hidden = shown !== 0;
