@@ -227,6 +227,39 @@ The cited example does not specify which is correct. Without a
 photograph of the full creed and an independent date anchor, the
 decoder alone cannot decide.
 
+### Worked resolution: a concrete buyer's check
+
+Suppose a listing photo shows `B6D-9927` and you need to settle the
+1996-vs-2006 ambiguity before bidding. Walk the cross-checks in
+order until one fires:
+
+1. **Read the country line on the creed.** If it says **"Made in
+   United States"** or **"Made in U.S.A."**, the bag is 1996 — Coach
+   ended significant US production in 1994 and the only US-made
+   bags shipping in 2006 came from the Lares, Puerto Rico facility,
+   which closed April 2002 [coach-10k-fiscal-2003]. A 2006 Willis
+   would say "Made in [offshore country]," not U.S.A.
+2. **Check the wordmark.** If "LEATHERWARE" is stamped in small caps
+   under "COACH", the bag pre-dates the late-1994 wordmark change
+   in nearly every case. A 1996 transitional bag might still carry
+   the older wordmark; a 2006 bag would not.
+3. **Check the leather edges.** Raw or burnished glove-tanned edges
+   read 1990s. Painted-glossy edges on a "Coach" Willis read 2006+
+   or fake.
+4. **Magnet-test the turnlock.** Solid brass (non-magnetic) is
+   consistent with both decades, so this rules out fakes but doesn't
+   resolve the ambiguity by itself.
+5. **Check the lining.** Unlined glove-tanned leather inside the
+   bag reads 1990s; cotton twill or jacquard lining reads 2000s.
+
+If steps 1–3 agree on a decade, you have a confident reading.
+If they disagree, the bag is either a Frankenbag, a fake, or
+serviced through Coach Repair — post the canonical photo set to
+PurseForum's "Authenticate This COACH" thread before bidding.
+
+**Never publish a date from the serial code alone.** The decoder
+narrows era, then cross-checks finish the date.
+
 ---
 
 ## The 2014 inflection (out of vintage scope)
