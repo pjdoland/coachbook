@@ -189,6 +189,32 @@ const base = import.meta.env.BASE_URL;
     border-color: var(--brass);
     background: var(--paper);
   }
+  /* Back is the primary control — bridle border, slight emphasis.
+   * Start over is destructive, so render it quieter (text + hover-
+   * border only) to avoid drawing the eye to a state-resetting
+   * action. The underlying min-height + 44px touch target is
+   * unchanged, so a11y-10 still passes for both. */
+  .wiz-controls .wiz-back {
+    border-color: var(--bridle);
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .wiz-controls .wiz-back:hover:not([disabled]) {
+    background: var(--bridle);
+    color: var(--paper);
+    border-color: var(--bridle);
+  }
+  .wiz-controls .wiz-restart {
+    background: transparent;
+    border-color: transparent;
+    color: var(--ink-soft);
+    margin-left: auto;
+  }
+  .wiz-controls .wiz-restart:hover:not([disabled]) {
+    color: var(--ink);
+    border-color: var(--surface-line);
+    background: var(--paper);
+  }
   .wiz-controls button[disabled] {
     /* Keep the disabled state perceivable: explicit color (instead of
      * opacity) preserves text contrast for low-vision users; aria-disabled
@@ -641,11 +667,13 @@ const base = import.meta.env.BASE_URL;
     ctl.className = 'wiz-controls';
     const back = document.createElement('button');
     back.type = 'button';
+    back.className = 'wiz-back';
     back.textContent = '← Back';
     back.disabled = state.history.length === 0;
     back.addEventListener('click', goBack);
     const restart = document.createElement('button');
     restart.type = 'button';
+    restart.className = 'wiz-restart';
     restart.textContent = 'Start over';
     restart.addEventListener('click', restartWizard);
     ctl.appendChild(back);
