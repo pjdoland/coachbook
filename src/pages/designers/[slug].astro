@@ -66,6 +66,48 @@ const jsonLd = {
       )}
     </dl>
     <Content />
+
+    {entry.data.facts && entry.data.facts.length > 0 && (
+      <section class="facts-block" id="facts">
+        <h2>Facts and provenance</h2>
+        <p class="facts-intro">
+          Per-claim breakdown: each statement carries its confidence,
+          the sources that support it (with tier), and a permalink so
+          the claim can be cited directly.
+        </p>
+        <ol class="facts-list">
+          {entry.data.facts.map((f, i) => {
+            const factEvidence = summarize(f.sources);
+            const factId = `fact-${i + 1}`;
+            return (
+              <li id={factId} class="fact" data-confidence={f.confidence}>
+                <p class="fact-claim">
+                  {f.claim}
+                  <a class="fact-anchor" href={`#${factId}`} aria-label="Permalink to this fact">#</a>
+                </p>
+                <p class="fact-meta">
+                  <span class="chip" data-confidence={f.confidence}>{f.confidence}</span>
+                  {factEvidence.best && (
+                    <span class="tier-pill" data-tier={factEvidence.best}>Tier {factEvidence.best}</span>
+                  )}
+                  <span class="fact-sources">
+                    {factEvidence.cited.map((c, j) => (
+                      <>
+                        {j > 0 && ' · '}
+                        <a href={`${base}sources/#${c.id}`} class="source-cite">[{c.id}]</a>
+                        {c.tier && <span class="tier-pill tier-pill-inline" data-tier={c.tier}>T{c.tier}</span>}
+                      </>
+                    ))}
+                  </span>
+                </p>
+                {f.notes && <p class="fact-notes">{f.notes}</p>}
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+    )}
+
     {
       entry.data.sources && entry.data.sources.length > 0 && (
         <section>
@@ -120,4 +162,50 @@ const jsonLd = {
   .tier-pill[data-tier="2"] { background: var(--brass); color: var(--paper); border-color: var(--brass); }
   .tier-pill[data-tier="3"] { background: var(--bridle-soft); color: var(--ink); border-color: var(--bridle-soft); }
   .tier-pill[data-tier="4"] { background: var(--paper); color: var(--ink-quiet); }
+
+  .facts-block { margin-top: 2.5rem; }
+  .facts-intro { color: var(--ink-soft); max-width: 60ch; margin-top: 0; }
+  .facts-list { list-style: none; padding-left: 0; margin: 1.25rem 0 0; counter-reset: fact; }
+  .fact {
+    padding: 0.85rem 1rem 0.85rem 2.4rem;
+    margin: 0 0 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--surface-line);
+    border-left: 3px solid var(--bridle);
+    border-radius: 3px;
+    position: relative;
+    counter-increment: fact;
+  }
+  .fact::before {
+    content: counter(fact);
+    position: absolute;
+    left: 0.85rem;
+    top: 0.95rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--brass-deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .fact[data-confidence="confirmed"] { border-left-color: var(--brass-deep); }
+  .fact[data-confidence="likely"] { border-left-color: var(--brass); }
+  .fact[data-confidence="tentative"] { border-left-color: var(--bridle); }
+  .fact[data-confidence="disputed"] { border-left-color: #b15a3c; }
+  .fact-claim { margin: 0 0 0.4rem; color: var(--ink); line-height: 1.5; }
+  .fact-meta { margin: 0; font-size: 0.85rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+  .fact-notes { margin: 0.5rem 0 0; font-size: 0.88rem; color: var(--ink-soft); font-style: italic; line-height: 1.5; }
+  .fact-anchor {
+    margin-left: 0.5rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.78em;
+    color: var(--ink-quiet);
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 120ms ease, color 120ms ease;
+  }
+  .fact:hover .fact-anchor,
+  .fact:focus-within .fact-anchor,
+  .fact-anchor:focus-visible { opacity: 1; color: var(--brass-deep); }
+  .fact:target { background: rgba(138, 106, 43, 0.08); box-shadow: 0 0 0 2px var(--brass-soft); }
+  .tier-pill-inline { margin-left: 0.25rem; font-size: 0.65rem; padding: 0 0.3rem; }
 </style>

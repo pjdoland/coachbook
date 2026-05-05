@@ -30,6 +30,27 @@ sources:
   - fundinguniverse-coach
   - coach-vintage-soho
   - coach-vintage-sheridan-stewart
+facts:
+  - claim: "Bonnie Cashin's contracted Coach tenure ran 1962–1974, twelve seasons."
+    confidence: confirmed
+    sources: [wwd-coach-early-years, vintagecoachie, coach-fb-1962-cashin]
+    notes: "Coach's own 2018 Facebook post confirms 1962 as the engagement start; this resolves the 1961-vs-1962 disambiguation in favor of 1962 as the engagement (Lillian Cahn's 'I hired her in 1961' likely refers to contract negotiation)."
+  - claim: "She was a contracted designer, not a Coach employee."
+    confidence: confirmed
+    sources: [wwd-coach-early-years]
+    notes: "Internally referred to as 'the Bonnie Cashin account.' The distinction matters for Coach's own organizational identity in the 1960s — Cashin's design work flowed in via contract, not as in-house staff."
+  - claim: "Cashin did not invent the brass turnlock — she sourced just-patented Fulford Manufacturing hardware (US Patent 3,201,162, filed April 1964) and popularized its use on Coach handbags."
+    confidence: confirmed
+    sources: [uspto-patent-turnlock-3201162, vintagefashionguild-cashin]
+    notes: "Common folklore credits Cashin with inventing the turnlock. The patent record names Paynor Melvin as inventor and assigns the patent to Fulford Manufacturing Co — neither Coach nor Cashin. Cashin's contribution is the design integration, not the invention."
+  - claim: "Any Coach bag attributed to Cashin design that was introduced after 1974 cannot be her work."
+    confidence: confirmed
+    sources: [wwd-coach-early-years]
+    notes: "Folklore correction: 1970s-introduced bags tagged 'Cashin design' (e.g. Mailbox is sometimes attributed) are by definition not Cashin's work, regardless of community claims. Cashin's contract ended 1974."
+  - claim: "Her first collection, the Cashin Carry tote, launched Fall 1962. The Cashin Carry is institutionally dated 1962 by RISD Museum's holdings."
+    confidence: confirmed
+    sources: [wwd-coach-early-years, risd-cashin-1962]
+    notes: "RISD Museum's collection record (via Artsy) holds a Cashin Carry tote dated 1962. This is independent institutional confirmation of the launch year."
 ---
 
 # Bonnie Cashin
