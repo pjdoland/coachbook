@@ -449,9 +449,15 @@ const base = import.meta.env.BASE_URL;
           next: 'country',
         },
         {
-          label: 'Just "COACH" — no LEATHERWARE',
-          sub: '1994 or later — E5 or modern',
+          label: 'Just "COACH" — no LEATHERWARE — and the creed has a serial',
+          sub: '1994 or later — E5 or modern. The post-1994 letter-digit-letter serial format will confirm.',
           era: ['e5'],
+          next: 'country',
+        },
+        {
+          label: 'Just "COACH" — no LEATHERWARE — and there is no serial',
+          sub: 'Late-Cashin (1968–~1973) before the LEATHERWARE wordmark first-use date. See pre-creed-era for the brass-turnlock + leather-stamp disambiguator. Distinct from the post-1994 no-LEATHERWARE creed which carries a serial.',
+          era: ['e2c'],
           next: 'country',
         },
         {
@@ -537,8 +543,11 @@ const base = import.meta.env.BASE_URL;
       .filter(e => !['line-specific', 'post-vintage'].includes(e));
     if (eras.length < 2) return false;
 
-    // Allow E3 + E4 to coexist. Anything else mixed is inconsistent.
-    const hasPre = eras.some(e => ['e2a', 'e2b', 'e3', 'e4'].includes(e));
+    // Allow adjacent eras to coexist (e2/e3 transition or e3/e4 long
+    // sub-collection runs). The boundary that's never legitimate is
+    // pre-1995 + 1995-onward — that's the offshore boundary which
+    // physically excludes a single bag from spanning it.
+    const hasPre = eras.some(e => ['e2a', 'e2b', 'e2c', 'e3', 'e4'].includes(e));
     const hasPost = eras.some(e => e === 'e5');
     return hasPre && hasPost;
   }
