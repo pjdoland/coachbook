@@ -14,11 +14,29 @@ variants:
   - name: mini-daypack
     style_number: "9960"
 status: published
-confidence: tentative
+confidence: likely
 sources:
+  - coach-catalogs-1960-1989
   - yourgreatfinds-collectors-guide
   - coachbagrehab-dating
   - vintagecoachie
+  - wwd-coach-early-years
+facts:
+  - claim: "The Daypack (style 9960) is in the 1996–1997 Source Book Classics line at $220, and continues across 1997 catalogs at increasing prices ($220 → $228 → $234 by 1998 Holiday Preview)."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Per research streams M3 (1995–96 Source Book) and M4 (1997–98 catalogs). Style 9960 is the original Daypack."
+  - claim: "Style 9791 'Large Daypack' is a 1997 introduction — distinct from the original 9960 Daypack; not the same bag."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Per research stream M4. The 1997 catalog launches Large Daypack 9791 at $278 alongside the original 9960 — they coexist. Some collector compilations list 9791 as the standard Daypack; primary catalog evidence shows 9791 is the larger variant, introduced later than 9960."
+  - claim: "Color 'Glacier' was introduced for Daypack 9960 in the 1997 Holiday Preview catalog."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Useful era anchor: a Glacier Daypack should be Holiday 1997 or later."
+  - claim: "Designer is in-house, not Bonnie Cashin — Daypack is a post-1974 silhouette and Cashin's contracted tenure ended 1974."
+    confidence: confirmed
+    sources: [wwd-coach-early-years]
 ---
 
 ## Lead

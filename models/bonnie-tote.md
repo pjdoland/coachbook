@@ -14,6 +14,19 @@ sources:
   - ucla-cashin-papers
   - wwd-coach-early-years
   - coachbagrehab-dating
+facts:
+  - claim: "The Bonnie Tote is named for Bonnie Cashin in collector compilations."
+    confidence: confirmed
+    sources: [yourgreatfinds-collectors-guide, vintagecoachie]
+    notes: "Naming-only attribution. The brand-published name in dated catalogs is open — no primary catalog appearance is currently indexed for this model."
+  - claim: "If the Bonnie Tote was designed by Cashin, it must date to her 1962–1974 contracted tenure."
+    confidence: likely
+    sources: [wwd-coach-early-years]
+    notes: "Conditional fact: a 1970s+ tote tagged 'Cashin design' is, by definition, not Cashin's work — her tenure ended 1974. The Bonnie Tote may be a Cashin-era design, a post-Cashin name-tribute, or a community misattribution."
+  - claim: "Designer attribution remains tentative until either the UCLA Cashin papers contractual paperwork is consulted, or a dated 1962–1974 Coach catalog appearance is located."
+    confidence: tentative
+    sources: [ucla-cashin-papers, wwd-coach-early-years]
+    notes: "UCLA holds Cashin's contracted-design records for Coach; pulling that document would settle the tenure-window question definitively."
 ---
 
 # Bonnie Tote
