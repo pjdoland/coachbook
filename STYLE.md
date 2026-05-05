@@ -99,6 +99,28 @@ Examples:
   Leather Bags' [fundinguniverse-coach, encyclopedia-com-coach-leatherware,
   wwd-coach-early-years]."
 
+#### Brackets in body text — citations vs placeholders
+
+Bare bracketed text in prose (`[some-id]`) is reserved for source
+citations only. The build-time auto-linker resolves any bare
+`[id]` against `sources/registry.md` and wraps it as a link to
+`/sources/#id`; an unresolved bare ID is a build error (librarian-3
+validator).
+
+Bracketed text that is NOT a citation — placeholder fields in a
+schema, regex character classes, fragment patterns — must be
+wrapped in **inline code** (single backticks) so it renders
+monospaced and isn't mistaken for a citation:
+
+- ✅ Serial format: `` `[A-M][year-digit][factory-letter]-[style-number]` ``
+- ❌ Serial format: [A-M][year-digit][factory-letter]-[style-number]
+
+The first reads as a code-pattern placeholder; the second reads as
+four broken citations. The build won't fail on the second form
+(none of those tokens are in the registry, so the citation linker
+leaves them alone), but it's poor editorial form — readers can't
+distinguish placeholder from citation at a glance.
+
 ### Workflow when adding a new source
 
 1. Add the source to `sources/registry.md` first, with all fields
