@@ -33,6 +33,19 @@ sources:
   - fundinguniverse-coach
   - coachbagrehab-dating
   - purseforum-costa-rica
+facts:
+  - claim: "The Ergo line launched in the 1997 Early Fall catalog with a six-style spread; the Ergo Hobo is style 9026."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Per research stream M4. Six-piece line: Hobo (9026), Flap Bag (5029), Mini Zip Bag (9020), Mini Satchel (9027), Zip Bag (9025), Pocket Zip Bag (9033). Style number for the Hobo was previously cataloged as 9020 in some collector compilations; the 1997 Early Fall catalog corrects this to 9026 (9020 is the Mini Zip Bag)."
+  - claim: "Ergo line was previewed in the 1997 Summer catalog before its Early Fall launch."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Two-step rollout: preview spread Summer 1997, full launch Early Fall 1997. This is one of several Krakoff-era seasonal rollouts where a sub-collection gets a dedicated multi-style debut."
+  - claim: "Ergo is an E5 (Krakoff transition) line — Ergo bags are not heritage Classics, even where they share glove-tanned cowhide construction."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989, fundinguniverse-coach]
+    notes: "era_role: contrast. Ergo's 1997 launch sits inside the Krakoff transition (1995–2002) and is treated as a boundary marker for the Krakoff-era diversification, not as a deep-dive subject of the archive."
 ---
 
 # Ergo Hobo

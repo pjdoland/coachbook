@@ -23,6 +23,22 @@ status: published
 confidence: confirmed
 sources:
   - coach-catalogs-1960-1989
+facts:
+  - claim: "City Bag debuts as style 9785 in the Early Spring 1987 catalog at $134 (NEW)."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Per research stream O2. The 9785 SKU is the original launch number and persists for roughly one catalog cycle."
+  - claim: "By the Spring 1987 catalog the City Bag is renumbered to style 9790; the 9785 SKU is reassigned to the new Zipper Tote by Early Summer 1987."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Same-year SKU swap. 9790 persists from Spring 1987 onward through the deep-read corpus (O2, M2, M3)."
+  - claim: "A vintage City Bag with style 9785 on the creed is correct-spec for the Early Spring 1987 window only — a narrow ~3-month production span."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Era-correct creed wording + 9785 = rare debut-window example. Not an authentication red flag if creed wording matches."
+  - claim: "Spring 1989 catalog: City Bag (now 9790) at $148, dimensions 11.5\" × 7.5\" × 3.75\", 'All 10 Classics colors.'"
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
 ---
 
 # City Bag (9790)
