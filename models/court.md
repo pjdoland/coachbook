@@ -29,6 +29,22 @@ sources:
   - yourgreatfinds-collectors-guide
   - coachbagrehab-dating
   - vintagecoachie
+facts:
+  - claim: "Court Bag (style 9870) launched Fall 1989 as part of the Continental Series, not as a free-standing Classic."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Per research stream M2. Continental Series Fall 1989 introduced four styles together: Plaza Bag (9860), Plaza Bag Large (9865), Court Bag (9870), and Regency Brief (5255)."
+  - claim: "By the Holiday 1991 catalog, Court Bag is priced at $206 with eight colorways: black, British tan, burgundy, forest green, mahogany, navy, putty, tabac."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+  - claim: "The 'Court is a 1980s Classic' framing is shorthand — the bag is a Late-NYC (E4) introduction, not Early-NYC (E3)."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Era code is E3-E4 because the bag's heritage-Classic framing in later catalogs blurred into the surrounding era. Production launch is unambiguously E4."
+  - claim: "Court Bag was reframed as a 'Classic' (rather than a Continental Series sub-collection bag) in subsequent catalogs."
+    confidence: likely
+    sources: [coach-catalogs-1960-1989, vintagecoachie]
+    notes: "By the mid-1990s catalogs, Court Bag is grouped with the Classic Coach silhouettes rather than under Continental Series. The migration from sub-collection to Classic is a documented 1989-90s pattern."
 ---
 
 ## Lead

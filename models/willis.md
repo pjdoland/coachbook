@@ -77,6 +77,7 @@ authentication:
 status: published
 confidence: likely
 sources:
+  - coach-catalogs-1960-1989
   - yourgreatfinds-collectors-guide
   - coachbagrehab-dating
   - coachbagrehab-style-numbers
@@ -86,6 +87,27 @@ sources:
   - purseforum-vintage-date-codes
   - purseforum-costa-rica
   - ebay-vintage-coach
+facts:
+  - claim: "Willis 9927 launched in the Fall Preview 1993 catalog at $242, alongside four other 'NEW Classic Styles' (Sling 9929, Lewiston 9931, Chadwick 9928, Murphy 9930)."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Primary catalog evidence from research stream P2. The 'Willis is an early-1980s bag' framing repeated across Tier 3 sources is wrong — Willis was absent from 24+ catalogs spanning 1981–1992."
+  - claim: "By the 1996–1997 Source Book, Coach calls Willis 'Coach's best-selling handbag' at $258."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Brand voice from primary catalog. Quoted in source-book-1996_status; not paraphrased as factual claim."
+  - claim: "Willis introduced the dowel as a Coach design motif."
+    confidence: likely
+    sources: [coach-catalogs-1960-1989]
+    notes: "Brand-published claim from the 1996–1997 Source Book ('Willis Bag introduced the use of the dowel as a design motif'). Not corroborated against an independent design-history source; treat as brand origin story."
+  - claim: "Willis was designed in-house, not by Bonnie Cashin."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989, wwd-coach-early-years]
+    notes: "Cashin's contracted tenure ended 1974; Willis launches Fall Preview 1993, two decades later. Any 'Cashin-designed Willis' attribution is folklore."
+  - claim: "Discontinuation date is unsettled. Community sources cite 1996; primary 1996–1997 Source Book has Willis at $258 as a current product."
+    confidence: disputed
+    sources: [coach-catalogs-1960-1989, vintagecoachie]
+    notes: "Tier 3 community 'discontinued 1996' claim contradicted by primary brand catalog. Settle by deep-reading 1998+ Source Books."
 ---
 
 # Willis
