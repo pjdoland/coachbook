@@ -2,17 +2,39 @@
 name: Station Bag
 slug: station-bag
 style_numbers: ["5130"]
-era: classic-nyc
-era_code: E3
+era: classic-nyc-late
+era_code: E3-E5
 designer: in-house
 designer_confidence: confirmed  # not Cashin
 hardware: solid_brass
+closure: brass_turnlock
+material: glove-tanned-cowhide
+related: [willis, court, murphy]
+catalog_1989_price: 144
+catalog_1989_dimensions_in: { width: 9, height: 9, depth: 2.5 }
+catalog_1989_colors: [black, british-tan, mocha, navy, red, tabac]
+source_book_1996_price: 224
+source_book_1996_quote: "Among the original Coach styles."
 status: published
-confidence: tentative  # single Tier 3 source, naming overlap with Willis
+confidence: confirmed
 sources:
+  - coach-catalogs-1960-1989
   - yourgreatfinds-collectors-guide
   - coachbagrehab-dating
   - vintagecoachie
+facts:
+  - claim: "Style 5130 is the Station Bag — a Classic NYC silhouette in solid brass turnlock, 9\" × 9\" × 2.5\"."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Primary catalog evidence: 1989 Coach catalog lists style 5130 Station Bag at $144 with the dimensions above (research stream M2)."
+  - claim: "The Station Bag was in continuous Classics-line production through at least the 1996–1997 Source Book at $224."
+    confidence: confirmed
+    sources: [coach-catalogs-1960-1989]
+    notes: "Per research stream M3. Coach's 1996–1997 Source Book describes the Station Bag as 'among the original Coach styles' (brand voice — paraphrase: brand identifies the bag as part of its heritage Classics line)."
+  - claim: "Style 5130 (Station Bag) is distinct from style 9927 (Willis). Resale listings often confuse them; the creed style number is the disambiguator."
+    confidence: confirmed
+    sources: [yourgreatfinds-collectors-guide, coach-catalogs-1960-1989]
+    notes: "Tier 3 collector compilations name 5130 as Station; primary 1989 + 1996–1997 catalogs corroborate. Always check the creed-side style number on listings."
 ---
 
 ## Lead
