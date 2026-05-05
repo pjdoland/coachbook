@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Content, getHeadings } from '../../bibliography.md';
+
+const base = import.meta.env.BASE_URL;
+const headings = await getHeadings();
+const sections = headings.filter((h) => h.depth === 2);
+---
+
+<BaseLayout
+  title="Bibliography"
+  description="Curated, human-readable companion to the source registry — books, SEC filings, trade press, archival finding aids, dealer guides."
+>
+  <article>
+    <p class="standfirst">Bibliography</p>
+    <h1 id="top">Bibliography</h1>
+    <p class="lede">
+      A human-readable companion to the
+      <a href={`${base}sources/`}>source registry</a>. The registry is the
+      canonical citation database with stable IDs, dates, snapshots,
+      and tier ratings; this page reads as a curated list grouped by
+      type, with brief annotations on what each source contributes.
+    </p>
+
+    {sections.length > 0 && (
+      <nav class="sections-toc" aria-label="Bibliography sections">
+        <h2>Sections</h2>
+        <ul class="card-grid">
+          {sections.map((s) => (
+            <li>
+              <a href={`#${s.slug}`}>
+                <strong>{s.text}</strong>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
+    <div class="bibliography-body">
+      <Content />
+    </div>
+
+    <p class="back-to-top"><a href="#top">↑ Back to top</a></p>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .sections-toc { margin: 1.5rem 0 2.5rem; }
+  .sections-toc h2 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin: 0 0 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+  }
+  .bibliography-body { margin-top: 2rem; }
+  .bibliography-body h2 {
+    font-size: 1.45rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--surface-line);
+    scroll-margin-top: clamp(1rem, 8vh, 4rem);
+  }
+  .bibliography-body ul {
+    padding-left: 1.1rem;
+    line-height: 1.55;
+  }
+  .bibliography-body li { margin: 0.4rem 0; }
+</style>
