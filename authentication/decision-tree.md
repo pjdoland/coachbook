@@ -155,6 +155,32 @@ Coach Repair. The caveat applies in isolation; once two independent
 dimensions disagree, the replacement explanation no longer covers the
 evidence.
 
+### Transitional-period caveat (~1994–1996, plus Lares through 2002)
+
+The LEATHERWARE wordmark dropped in late 1994 and offshore production
+ramped up across 1995–1996, but the transition was not instantaneous.
+Two specific transitional patterns are real and should not be flagged
+as fakes on era-mismatch alone:
+
+1. **LEATHERWARE-present + offshore country (~1994–1996)**: stock
+   bodies stamped with the older creed sometimes finished at offshore
+   facilities once those facilities came online. Era-mismatched on
+   the wordmark/country axis, but a documented transitional
+   manufacturing artifact.
+2. **LEATHERWARE-absent + "Made in Puerto Rico, U.S.A." (1995–April
+   2002)**: Coach kept the Lares, Puerto Rico facility producing
+   under the new creed wording until April 2002 [coach-10k-fiscal-2003].
+   "Made in Puerto Rico, U.S.A." is U.S. origin under the creed-side
+   country marking but pairs with the LEATHERWARE-absent post-1994
+   wordmark. Not a contradiction.
+
+Wizard verdicts will flag both patterns as era-mismatched. Treat the
+verdict as a prompt for second-opinion authentication rather than a
+fake declaration when the bag's other signals (hardware, leather,
+construction) are otherwise era-consistent. The conservative reading
+is: an era-mismatch verdict on a bag that fits one of these two
+patterns is a request for human review, not a verdict of fakery.
+
 ## When in doubt — community authentication
 
 If the seven-step flow above does not resolve the bag, post the canonical
